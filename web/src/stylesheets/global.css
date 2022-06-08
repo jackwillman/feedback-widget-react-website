@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-[#09090A] text-zinc-100;
+}
+.widget-close-button {
+    @apply top-5 right-5 absolute text-zinc-400 hover:text-zinc-100;
+}
+.widget-close-button-icon {
+    @apply w-4 h-4;
+}
+.loading {
+    @apply w-6 h-6 flex items-center justify-center overflow-hidden
+}
+.loading-icon {
+    @apply w-4 h-4 animate-spin;
+}

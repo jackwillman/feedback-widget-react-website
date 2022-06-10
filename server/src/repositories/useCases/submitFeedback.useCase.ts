@@ -33,14 +33,14 @@ export const SubmitFeedbackUseCase = class {
             comment,
             screenshot
         });
-        // adicionei por conta a screenshot no email
+
         await this.mailAdapter.sendMail({
             subject : 'Novo Feedback',
             body : [
                 `<div style="font-family: sans-serif; font size: 16 px; color: #111;">`,
-                `<p>Tipo do feedback: ${type}</p>`,
-                `<p>Comentário: ${comment}</p>`,
-                screenshot ? `<img src="${screenshot}" />` : '',
+                `<p><strong>Tipo do feedback:</strong> ${type}</p>`,
+                `<p><strong>Comentário:</strong> ${comment}</p>`,
+                screenshot ? `<img src="${screenshot}" alt="Feedback Screenshot" style="vertical-align:middle;margin:12px 30px"/>` : '',
                 `</div/>`
             ].join('\n')
         });

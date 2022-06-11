@@ -1,4 +1,4 @@
-import { FeedbackType } from "..";
+import { FeedbackType } from "../feedbackType";
 import FeedbackTypeHeader from "./FeedbackTypeHeader";
 import FeedbackTypeBody from "./FeedbackTypeBody";
 

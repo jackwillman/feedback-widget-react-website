@@ -1,4 +1,4 @@
-import { FeedbackType, feedbackTypes } from "..";
+import { FeedbackType, feedbackTypes } from "../feedbackType";
 
 interface FeedbackContentHeaderProps {
     feedbackType : FeedbackType;

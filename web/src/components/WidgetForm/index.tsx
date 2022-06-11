@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-import FeedbackTypeStep from './Steps/FeedbackTypeStep';
-import FeedbackContentStep from './Steps/FeedbackContentStep';
+import FeedbackTypeStep from './FeedbackTypeStep';
+import FeedbackContentStep from './FeedbackContentStep';
+import FeedbackSuccessStep from './FeedbackSuccessStep';
 
 import bugImageUrl from '../../images/bug.svg';
 import ideaImageUrl from '../../images/idea.svg';
 import thoughtImageUrl from '../../images/thought.svg';
-import FeedbackSuccessStep from './Steps/FeedbackSuccessStep';
+
 
 export const feedbackTypes = {
     BUG : {

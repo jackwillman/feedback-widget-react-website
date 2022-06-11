@@ -1,5 +1,5 @@
-import { FeedbackType, feedbackTypes } from "..";
-import CloseButton from "../../Misc/CloseButton";
+import { FeedbackType, feedbackTypes } from ".";
+import CloseButton from "../Misc/CloseButton";
 
 interface FeedbackTypeStepProps {
     handleSetFeedbackType : (type : FeedbackType) => void;

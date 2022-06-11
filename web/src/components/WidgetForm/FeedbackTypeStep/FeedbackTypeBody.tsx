@@ -1,20 +1,11 @@
-import { FeedbackType, feedbackTypes } from ".";
-import CloseButton from "../Misc/CloseButton";
+import { FeedbackType, feedbackTypes } from "..";
+import { FeedbackTypeStepProps } from ".";
 
-interface FeedbackTypeStepProps {
-    handleSetFeedbackType : (type : FeedbackType) => void;
-};
-
-const FeedbackTypeStep = function FeedbackTypeStep({ 
+const FeedbackTypeBody = function FeedbackTypeBodyComponent({ 
     handleSetFeedbackType 
 } : FeedbackTypeStepProps
 ) {
-    return ( <>
-        <header>
-            <span className="widget-form-header">Deixe seu feedback</span>
-            <CloseButton />
-        </header>
-
+    return (
         <div className="widget-form-body">
             { Object.entries(feedbackTypes).map(([key, value]) => {
                 return (
@@ -30,7 +21,7 @@ const FeedbackTypeStep = function FeedbackTypeStep({
                 );
             }) }
         </div>
-    </> );
+    );
 };
 
-export default FeedbackTypeStep;
+export default FeedbackTypeBody;

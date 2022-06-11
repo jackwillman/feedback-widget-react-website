@@ -1,4 +1,4 @@
-import CloseButton from "../../CloseButton";
+import CloseButton from "../../Misc/CloseButton";
 
 import successIcon from "../../../images/success.svg";
 

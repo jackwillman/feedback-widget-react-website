@@ -8,7 +8,6 @@ import CloseButton from "../Misc/CloseButton";
 import ScreenshotButton from "../Misc/ScreenshotButton";
 import Loading from "../Misc/Loading";
 
-
 interface FeedbackContentStepProps {
     feedbackType : FeedbackType;
     onFeedbackRestartRequested : () => void;

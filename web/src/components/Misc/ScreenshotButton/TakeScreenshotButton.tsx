@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Camera } from "phosphor-react";
 
 import handleTakeScreenshot from './handleTakeScreenshot';
 import Loading from "../Loading";
+
+import styled from './styled';
 
 interface TakeScreenshotButtonProps {
     handleSetScreenshot : (screenshot : string | null) => void;
@@ -14,17 +15,16 @@ const TakeScreenshotButton = function (
     const [isTakingScreenshot, setIsTakingScreenshot] = useState(false);
 
     return (
-        <button 
+        <styled.ScreenshotButton 
             type="button"
-            className="feedback-form-snapshot-button"
             onClick={ () => handleTakeScreenshot(handleSetScreenshot, setIsTakingScreenshot) }
         >
             { !isTakingScreenshot ? (
-                <Camera className="feedback-form-snapshot-icon"/>
+                <styled.ScreenshotIcon />
             ) : (
                 <Loading />
             ) }
-        </button>
+        </styled.ScreenshotButton>
     );
 };
 

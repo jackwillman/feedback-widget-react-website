@@ -1,9 +1,11 @@
 import CloseButton from "../../Misc/CloseButton";
 
+import styled from './styled';
+
 const FeedbackTypeHeader = function FeedbackTypeHeaderComponent() {
     return (
     <header>
-        <span className="widget-form-header">Deixe seu feedback</span>
+        <styled.FeedbackTypeHeader>Deixe seu feedback</styled.FeedbackTypeHeader>
         <CloseButton />
     </header>
     );

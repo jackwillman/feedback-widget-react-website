@@ -1,4 +1,5 @@
-import { ArrowLeft } from "phosphor-react";
+import styled from "./styled";
+
 
 interface FeedbackContentStepProps {
     onFeedbackRestartRequested : () => void;
@@ -8,13 +9,12 @@ const LeftArrowButton = function LeftArrowButtonComponent(
     { onFeedbackRestartRequested } : FeedbackContentStepProps
 ) {
     return (
-        <button 
+        <styled.FeedbackArrowLeftButton 
             type="button" 
-            className="feedback-arrow-left-button"
             onClick={ onFeedbackRestartRequested }
         >
-            <ArrowLeft weight="bold" className="feedback-arrow-left-icon"/>                
-        </button>
+            <styled.FeedbackArrowLeftIcon weight="bold" />                
+        </styled.FeedbackArrowLeftButton>
     );
 };
 

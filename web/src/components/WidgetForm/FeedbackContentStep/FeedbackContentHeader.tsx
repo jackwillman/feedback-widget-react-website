@@ -1,5 +1,7 @@
 import { FeedbackType, feedbackTypes } from "../feedbackType";
 
+import styled from './styled';
+
 interface FeedbackContentHeaderProps {
     feedbackType : FeedbackType;
 };
@@ -10,10 +12,10 @@ const FeedbackContentHeader = function FeedbackContentHeaderComponent(
     const feedbackTypeInfo = feedbackTypes[feedbackType];
 
     return (
-        <span className="feedback-form-header">
-            <img src={ feedbackTypeInfo.image.source } alt={ feedbackTypeInfo.image.alt } className="feedback-form-image"/>
+        <styled.FeedbackFormHeader>
+            <styled.FeedbackFormImage src={ feedbackTypeInfo.image.source } alt={ feedbackTypeInfo.image.alt } />
             { feedbackTypeInfo.title }
-        </span>
+        </styled.FeedbackFormHeader>
     );
 };
 

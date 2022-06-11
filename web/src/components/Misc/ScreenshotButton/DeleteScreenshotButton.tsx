@@ -1,6 +1,7 @@
 import { Trash } from "phosphor-react";
 
 import { ScreenshotButtonProps } from ".";
+import styled from "./styled";
 
 const deleteScreenshotButton = function(
     { 
@@ -9,9 +10,8 @@ const deleteScreenshotButton = function(
     } : ScreenshotButtonProps
 ) {
     return (
-        <button
+        <styled.ScreenshotPicture
             type="button"
-            className="feedback-form-snapshot-picture"
             onClick={ () => handleSetScreenshot(null) }
             style={ { 
                 backgroundImage : `url(${screenshot})`,
@@ -22,7 +22,7 @@ const deleteScreenshotButton = function(
             } }
         >
             <Trash weight="fill" />
-        </button>
+        </styled.ScreenshotPicture>
     );
 };
 

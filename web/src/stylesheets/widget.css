@@ -31,6 +31,18 @@
     @apply rounded-lg py-5 w-24 flex-1 flex flex-col items-center gap-2 border-2 border-transparent 
     bg-zinc-800 hover:border-brand-500 focus:border-brand-500 focus:outline-none;
 }
+.widget-close-button {
+    @apply top-5 right-5 absolute text-zinc-400 hover:text-zinc-100;
+}
+.widget-close-button-icon {
+    @apply w-4 h-4;
+}
+.loading {
+    @apply w-6 h-6 flex items-center justify-center overflow-hidden
+}
+.loading-icon {
+    @apply w-4 h-4 animate-spin;
+}
 .feedback-form-header {
     @apply text-xl leading-6 flex items-center gap-2
 }

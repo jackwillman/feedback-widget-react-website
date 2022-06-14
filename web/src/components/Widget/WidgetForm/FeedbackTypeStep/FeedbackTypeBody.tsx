@@ -13,7 +13,6 @@ const FeedbackTypeBody = function FeedbackTypeBodyComponent({
                 return (
                     <styled.FeedbackTypeButton
                         key={ key }
-                        className="widget-feedback-button"
                         onClick={ () => handleSetFeedbackType(key as FeedbackType) }
                         type="button"
                     >

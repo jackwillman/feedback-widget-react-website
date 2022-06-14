@@ -1,7 +1,7 @@
 import CloseButton from "../../Misc/CloseButton";
 import RestartFeedbackButton from "./RestartFeedbackButton";
 
-import successIcon from "../../../images/success.svg";
+import successIcon from "../../../../images/success.svg";
 
 import styled from './styled';
 

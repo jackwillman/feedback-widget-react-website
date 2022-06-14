@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 
-import api from "../../../lib/api";
+import api from "../../../../lib/api";
 
 import { FeedbackType } from "../feedbackType";
 import CloseButton from "../../Misc/CloseButton";

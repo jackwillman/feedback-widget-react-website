@@ -18,20 +18,23 @@ const WidgetForm = function WidgetFormComponent() {
 
     return (
         <styled.WidgetForm>
-    
-            { isFeedbackSent ? (
-                <FeedbackSuccessStep 
-                    onFeedbackRestartRequested={ handleRestartFeedback }
-                />
-            ) : !feedbackType ? (
-                <FeedbackTypeStep handleSetFeedbackType={ setFeedbackType } />
-            ) : (
-                <FeedbackContentStep 
-                    feedbackType={ feedbackType } 
-                    onFeedbackRestartRequested={ handleRestartFeedback }
-                    onFeedbackSent={ () => setIsFeedbackSent(true) }
-                />
-            ) }
+            { isFeedbackSent 
+                ? ( 
+                    <FeedbackSuccessStep 
+                        onFeedbackRestartRequested={ handleRestartFeedback }
+                    />
+                ) : !feedbackType 
+                    ? ( 
+                        <FeedbackTypeStep 
+                            handleSetFeedbackType={ setFeedbackType } 
+                        />
+                    ) : (
+                    <FeedbackContentStep 
+                        feedbackType={ feedbackType } 
+                        onFeedbackRestartRequested={ handleRestartFeedback }
+                        onFeedbackSent={ () => setIsFeedbackSent(true) }
+                    /> )
+             }
             
             <styled.WidgetFormFooter>
                 Feito com ♥ pela <styled.WidgetFormFooterLink href="https://pudim.com.br">Pudim</styled.WidgetFormFooterLink>

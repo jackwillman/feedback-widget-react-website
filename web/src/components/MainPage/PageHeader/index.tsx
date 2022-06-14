@@ -1,27 +1,34 @@
 import { PageProps } from '..';
 
-import styled from './styled';
+import {
+    HeaderDiv,
+    CompanyButton,
+    BrandColor,
+    MenuButtonsDiv,
+    MenuButton
+} from './styled';
 
 const PageHeader = function PageHeaderComponent({ setCurrentPage } : PageProps) {
-    return <div>
-        <button
-            onClick={() => setCurrentPage('Home')}
-        >
-            BetterSite
-        </button>
-        <styled.RightButtonsDiv>
-            <styled.RightButton
-                onClick={() => setCurrentPage('About')}
-            >
-                About
-            </styled.RightButton>
-            <styled.RightButton
-                onClick={() => setCurrentPage('Dashboard')}
-            >
-                Dashboard
-            </styled.RightButton>
-        </styled.RightButtonsDiv>
-    </div>
+    return (
+        <HeaderDiv>
+            <CompanyButton onClick={() => setCurrentPage('Home')}>
+                Better
+                <BrandColor>
+                    Site
+                </BrandColor>
+            </CompanyButton>
+
+            <MenuButtonsDiv>
+                <MenuButton onClick={() => setCurrentPage('About')}>
+                    About
+                </MenuButton>
+                <MenuButton onClick={() => setCurrentPage('Dashboard')}>
+                    Dashboard
+                </MenuButton>
+            </MenuButtonsDiv>
+
+        </HeaderDiv>
+    );
 };
 
 export default PageHeader;

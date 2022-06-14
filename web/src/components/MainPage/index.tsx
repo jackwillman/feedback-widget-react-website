@@ -14,13 +14,15 @@ export interface PageProps {
 const MainPage = function MainPageComponent() {
     const [currentPage, setCurrentPage] = useState<ExistingPage>('Home');
 
-    return <styled.MainDiv>
-        <PageHeader setCurrentPage={ setCurrentPage } />
-        <CurrentPage 
-            currentPage={ currentPage }
-            setCurrentPage={ setCurrentPage }
-        />
-    </styled.MainDiv>
+    return (
+        <styled.MainDiv>
+            <PageHeader setCurrentPage={ setCurrentPage } />
+            <CurrentPage 
+                currentPage={ currentPage }
+                setCurrentPage={ setCurrentPage }
+            />
+        </styled.MainDiv>
+    );
 };
 
 export default MainPage;

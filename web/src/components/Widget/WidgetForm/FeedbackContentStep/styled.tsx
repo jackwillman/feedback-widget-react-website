@@ -61,7 +61,19 @@ const FeedbackFormSubmit = tw.button`
 `;
 
 const FeedbackFormText = tw(<textarea></textarea>)`
-    min-w-[304px] w-full min-h-[112px] text-sm rounded resize-none placeholder-zinc-400 text-zinc-100 border-zinc-600 bg-transparent focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none scrollbar-thin  scrollbar-thumb-zinc-700 scrollbar-track-transparent
+    min-w-[304px] 
+    w-full min-h-[112px] 
+    text-sm rounded 
+    resize-none placeholder-zinc-400 
+    text-zinc-100 border-zinc-600 
+    bg-transparent 
+    focus:border-brand-500 
+    focus:ring-brand-500 
+    focus:ring-1 
+    focus:outline-none 
+    scrollbar-thin  
+    scrollbar-thumb-zinc-700 
+    scrollbar-track-transparent
 `;
 
 export default {

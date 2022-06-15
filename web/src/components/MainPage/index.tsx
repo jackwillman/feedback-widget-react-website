@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PageHeader from './PageHeader';
 import CurrentPage from './CurrentPage';
 
-import styled from './styled';
+import { MainDiv } from './styled';
 
 export type ExistingPage = 'Home' | 'About' | 'Dashboard';
 
@@ -15,13 +15,13 @@ const MainPage = function MainPageComponent() {
     const [currentPage, setCurrentPage] = useState<ExistingPage>('Home');
 
     return (
-        <styled.MainDiv>
+        <MainDiv>
             <PageHeader setCurrentPage={ setCurrentPage } />
             <CurrentPage 
                 currentPage={ currentPage }
                 setCurrentPage={ setCurrentPage }
             />
-        </styled.MainDiv>
+        </MainDiv>
     );
 };
 

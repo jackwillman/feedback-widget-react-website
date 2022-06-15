@@ -1,5 +1,15 @@
 import tw from "tailwind-styled-components/dist/tailwind";
 
+export const TextDiv = tw.div`
+    absolute
+    ml-[175px]
+`;
+
+export const HomeImageDiv = tw.div`
+    absolute
+    place-self-end
+`;
+
 const HomeText = tw.p`
     font-sans
     not-italic
@@ -26,7 +36,7 @@ export const BigHomeText = tw(MajorHomeText)`
 `;
 
 export const NormalTextDiv = tw.div`
-    md:right-[calc(60vw)]
+    md:mr-[700px]
 `;
 
 export const NormalHomeText = tw(HomeText)`
@@ -36,14 +46,4 @@ export const NormalHomeText = tw(HomeText)`
     leading-[22px]
     xl:leading-[32px]
     py-6
-`;
-
-export const HomeDiv = tw.div`
-    grid
-`;
-
-export const HomeImageDiv = tw.div`
-    absolute
-    top-[199px]
-    place-self-end
 `;

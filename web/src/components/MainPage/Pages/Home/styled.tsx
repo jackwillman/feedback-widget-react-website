@@ -11,17 +11,13 @@ export const TextDiv = tw.div`
 export const HomeImageDiv = tw.div`
     static
 
-    lg:place-self-end
+    place-self-end
 
-    ml-0
-    lg:ml-auto
-    sm:ml-[calc(10vw)]
-
-    mt-[400px]
     xl:mt-auto
     lg:mt-[200px]
     md:mt-[300px]
     sm:mt-[320px]
+    mt-[400px]
 `;
 
 const HomeText = tw.p`

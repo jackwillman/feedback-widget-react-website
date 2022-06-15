@@ -2,9 +2,10 @@ import tw from "tailwind-styled-components/dist/tailwind";
 
 export const PageDiv = tw.div`
     absolute
+    top-[246px]
     left-[43px]
-    md:left-[175px]
-    right-[calc(5vw)]
+    md:left-[220px]
+    right-[calc(15vw)]
     md:right-[calc(50vw)]
-    top-[calc(25vh)]
+    xl:right-[calc(35vw)]
 `;

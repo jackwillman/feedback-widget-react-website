@@ -3,7 +3,6 @@ import { PageProps } from '..';
 import {
     HeaderDiv,
     CompanyButton,
-    BrandColor,
     MenuButtonsDiv,
     MenuButton
 } from './styled';
@@ -12,10 +11,7 @@ const PageHeader = function PageHeaderComponent({ setCurrentPage } : PageProps) 
     return (
         <HeaderDiv>
             <CompanyButton onClick={() => setCurrentPage('Home')}>
-                Better
-                <BrandColor>
-                    Site
-                </BrandColor>
+                Better<a className='text-brand-500'>Site</a>
             </CompanyButton>
 
             <MenuButtonsDiv>

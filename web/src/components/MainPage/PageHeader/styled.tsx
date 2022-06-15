@@ -13,15 +13,13 @@ export const CompanyButton = tw.button`
     font-sans
     not-italic
     font-bold 
-    text-2xl 
-    leading-[33px]
+    text-3xl
+    xl:text-4xl
+
+    
     tracking-[0.045em]
 
     text-zinc-100
-`;
-
-export const BrandColor= tw.a`
-    text-brand-500
 `;
 
 export const MenuButtonsDiv = tw.div`
@@ -36,8 +34,8 @@ export const MenuButton = tw.button`
     font-sans
     not-italic
     font-normal
-    text-[15px]
-    leading-[20px]
+    text-base
+    xl:text-lg
     tracking-[0.045em]
 
     text-zinc-100

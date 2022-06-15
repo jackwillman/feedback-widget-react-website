@@ -2,12 +2,26 @@ import tw from "tailwind-styled-components/dist/tailwind";
 
 export const TextDiv = tw.div`
     absolute
+    xl:mr-auto
+    mr-[calc(15vw)]
+    mt-[47px]
     ml-[175px]
 `;
 
 export const HomeImageDiv = tw.div`
-    absolute
-    place-self-end
+    static
+
+    lg:place-self-end
+
+    ml-0
+    lg:ml-auto
+    sm:ml-[calc(10vw)]
+
+    mt-[400px]
+    xl:mt-auto
+    lg:mt-[200px]
+    md:mt-[300px]
+    sm:mt-[320px]
 `;
 
 const HomeText = tw.p`
@@ -23,20 +37,24 @@ const MajorHomeText = tw(HomeText)`
 
 export const BiggerHomeText = tw(MajorHomeText)`
     text-4xl
-    xl:text-5xl
+    2xl:text-5xl
     leading-[49px]
     xl:leading-[64px]
 `;
 
 export const BigHomeText = tw(MajorHomeText)`
     text-2xl
-    xl:text-3xl
+    2xl:text-3xl
     leading-[33px]
-    xl:leading-[46px]
+    2xl:leading-[46px]
 `;
 
 export const NormalTextDiv = tw.div`
-    md:mr-[700px]
+    mr-auto
+    xl:mr-[calc(50vw)]
+    lg:mr-[calc(30vw)]
+    md:mr-[calc(20vw)]
+    sm:mr-[calc(10vw)]
 `;
 
 export const NormalHomeText = tw(HomeText)`

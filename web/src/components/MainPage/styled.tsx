@@ -5,6 +5,7 @@ export const MainDiv = tw.div`
     grid
     h-screen
     w-screen
-    py-[246px]
+    py-[120px]
+    xl:py-[199px]
     bg-brand-darkness
 `;

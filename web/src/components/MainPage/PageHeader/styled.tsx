@@ -14,7 +14,7 @@ export const CompanyButton = tw.button`
     not-italic
     font-bold 
     text-3xl
-    xl:text-4xl
+    2xl:text-4xl
 
     
     tracking-[0.045em]
@@ -35,7 +35,7 @@ export const MenuButton = tw.button`
     not-italic
     font-normal
     text-base
-    xl:text-lg
+    2xl:text-lg
     tracking-[0.045em]
 
     text-zinc-100

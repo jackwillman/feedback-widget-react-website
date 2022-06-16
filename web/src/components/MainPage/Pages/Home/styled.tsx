@@ -2,16 +2,20 @@ import tw from "tailwind-styled-components/dist/tailwind";
 
 export const TextDiv = tw.div`
     absolute
+
     xl:mr-auto
     mr-[calc(15vw)]
+
     mt-[47px]
-    ml-[175px]
+    ml-[calc(11vw)]
 `;
 
 export const HomeImageDiv = tw.div`
     static
 
     place-self-end
+
+    xl:mb-[200px]
 
     xl:mt-auto
     lg:mt-[200px]

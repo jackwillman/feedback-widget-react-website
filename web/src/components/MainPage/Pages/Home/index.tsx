@@ -1,13 +1,15 @@
 import { PageProps } from '../..';
 
-import { PageDiv } from '../styled';
-import {
-    TextDiv,
+import { 
+    PageDiv,
+    BiggerText,
+    BigText,
+    NormalText 
+} from '../styled';
+import { 
     HomeImageDiv,
-    BiggerHomeText,
-    BigHomeText,
-    NormalHomeText,
-    NormalTextDiv
+    HomeTextDiv,
+    HomeNormalTextDiv,
 } from './styled';
 
 import heroUrl from '../../../../images/hero.svg';
@@ -15,21 +17,21 @@ import heroUrl from '../../../../images/hero.svg';
 const Home = function HomePageComponent({ setCurrentPage } : PageProps) {
     return (
         <PageDiv>
-            <TextDiv>
-                <BiggerHomeText>
+            <HomeTextDiv>
+                <BiggerText>
                     Let's <a className='text-brand-500'>change</a> the world together.
-                </BiggerHomeText>
+                </BiggerText>
 
-                <BigHomeText>
+                <BigText>
                     Everybody deserves <a className='text-brand-500'>better...</a>
-                </BigHomeText>
+                </BigText>
                 
-                <NormalTextDiv>
-                    <NormalHomeText> 
+                <HomeNormalTextDiv>
+                    <NormalText> 
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    </NormalHomeText>
-                </NormalTextDiv>
-            </TextDiv>
+                    </NormalText>
+                </HomeNormalTextDiv>
+            </HomeTextDiv>
             <HomeImageDiv>
                 <img src={ heroUrl } alt='Image of a long haired person holding flower petals.' />
             </HomeImageDiv>

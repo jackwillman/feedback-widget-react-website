@@ -1,10 +1,15 @@
 import { PageProps } from "../..";
-import { PageDiv } from '../styled';
+
+import { PageDiv, TextDiv, BiggerText } from '../styled';
 
 const Dashboard = function DashboardComponent({ setCurrentPage } : PageProps) {
     return (
         <PageDiv>
-            <p>Dashboard</p>
+            <TextDiv>
+                <BiggerText>
+                    Coming soon.
+                </BiggerText>
+            </TextDiv>
         </PageDiv>
     );
 };

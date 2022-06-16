@@ -2,25 +2,30 @@ import { Popover } from '@headlessui/react';
 
 import WidgetForm from './WidgetForm';
 
-import styled from './styled';
+import {
+    WidgetPopover,
+    WidgetButton,
+    WidgetIcon,
+    WidgetSpan
+} from './styled';
 
 const Widget = function WidgetComponent() {    
     return (
-        <styled.WidgetPopover>
+        <WidgetPopover>
             
             <Popover.Panel>
                 <WidgetForm />
             </Popover.Panel>
     
-            <styled.WidgetButton>
-                <styled.WidgetIcon />
+            <WidgetButton>
+                <WidgetIcon />
     
-                <styled.WidgetSpan>
+                <WidgetSpan>
                     Feedback
-                </styled.WidgetSpan>
-            </styled.WidgetButton>
+                </WidgetSpan>
+            </WidgetButton>
     
-        </styled.WidgetPopover>
+        </WidgetPopover>
     );
 };
 

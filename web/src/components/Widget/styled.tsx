@@ -2,7 +2,7 @@ import tw from "tailwind-styled-components"
 import { Popover } from '@headlessui/react';
 import { ChatTeardropDots } from 'phosphor-react';
 
-const WidgetPopover = tw(Popover)`
+export const WidgetPopover = tw(Popover)`
     absolute 
     flex 
     flex-col 
@@ -13,7 +13,7 @@ const WidgetPopover = tw(Popover)`
     md:right-8
 `;
 
-const WidgetButton = tw(Popover.Button)`
+export const WidgetButton = tw(Popover.Button)`
     bg-brand-500 
     text-white 
     rounded-full 
@@ -24,12 +24,12 @@ const WidgetButton = tw(Popover.Button)`
     group
 `;
 
-const WidgetIcon = tw(ChatTeardropDots)`
+export const WidgetIcon = tw(ChatTeardropDots)`
     w-6 
     h-6
 `;
 
-const WidgetSpan = tw.span`
+export const WidgetSpan = tw.span`
     max-w-0 
     overflow-hidden 
     transition-all 
@@ -37,10 +37,3 @@ const WidgetSpan = tw.span`
     ease-linear
     group-hover:max-w-xs
 `;
-
-export default{
-    WidgetPopover,
-    WidgetButton,
-    WidgetIcon,
-    WidgetSpan
-};

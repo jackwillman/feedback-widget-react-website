@@ -7,7 +7,7 @@ import { handleErrorLogging, handleNotFound } from './middlewares';
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit : '1mb'}));
 app.use(router);
 app.use(handleErrorLogging);
 app.use(handleNotFound);

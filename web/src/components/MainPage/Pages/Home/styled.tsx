@@ -18,7 +18,8 @@ export const HomeImageDiv = tw.div`
 
 export const HomeTextDiv = tw(TextDiv)`
     xl:mr-auto
-    mr-[calc(15vw)]
+    sm:mr-[calc(15vw)]
+    mr-[calc(11vw)]
 `;
 
 export const HomeNormalTextDiv = tw.div`

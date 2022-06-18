@@ -7,5 +7,5 @@ export const AboutTextDiv = tw(TextDiv)`
 `;
 
 export const AboutNormalTextDiv = tw.div`
-    mr-[calc(10vw)]
+    mr-[calc(11vw)]
 `;

@@ -1,11 +1,8 @@
 import { PageProps } from '..';
+import DesktopMenu from './DesktopMenu';
+import MobileMenu from './MobileMenu';
 
-import {
-    HeaderDiv,
-    CompanyButton,
-    MenuButtonsDiv,
-    MenuButton
-} from './styled';
+import { HeaderDiv, CompanyButton } from './styled';
 
 const PageHeader = function PageHeaderComponent({ setCurrentPage } : PageProps) {
     return (
@@ -14,15 +11,9 @@ const PageHeader = function PageHeaderComponent({ setCurrentPage } : PageProps) 
                 Better<a className='text-brand-500'>Site</a>
             </CompanyButton>
 
-            <MenuButtonsDiv>
-                <MenuButton onClick={() => setCurrentPage('About')}>
-                    About
-                </MenuButton>
-                <MenuButton onClick={() => setCurrentPage('Dashboard')}>
-                    Dashboard
-                </MenuButton>
-            </MenuButtonsDiv>
+            <DesktopMenu setCurrentPage={ setCurrentPage }/>
 
+            <MobileMenu setCurrentPage={ setCurrentPage }/>
         </HeaderDiv>
     );
 };

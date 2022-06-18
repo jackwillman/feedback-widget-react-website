@@ -7,8 +7,10 @@ export const HeaderDiv = tw.div`
 
 export const CompanyButton = tw.button`
     absolute 
-    left-[43px]
     top-[37px]
+
+    sm:left-[43px]
+    left-[calc(50vw-(5.1rem))]
 
     font-sans
     not-italic
@@ -20,24 +22,4 @@ export const CompanyButton = tw.button`
     tracking-[0.045em]
 
     text-zinc-100
-`;
-
-export const MenuButtonsDiv = tw.div`
-    absolute
-    top-[50px]
-    right-[calc(5vw)]
-    md:right-[calc(3vw)]
-    space-x-[45px]
-`;
-
-export const MenuButton = tw.button`
-    font-sans
-    not-italic
-    font-normal
-    text-base
-    2xl:text-lg
-    tracking-[0.045em]
-
-    text-zinc-100
-    hover:text-zinc-400
 `;

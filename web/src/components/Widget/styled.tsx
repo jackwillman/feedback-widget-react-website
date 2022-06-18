@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components"
+import tw from "tailwind-styled-components";
 import { Popover } from '@headlessui/react';
 import { ChatTeardropDots } from 'phosphor-react';
 
@@ -36,4 +36,5 @@ export const WidgetSpan = tw.span`
     duration-500 
     ease-linear
     group-hover:max-w-xs
+    ml-1
 `;

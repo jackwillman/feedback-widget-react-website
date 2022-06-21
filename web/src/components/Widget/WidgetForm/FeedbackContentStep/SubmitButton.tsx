@@ -1,6 +1,6 @@
 import Loading from "../../Misc/Loading";
 
-import styled from './styled';
+import { FeedbackFormSubmit } from './styled';
 
 interface SubmitButtonProps {
     isSendingFeedback : boolean
@@ -11,7 +11,7 @@ const SubmitButton = function SubmitButtonComponent(
     { isSendingFeedback, comment } : SubmitButtonProps
 ) {
     return (
-        <styled.FeedbackFormSubmit 
+        <FeedbackFormSubmit 
             type="submit" 
             disabled={ comment.length === 0 || isSendingFeedback }
         >
@@ -20,7 +20,7 @@ const SubmitButton = function SubmitButtonComponent(
                     ? <Loading />
                     : 'Enviar Feedback' 
             }
-        </styled.FeedbackFormSubmit>
+        </FeedbackFormSubmit>
     );
 };
 

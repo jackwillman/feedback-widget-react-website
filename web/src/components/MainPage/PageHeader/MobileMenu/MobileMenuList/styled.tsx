@@ -1,37 +1,40 @@
+import { Popover } from "@headlessui/react";
 import tw from "tailwind-styled-components";
 
 export const MenuList = tw.div`
-    relative 
-    
-    flex
-
-    w-[calc(75vw)]
-    h-[172px]
-
-    rounded-2xl 
-
-    bg-zinc-900
-`;
-
-const MenuItem = tw.button`
     absolute 
 
-    w-[calc(65vw)]
-    h-[50px]
-
-    ml-[calc(5vw)]
+    w-screen
+    h-screen    
 
     rounded-2xl 
 
-    bg-zinc-800
-    hover:bg-zinc-400
+    bg-brand-dark
+`;
+
+const MenuItem = tw(Popover.Button)`
+    absolute 
+
+    h-[50px]
+    w-full
+
+    bg-zinc-900
+    hover:bg-zinc-800
     text-zinc-100
 `;
 
+export const MenuItemText = tw.a`
+    font-semibold
+    text-lg
+`;
+
 export const MenuItem1 = tw(MenuItem)`
-    mt-6
 `;
 
 export const MenuItem2 = tw(MenuItem)`
-    mt-24
+    mt-[50px]
+`;
+
+export const MenuItem3 = tw(MenuItem)`
+    mt-[100px]
 `;

@@ -10,7 +10,7 @@ import FeedbackContentHeader from "./FeedbackContentHeader";
 import FormTextArea from "./FormTextArea";
 import SubmitButton from "./SubmitButton";
 
-import styled from './styled';
+import { FeedbackForm, FeedbackFormFooter } from './styled';
 
 interface FeedbackContentStepProps {
     feedbackType : FeedbackType;
@@ -54,10 +54,10 @@ const FeedbackContentStep = function FeedbackContentStep( {
             <CloseButton />
         </header>
 
-        <styled.FeedbackForm onSubmit={ handleSubmitFeedback }>
+        <FeedbackForm onSubmit={ handleSubmitFeedback }>
             <FormTextArea setComment={ setComment }/>
 
-            <styled.FeedbackFormFooter>
+            <FeedbackFormFooter>
                 <ScreenshotButton 
                     screenshot={ screenshot }
                     handleSetScreenshot={ setScreenshot }
@@ -67,8 +67,8 @@ const FeedbackContentStep = function FeedbackContentStep( {
                     isSendingFeedback={ isSendingFeedback }
                     comment={ comment }
                 />
-            </styled.FeedbackFormFooter>
-        </styled.FeedbackForm>
+            </FeedbackFormFooter>
+        </FeedbackForm>
     </> );
 };
 

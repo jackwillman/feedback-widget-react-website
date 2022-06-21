@@ -1,16 +1,16 @@
 import tw from "tailwind-styled-components";
 
-const FeedbackTypeHeader = tw.span`
+export const FeedbackTypeHeaderSpan = tw.span`
     text-xl 
     leading-6
 `;
-const FeedbackTypeBody = tw.div`
+export const FeedbackTypeBodyDiv = tw.div`
     flex 
     py-8 
     gap-2 
     w-full
 `;
-const FeedbackTypeButton = tw.button`
+export const FeedbackTypeButton = tw.button`
     rounded-lg 
     py-5 
     w-24 
@@ -26,9 +26,3 @@ const FeedbackTypeButton = tw.button`
     focus:border-brand-500 
     focus:outline-none
 `;
-
-export default {
-    FeedbackTypeHeader,
-    FeedbackTypeBody,
-    FeedbackTypeButton
-};

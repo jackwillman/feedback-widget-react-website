@@ -1,5 +1,3 @@
-import styled from './styled';
-
 interface FormTextAreaProps {
     setComment : (comment : string) => void
 };

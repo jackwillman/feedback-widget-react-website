@@ -11,6 +11,7 @@ export const WidgetPopover = tw(Popover)`
     right-4 
     md:bottom-8 
     md:right-8
+    z-20
 `;
 
 export const WidgetButton = tw(Popover.Button)`

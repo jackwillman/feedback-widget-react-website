@@ -1,27 +1,27 @@
 import { FeedbackType, feedbackTypes } from "../feedbackType";
 import { FeedbackTypeStepProps } from ".";
 
-import styled from './styled';
+import { FeedbackTypeBodyDiv, FeedbackTypeButton } from './styled';
 
 const FeedbackTypeBody = function FeedbackTypeBodyComponent({ 
     handleSetFeedbackType 
 } : FeedbackTypeStepProps
 ) {
     return (
-        <styled.FeedbackTypeBody>
+        <FeedbackTypeBodyDiv>
             { Object.entries(feedbackTypes).map(([key, value]) => {
                 return (
-                    <styled.FeedbackTypeButton
+                    <FeedbackTypeButton
                         key={ key }
                         onClick={ () => handleSetFeedbackType(key as FeedbackType) }
                         type="button"
                     >
                         <img src={ value.image.source } alt={ value.image.alt } />
                         <span>{ value.title }</span>
-                    </styled.FeedbackTypeButton>
+                    </FeedbackTypeButton>
                 );
             }) }
-        </styled.FeedbackTypeBody>
+        </FeedbackTypeBodyDiv>
     );
 };
 

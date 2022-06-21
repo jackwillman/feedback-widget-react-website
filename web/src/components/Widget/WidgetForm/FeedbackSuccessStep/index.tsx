@@ -3,7 +3,7 @@ import RestartFeedbackButton from "./RestartFeedbackButton";
 
 import successIcon from "../../../../images/success.svg";
 
-import styled from './styled';
+import { FeedbackSuccess, FeedbackSuccessMessage } from './styled';
 
 export interface FeedbackSuccessStepProps {
     onFeedbackRestartRequested : () => void;
@@ -19,17 +19,17 @@ const FeedbackSuccessStep = function FeedbackSuccessStep(
             <CloseButton />
         </header>
 
-        <styled.FeedbackSuccess>
+        <FeedbackSuccess>
             <img src={ successIcon } />
 
-            <styled.FeedbackSuccessMessage>
+            <FeedbackSuccessMessage>
                 Agradecemos o feedback!
-            </styled.FeedbackSuccessMessage>
+            </FeedbackSuccessMessage>
 
             <RestartFeedbackButton 
                 onFeedbackRestartRequested={ onFeedbackRestartRequested }
             />
-        </styled.FeedbackSuccess>
+        </FeedbackSuccess>
     </> );
 };
 

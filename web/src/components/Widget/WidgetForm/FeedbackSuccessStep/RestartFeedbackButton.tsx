@@ -1,5 +1,5 @@
 import { FeedbackSuccessStepProps } from '.';
-import styled from './styled';
+import { RestartFeedbackButtonStyle } from './styled';
 
 const RestartFeedbackButton = function RestartFeedbackButtonComponent(
     {
@@ -7,12 +7,12 @@ const RestartFeedbackButton = function RestartFeedbackButtonComponent(
     } : FeedbackSuccessStepProps
 ) {
     return (
-        <styled.RestartFeedbackButton 
+        <RestartFeedbackButtonStyle 
             type="button"
             onClick={ onFeedbackRestartRequested }
         >
             Quero enviar outro!
-        </styled.RestartFeedbackButton>
+        </RestartFeedbackButtonStyle>
     );
 };
 

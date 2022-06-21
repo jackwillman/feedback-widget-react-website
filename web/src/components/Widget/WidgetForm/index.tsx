@@ -5,7 +5,11 @@ import FeedbackTypeStep from './FeedbackTypeStep';
 import FeedbackContentStep from './FeedbackContentStep';
 import FeedbackSuccessStep from './FeedbackSuccessStep';
 
-import styled from './styled';
+import {
+    WidgetFormDiv,
+    WidgetFormFooter,
+    WidgetFormFooterLink
+} from './styled';
 
 const WidgetForm = function WidgetFormComponent() {
     const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null);
@@ -17,7 +21,7 @@ const WidgetForm = function WidgetFormComponent() {
     };
 
     return (
-        <styled.WidgetForm>
+        <WidgetFormDiv>
             { isFeedbackSent 
                 ? ( 
                     <FeedbackSuccessStep 
@@ -36,11 +40,11 @@ const WidgetForm = function WidgetFormComponent() {
                     /> )
              }
             
-            <styled.WidgetFormFooter>
-                Feito com ♥ pela <styled.WidgetFormFooterLink href="https://pudim.com.br">Pudim</styled.WidgetFormFooterLink>
-            </styled.WidgetFormFooter>
+            <WidgetFormFooter>
+                Feito com ♥ pela <WidgetFormFooterLink href="https://pudim.com.br">Pudim</WidgetFormFooterLink>
+            </WidgetFormFooter>
 
-        </styled.WidgetForm>
+        </WidgetFormDiv>
     );
 };
 

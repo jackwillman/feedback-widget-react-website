@@ -8,13 +8,13 @@ export const MenuListPopover = tw(Popover)`
     sm:invisible
     visible
 
-    mt-[39px]
-    ml-[calc(11vw)]
+    mt-[19px]
 `;
 
 export const MenuListButton = tw(Popover.Button)`
     text-zinc-100
     hover:text-zinc-400
+    ml-[calc(11vw)]
 `;
 
 export const MenuListIcon = tw(List)`
@@ -24,6 +24,5 @@ export const MenuListIcon = tw(List)`
 
 export const MenuListPanel = tw(Popover.Panel)`
     absolute
-    mt-10
     z-10
 `;

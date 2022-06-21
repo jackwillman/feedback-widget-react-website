@@ -48,6 +48,8 @@ export const FeedbackFormSubmit = tw.button`
     justify-center 
     items-center 
     text-sm
+    font-bold
+    text-zinc-800
     bg-brand-500 
     hover:bg-brand-300 
     transition-colors
@@ -57,5 +59,5 @@ export const FeedbackFormSubmit = tw.button`
     focus:ring-offset-zinc-900 
     focus:ring-brand-500
     disabled:opacity-50 
-    disabled:hover:bg-brand-500;
+    disabled:hover:bg-brand-500
 `;

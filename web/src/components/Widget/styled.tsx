@@ -16,7 +16,7 @@ export const WidgetPopover = tw(Popover)`
 
 export const WidgetButton = tw(Popover.Button)`
     bg-brand-500 
-    text-white 
+    text-zinc-800
     rounded-full 
     px-3 
     h-12 
@@ -38,4 +38,5 @@ export const WidgetSpan = tw.span`
     ease-linear
     group-hover:max-w-xs
     ml-1
+    font-bold
 `;

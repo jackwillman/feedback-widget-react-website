@@ -18,7 +18,7 @@ const Widget = function WidgetComponent() {
             </Popover.Panel>
     
             <WidgetButton>
-                <WidgetIcon />
+                <WidgetIcon weight="bold"/>
     
                 <WidgetSpan>
                     Feedback

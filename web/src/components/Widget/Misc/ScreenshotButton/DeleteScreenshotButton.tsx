@@ -18,7 +18,7 @@ const deleteScreenshotButton = function(
 
                 // posição do widget, só pq n tem bulhufas no site
                 backgroundPosition : 'right bottom',
-                backgroundSize : 180
+                backgroundSize : 80
             } }
         >
             <Trash weight="fill" />

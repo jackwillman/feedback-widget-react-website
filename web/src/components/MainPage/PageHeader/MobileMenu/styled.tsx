@@ -8,7 +8,7 @@ export const MenuListPopover = tw(Popover)`
     sm:invisible
     visible
 
-    mt-[19px]
+    mt-[39px]
 `;
 
 export const MenuListButton = tw(Popover.Button)`

@@ -1,5 +1,5 @@
 import { SubmitFeedbackUseCaseRequest } from ".";
-import { MailAdapter } from "../../../adapters/mail.adapter";
+import { MailAdapter } from "../../adapters/mail.adapter";
 
 const sendFeedbackByMail = async function (
     {

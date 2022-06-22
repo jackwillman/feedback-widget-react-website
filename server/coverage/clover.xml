@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1655864692342" clover="3.2.0">
-  <project timestamp="1655864692342" name="All files">
+<coverage generated="1655867181970" clover="3.2.0">
+  <project timestamp="1655867181971" name="All files">
     <metrics statements="79" coveredstatements="79" conditionals="13" coveredconditionals="13" methods="4" coveredmethods="4" elements="96" coveredelements="96" complexity="0" loc="79" ncloc="79" packages="1" files="3" classes="3"/>
-    <file name="createFeedbackAtDatabase.ts" path="D:\programming\learning\RocketSeatNwlReturn\server\src\repositories\useCases\submitFeedback\createFeedbackAtDatabase.ts">
+    <file name="createFeedbackAtDatabase.ts" path="D:\programming\learning\RocketSeatNwlReturn\server\src\resources\feedbacks\repositories\submitFeedback.useCase\createFeedbackAtDatabase.ts">
       <metrics statements="19" coveredstatements="19" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
@@ -24,7 +24,7 @@
       <line num="18" count="1" type="stmt"/>
       <line num="19" count="1" type="stmt"/>
     </file>
-    <file name="index.ts" path="D:\programming\learning\RocketSeatNwlReturn\server\src\repositories\useCases\submitFeedback\index.ts">
+    <file name="index.ts" path="D:\programming\learning\RocketSeatNwlReturn\server\src\resources\feedbacks\repositories\submitFeedback.useCase\index.ts">
       <metrics statements="36" coveredstatements="36" conditionals="9" coveredconditionals="9" methods="2" coveredmethods="2"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
@@ -63,7 +63,7 @@
       <line num="35" count="2" type="stmt"/>
       <line num="36" count="1" type="stmt"/>
     </file>
-    <file name="sendFeedbackByMail.ts" path="D:\programming\learning\RocketSeatNwlReturn\server\src\repositories\useCases\submitFeedback\sendFeedbackByMail.ts">
+    <file name="sendFeedbackByMail.ts" path="D:\programming\learning\RocketSeatNwlReturn\server\src\resources\feedbacks\repositories\submitFeedback.useCase\sendFeedbackByMail.ts">
       <metrics statements="24" coveredstatements="24" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>

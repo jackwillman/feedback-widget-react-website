@@ -1,5 +1,5 @@
 TN:
-SF:src\repositories\useCases\submitFeedback\createFeedbackAtDatabase.ts
+SF:src\resources\feedbacks\repositories\submitFeedback.useCase\createFeedbackAtDatabase.ts
 FN:4,createFeedbackAtDatabase
 FNF:1
 FNH:1
@@ -30,7 +30,7 @@ BRF:1
 BRH:1
 end_of_record
 TN:
-SF:src\repositories\useCases\submitFeedback\index.ts
+SF:src\resources\feedbacks\repositories\submitFeedback.useCase\index.ts
 FN:18,execute
 FN:13,SubmitFeedbackUseCase
 FNF:2
@@ -88,7 +88,7 @@ BRF:9
 BRH:9
 end_of_record
 TN:
-SF:src\repositories\useCases\submitFeedback\sendFeedbackByMail.ts
+SF:src\resources\feedbacks\repositories\submitFeedback.useCase\sendFeedbackByMail.ts
 FN:4,sendFeedbackByMail
 FNF:1
 FNH:1

@@ -1,4 +1,9 @@
-import { Request, Response, RequestHandler, ErrorRequestHandler } from 'express';
+import { 
+	Request, 
+	Response, 
+	RequestHandler, 
+	ErrorRequestHandler 
+} from 'express';
 
 
 export const catchErrors = function catchErrorsMiddleware(
@@ -22,7 +27,6 @@ export const handleNotFound : RequestHandler = function handleNotFoundError(req,
 };
 
 
-export const handleErrorLogging : ErrorRequestHandler = function logErrorsMiddleware(error, req, res) {
-	res.status(error.status || 500);
-	res.send(error.message);
+export const handleErrorLogging : ErrorRequestHandler = function logErrorsMiddleware(error, req, res, next) {
+	res.status(error.status || 500).send(error.message);
 };

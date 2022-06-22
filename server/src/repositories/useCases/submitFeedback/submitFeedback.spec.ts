@@ -20,6 +20,17 @@ describe('Submit feedback', () => {
         expect(sendMailSpy).toHaveBeenCalled();
     });
 
+    it('should be able to submit a feedback without a screenshot', async () => {
+        await expect(submitFeedback.execute({
+            type : 'BUG',
+            comment : 'example comment',
+            screenshot : '',
+        })).resolves.not.toThrow();
+
+        expect(createFeedbackSpy).toHaveBeenCalled();
+        expect(sendMailSpy).toHaveBeenCalled();
+    });
+
     it('should not be able to submit a feedback without type', async () => {
         await expect(submitFeedback.execute({
             type : '',

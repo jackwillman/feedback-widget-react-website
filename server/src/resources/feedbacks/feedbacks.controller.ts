@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator';
 
 import { NodemailerMailAdapter } from './adapters/nodemailer.mail.adapter';
 import { PrismaFeedbacksRepository } from './repositories/prisma.feedbacks.repository';
-import { SubmitFeedbackUseCase } from './repositories/submitFeedback.useCase';
+import { SubmitFeedbackUseCase } from './useCases/submitFeedback.useCase';
 
 const postFeedback = async function postFeedbackController(
     req : Request, 

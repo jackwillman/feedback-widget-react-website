@@ -1,5 +1,5 @@
 import { MailAdapter } from '../../adapters/mail.adapter';
-import { FeedbacksRepository } from '../feedbacks.repository';
+import { FeedbacksRepository } from '../../repositories/feedbacks.repository';
 import createFeedbackAtDatabase from './createFeedbackAtDatabase';
 import sendFeedbackByMail from './sendFeedbackByMail';
 

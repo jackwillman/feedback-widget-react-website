@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
-import { SubmitUserUseCase } from './repositories/submitUser.useCase';
+import { SubmitUserUseCase } from './useCases/submitUser.useCase';
 import { PrismaUsersRepository } from './repositories/prisma.users.repository';
 
 

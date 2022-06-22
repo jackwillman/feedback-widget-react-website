@@ -1,5 +1,5 @@
 import { SubmitFeedbackUseCaseRequest } from '.';
-import { FeedbacksRepository } from '../feedbacks.repository';
+import { FeedbacksRepository } from '../../repositories/feedbacks.repository';
 
 const createFeedbackAtDatabase = async function (
     {

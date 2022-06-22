@@ -12,8 +12,8 @@ export const catchErrors = function catchErrorsMiddleware(
 	const tryCatchFunction : RequestHandler = async function (req, res, next) {
 		try {
 			await controllerMethod(req, res);
-		} catch (err) {
-			next(err);
+		} catch (error) {
+			next(error);
 		}
 	};
 

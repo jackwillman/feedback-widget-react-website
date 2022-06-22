@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 
-import { UsersRepository } from './users.repository';
+import { UsersRepository } from '../repositories/users.repository';
 
 export interface SubmitUserUseCaseRequest {
     username : string;

@@ -10,15 +10,17 @@ const usersRouter = express.Router();
 
 usersRouter
     .route('/')
-    .get(catchErrors(usersController.getUser))
     .post(
         [sanitize.username, sanitize.email],
         catchErrors(usersController.postUser)
     )
+    /*
+    .get(catchErrors(usersController.getUser))
     .put(
         [sanitize.username, sanitize.email],
         catchErrors(usersController.putUser)
     )
     .delete(catchErrors(usersController.deleteUser));
+    */
 
 export default usersRouter;

@@ -4,15 +4,39 @@ import { UserIdData, UserInputData, UserUpdateData, UsersRepository } from "./us
 export const PrismaUsersRepository = class implements UsersRepository {
     
     get = async function ({ userId } : UserIdData) {
-        return await prisma.user.findUnique({
+        const user = await prisma.user.findUnique({
             where : {
                 id : userId
             }
         });
+
+        if (!user) {
+            return;
+        }
+        
+        const selectedData = {
+            id : user.id,
+            username : user.username,
+            email : user.email
+        };
+        
+        return selectedData;
     };
 
     getAll = async function () {
-        return await prisma.user.findMany();
+        const userList = await prisma.user.findMany()
+
+        const selectedData : Record<string, any> = {};
+        for (const user in userList) {
+            let id = userList[user].id;
+            
+            selectedData[id] = {
+                id,
+                username : userList[user].username,
+                email : userList[user].email
+            };
+        }
+        return selectedData;
     };
 
     create = async function (

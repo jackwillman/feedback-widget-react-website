@@ -16,8 +16,6 @@ export const GetUserUseCase = class {
         }
 
         const user = await this.usersRepository.get({ userId });
-        delete user.id;
-        delete user.password;
         return user;
     };
 };

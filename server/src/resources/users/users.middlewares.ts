@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 
 export const sanitize = {
-	username : body('username').trim().notEmpty().blacklist('{}').escape(),
-	email : body('email').trim().notEmpty().blacklist('{}').isEmail().normalizeEmail()
+	username : body('username').optional().trim().blacklist('{}').escape(),
+	email : body('email').optional().trim().blacklist('{}').isEmail().normalizeEmail()
 };

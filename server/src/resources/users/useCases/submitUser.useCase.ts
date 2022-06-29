@@ -10,11 +10,12 @@ export interface SubmitUserUseCaseRequest {
 
 export const SubmitUserUseCase = class {
     constructor (
-        private usersRepository : UsersRepository,
+        private usersRepository : UsersRepository
     ) {};
 
     async execute(request : SubmitUserUseCaseRequest) {
-        const { username, email, password } = request;
+        const { username, email } = request;
+        let { password } = request;
 
         if (!username) {
             throw new Error('Username is required');
@@ -29,12 +30,12 @@ export const SubmitUserUseCase = class {
         }
 
         const salt = await bcrypt.genSalt(10);
-		const encrypted_password = await bcrypt.hash(password, salt);
+		password = await bcrypt.hash(password, salt);
 
         await this.usersRepository.create({
             username,
             email,
-            password : encrypted_password
+            password
         });
     };
 };

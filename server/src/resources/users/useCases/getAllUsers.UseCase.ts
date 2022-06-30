@@ -7,6 +7,17 @@ export const GetAllUsersUseCase = class {
     ) {};
 
     async execute() {
-        return await this.usersRepository.getAll();
+        const userList = await this.usersRepository.getAll();
+
+        const selectedData : Record<string, any> = {};
+        for (const user in userList) {
+            let id = userList[user].id;
+            
+            selectedData[id] = {
+                username : userList[user].username,
+                email : userList[user].email
+            };
+        }
+        return selectedData;
     };
 };

@@ -10,33 +10,12 @@ export const PrismaUsersRepository = class implements UsersRepository {
             }
         });
 
-        if (!user) {
-            return;
-        }
-        
-        const selectedData = {
-            id : user.id,
-            username : user.username,
-            email : user.email
-        };
-        
-        return selectedData;
+        return user;
     };
 
     getAll = async function () {
-        const userList = await prisma.user.findMany()
-
-        const selectedData : Record<string, any> = {};
-        for (const user in userList) {
-            let id = userList[user].id;
-            
-            selectedData[id] = {
-                id,
-                username : userList[user].username,
-                email : userList[user].email
-            };
-        }
-        return selectedData;
+        const userList = await prisma.user.findMany();
+        return userList;
     };
 
     create = async function (

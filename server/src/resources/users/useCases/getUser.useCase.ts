@@ -16,6 +16,17 @@ export const GetUserUseCase = class {
         }
 
         const user = await this.usersRepository.get({ userId });
-        return user;
+        
+        if (!user) {
+            return;
+        }
+        
+        const selectedData = {
+            id : user.id,
+            username : user.username,
+            email : user.email
+        };
+        
+        return selectedData;
     };
 };

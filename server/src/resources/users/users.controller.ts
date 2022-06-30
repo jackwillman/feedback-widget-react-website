@@ -9,7 +9,10 @@ import { SubmitUserUseCase } from './useCases/submitUser.useCase';
 import { UpdateUserUseCase } from './useCases/updateUser.useCase';
 import { DeleteUserUseCase } from './useCases/deleteUser.useCase';
 
-const getUser = async function getUserController(
+type Controller = (req : Request, res : Response) => Promise<void>;
+const userController : Record<string, Controller> = {};
+
+userController.getUser = async function getUserController(
     req : Request, 
     res : Response
 ) {    
@@ -17,7 +20,7 @@ const getUser = async function getUserController(
     let result;
     const userId = req.query.id;
 
-    if (!req.query.id) {
+    if (!userId) {
         const getAllUsersUseCase = new GetAllUsersUseCase(
             prismaUsersRepository
         );
@@ -41,7 +44,7 @@ const getUser = async function getUserController(
     return;
 };
 
-const postUser = async function postUserController(
+userController.postUser = async function postUserController(
     req : Request, 
     res : Response
 ) {
@@ -67,7 +70,7 @@ const postUser = async function postUserController(
     return;
 };
 
-const putUser = async function putUserController(
+userController.putUser = async function putUserController(
     req : Request, 
     res : Response
 ) {
@@ -89,7 +92,7 @@ const putUser = async function putUserController(
     return;
 };
 
-const deleteUser = async function deleteUserController(
+userController.deleteUser = async function deleteUserController(
     req : Request, 
     res : Response
 ) {    
@@ -105,9 +108,4 @@ const deleteUser = async function deleteUserController(
     return;
 };
 
-export default {
-    getUser,
-    postUser,
-    putUser,
-    deleteUser
-};
+export default userController;

@@ -1,4 +1,4 @@
-import { UsersRepository } from '../repositories/users.repository';
+import { UsersRepository, UserSelectedDataList } from '../repositories/users.repository';
 
 
 export const GetAllUsersUseCase = class {
@@ -9,15 +9,18 @@ export const GetAllUsersUseCase = class {
     async execute() {
         const userList = await this.usersRepository.getAll();
 
-        const selectedData : Record<string, any> = {};
-        for (const user in userList) {
-            let id = userList[user].id;
-            
-            selectedData[id] = {
-                username : userList[user].username,
-                email : userList[user].email
-            };
+        if (!userList) {
+            return;
         }
+
+        const selectedData : UserSelectedDataList = {};
+        userList.forEach((user) => {
+            
+            selectedData[user.id] = {
+                username : user.username,
+                email : user.email
+            };
+        });
         return selectedData;
     };
 };

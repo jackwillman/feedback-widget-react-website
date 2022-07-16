@@ -8,11 +8,11 @@ import { GetAllUsersUseCase } from './useCases/getAllUsers.UseCase';
 import { SubmitUserUseCase } from './useCases/submitUser.useCase';
 import { UpdateUserUseCase } from './useCases/updateUser.useCase';
 import { DeleteUserUseCase } from './useCases/deleteUser.useCase';
+import { LoginUseCase } from './useCases/login.useCase';
+import { isString } from '../../helpers';
+import { JwtSimpleJwtAdapter } from './adapters/jwtSimple.jwt.adapter';
 
-type Controller = (req : Request, res : Response) => Promise<void>;
-const userController : Record<string, Controller> = {};
-
-userController.getUser = async function getUserController(
+export const getUser = async function getUserController(
     req : Request, 
     res : Response
 ) {    
@@ -26,12 +26,20 @@ userController.getUser = async function getUserController(
         );
 
         result = await getAllUsersUseCase.execute();
+        if (!result) {
+            res.status(404).send('No user was found');
+            return;
+        }
         
     } else {
+        if (!isString(userId)) {
+            res.status(400).send('User ID is not a string');
+            return;
+        }
+
         const getUserUseCase = new GetUserUseCase(
             prismaUsersRepository
         );
-        
         result = await getUserUseCase.execute({ userId });
 
         if (!result) {
@@ -44,7 +52,7 @@ userController.getUser = async function getUserController(
     return;
 };
 
-userController.postUser = async function postUserController(
+export const postUser = async function postUserController(
     req : Request, 
     res : Response
 ) {
@@ -70,7 +78,7 @@ userController.postUser = async function postUserController(
     return;
 };
 
-userController.putUser = async function putUserController(
+export const putUser = async function putUserController(
     req : Request, 
     res : Response
 ) {
@@ -80,6 +88,11 @@ userController.putUser = async function putUserController(
     );
 
     const userId = req.query.id;
+    if (!isString(userId)) {
+        res.status(400).send('User ID is not a string');
+        return;
+    }
+    
     const { username, email, password } = req.body;
     await updateUserUseCase.execute({
         userId,
@@ -92,7 +105,7 @@ userController.putUser = async function putUserController(
     return;
 };
 
-userController.deleteUser = async function deleteUserController(
+export const deleteUser = async function deleteUserController(
     req : Request, 
     res : Response
 ) {    
@@ -102,10 +115,35 @@ userController.deleteUser = async function deleteUserController(
     );
 
     const userId = req.query.id;
+    if (!isString(userId)) {
+        res.status(400).send('User ID is not a string');
+        return;
+    }
+
     await deleteUserUseCase.execute({ userId });
 
     res.status(200).send();
     return;
 };
 
-export default userController;
+export const login = async function loginUserController(
+    req : Request, 
+    res : Response
+) {
+
+    const prismaUsersRepository = new PrismaUsersRepository();
+    const jwtSimpleJwtAdapter = new JwtSimpleJwtAdapter();
+    const loginUseCase = new LoginUseCase(
+        prismaUsersRepository,
+        jwtSimpleJwtAdapter
+    );
+
+    const { userIdentifier, password } = req.body;
+    const { token } = await loginUseCase.execute({
+        userIdentifier,
+        password
+    });
+
+    res.header('x-access-token', token).status(200);
+    return;
+};

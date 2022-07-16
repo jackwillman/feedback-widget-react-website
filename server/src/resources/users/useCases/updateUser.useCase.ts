@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { UsersRepository } from '../repositories/users.repository';
 
 export interface UpdateUserUseCaseRequest {
-    userId : any;
+    userId : string;
     username? : string;
     email? : string;
     password? : string;
@@ -32,7 +32,7 @@ export const UpdateUserUseCase = class {
         }
 
         await this.usersRepository.update({
-            userId,
+            id : userId,
             username,
             email,
             password

@@ -1,7 +1,7 @@
 import { UsersRepository } from '../repositories/users.repository';
 
 export interface DeleteUserUseCaseRequest {
-    userId : any;
+    userId : string;
 };
 
 export const DeleteUserUseCase = class {
@@ -14,6 +14,6 @@ export const DeleteUserUseCase = class {
             throw new Error('User ID is required!');
         }
 
-        await this.usersRepository.delete({ userId });
+        await this.usersRepository.delete(userId);
     };
 };

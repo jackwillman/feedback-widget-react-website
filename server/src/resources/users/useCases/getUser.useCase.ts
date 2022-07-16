@@ -1,7 +1,7 @@
 import { UsersRepository } from '../repositories/users.repository';
 
 export interface GetUserUseCaseRequest {
-    userId : any;
+    userId : string;
 };
 
 export const GetUserUseCase = class {
@@ -15,7 +15,7 @@ export const GetUserUseCase = class {
             throw new Error('User ID is required!');
         }
 
-        const user = await this.usersRepository.get({ userId });
+        const user = await this.usersRepository.getById(userId);
         
         if (!user) {
             return;

@@ -3,20 +3,25 @@ import express from 'express';
 import { catchErrors } from '../../middlewares';
 import { sanitize } from './users.middlewares';
 
-import usersController from './users.controller';
-
+import {
+    getUser,
+    postUser,
+    putUser,
+    deleteUser,
+    login
+} from './users.controller';
 
 const usersRouter = express.Router();
 
 usersRouter
     .route('/')
-    .get(catchErrors(usersController.getUser))
+    .get(catchErrors(getUser))
     .post(
         [sanitize.username, sanitize.email],
-        catchErrors(usersController.postUser)
+        catchErrors(postUser)
     ).put(
         [sanitize.username, sanitize.email],
-        catchErrors(usersController.putUser)
-    ).delete(catchErrors(usersController.deleteUser));
+        catchErrors(putUser)
+    ).delete(catchErrors(deleteUser));
 
 export default usersRouter;

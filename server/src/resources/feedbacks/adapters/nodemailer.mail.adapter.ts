@@ -11,7 +11,7 @@ const transport = nodemailer.createTransport({
 });
 
 export const NodemailerMailAdapter = class implements MailAdapter {
-    sendMail = async function ({ subject, body }: SendMailData) {
+    async sendMail ({ subject, body }: SendMailData) {
         await transport.sendMail({
             from : 'Equipe Feedget <oi@feedget.com>',
             to : 'João Luís Rheingantz Scaini <jlrscaini@yahoo.com.br>',

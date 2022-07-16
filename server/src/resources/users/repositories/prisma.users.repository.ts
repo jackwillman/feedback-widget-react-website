@@ -1,24 +1,44 @@
 import prisma from "../../../prisma";
-import { UserIdData, UserInputData, UserUpdateData, UsersRepository } from "./users.repository";
+import { Id, Username, Email, UserUpdateData, UsersRepository, UserInputData } from "./users.repository";
 
 export const PrismaUsersRepository = class implements UsersRepository {
     
-    get = async function ({ userId } : UserIdData) {
+    async getById (id : Id) {
         const user = await prisma.user.findUnique({
             where : {
-                id : userId
+                id
             }
         });
 
         return user;
     };
 
-    getAll = async function () {
+    async getByUsername (username : Username) {
+        const user = await prisma.user.findUnique({
+            where : {
+                username
+            }
+        });
+
+        return user;
+    };
+
+    async getByEmail (email : Email) {
+        const user = await prisma.user.findUnique({
+            where : {
+                email
+            }
+        });
+
+        return user;
+    };
+
+    async getAll () {
         const userList = await prisma.user.findMany();
         return userList;
     };
 
-    create = async function (
+    async create (
         { username, email, password } : UserInputData
     ) {
         await prisma.user.create({
@@ -30,12 +50,16 @@ export const PrismaUsersRepository = class implements UsersRepository {
         });
     };
 
-    update = async function (
-        { userId, username, email, password } : UserUpdateData
+    async update ({ 
+        id, 
+        username, 
+        email, 
+        password 
+    } : UserUpdateData
     ) {
         await prisma.user.update({
             where : {
-                id : userId
+                id : id
             },
             data : {
                 username,
@@ -45,10 +69,10 @@ export const PrismaUsersRepository = class implements UsersRepository {
         });
     };
 
-    delete = async function ({ userId } : UserIdData) {
+    async delete (id : Id) {
         await prisma.user.delete({
             where : {
-                id : userId
+                id
             }
         });
     };

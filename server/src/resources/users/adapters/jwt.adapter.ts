@@ -33,7 +33,7 @@ export interface DecodeSessionData {
 export interface DecodeResult {
     type: string;
     session?: Session;
-}
+};
 
 export interface JwtAdapter {
     encodeSession : (encodeSessionData : EncodeSessionData) => EncodeResult;

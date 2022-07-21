@@ -14,7 +14,7 @@ import {
 const usersRouter = express.Router();
 
 usersRouter
-    .route('/')
+    .route('/users')
     .get(catchErrors(getUser))
     .post(
         [sanitize.username, sanitize.email],
@@ -23,5 +23,9 @@ usersRouter
         [sanitize.username, sanitize.email],
         catchErrors(putUser)
     ).delete(catchErrors(deleteUser));
+
+usersRouter
+    .route('/session')
+    .post(catchErrors(login));
 
 export default usersRouter;

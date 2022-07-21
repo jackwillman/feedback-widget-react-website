@@ -138,12 +138,14 @@ export const login = async function loginUserController(
         jwtSimpleJwtAdapter
     );
 
-    const { userIdentifier, password } = req.body;
+    const userIdentifier = req.body.email || req.body.username;
+    const { password } = req.body;
+    
     const { token } = await loginUseCase.execute({
         userIdentifier,
         password
     });
 
-    res.header('x-access-token', token).status(200);
+    res.header('x-access-token', token).status(200).send();
     return;
 };

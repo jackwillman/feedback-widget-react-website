@@ -5,7 +5,7 @@ import feedbacksRouter from './resources/feedbacks/feedbacks.router';
 
 const router = express.Router();
 
-router.use('/users', usersRouter);
+router.use('/', usersRouter);
 router.use('/feedbacks', feedbacksRouter);
 
 export default router;

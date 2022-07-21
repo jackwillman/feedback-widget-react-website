@@ -17,16 +17,18 @@ export const JwtSimpleJwtAdapter = class implements JwtAdapter {
         const issued = Date.now();
         const fifteenMinutesInMs = 15 * 60 * 1000;
         const expires = issued + fifteenMinutesInMs;
+        
         const session: Session = {
             ...partialSession,
             issued,
             expires
         };
+        const token = encode(session, secretKey, this.algorithm);
     
         return {
-            token: encode(session, secretKey, this.algorithm),
-            issued: issued,
-            expires: expires
+            token,
+            issued,
+            expires
         };
     };
 

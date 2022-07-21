@@ -48,7 +48,7 @@ export const LoginUseCase = class {
 			userId : user.id,
 			username : user.username,
 			email : user.email
-		}
+		};
 
 		return this.jwtAdapter.encodeSession({
 			secretKey,

@@ -1,3 +1,4 @@
+import { httpError } from '../../../helpers';
 import { UsersRepository } from '../repositories/users.repository';
 
 export interface DeleteUserUseCaseRequest {
@@ -11,7 +12,7 @@ export const DeleteUserUseCase = class {
 
     async execute( { userId } : DeleteUserUseCaseRequest) {
         if (!userId) {
-            throw new Error('User ID is required!');
+            throw httpError(400, 'User ID is required!');
         }
 
         await this.usersRepository.delete(userId);

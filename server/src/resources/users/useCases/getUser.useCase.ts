@@ -1,3 +1,4 @@
+import { httpError } from '../../../helpers';
 import { UsersRepository } from '../repositories/users.repository';
 
 export interface GetUserUseCaseRequest {
@@ -12,7 +13,7 @@ export const GetUserUseCase = class {
     async execute( { userId } : GetUserUseCaseRequest) {
         
         if (!userId) {
-            throw new Error('User ID is required!');
+            throw httpError(400, 'User ID is required!');
         }
 
         const user = await this.usersRepository.getById(userId);

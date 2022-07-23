@@ -5,6 +5,8 @@ import {
 	ErrorRequestHandler 
 } from 'express';
 
+import { ErrorCoded } from './helpers';
+
 
 export const catchErrors = function catchErrorsMiddleware(
     controllerMethod : (req : Request, res : Response) => Promise<void>
@@ -28,5 +30,6 @@ export const handleNotFound : RequestHandler = function handleNotFoundError(req,
 
 
 export const handleErrorLogging : ErrorRequestHandler = function logErrorsMiddleware(error, req, res, next) {
-	res.status(error.status || 500).send(error.message);
+	error as ErrorCoded;
+	res.status(error.httpCode || 500).send(error.message);
 };

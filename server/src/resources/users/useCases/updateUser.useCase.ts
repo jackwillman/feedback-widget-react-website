@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 
+import { httpError } from '../../../helpers';
 import { UsersRepository } from '../repositories/users.repository';
 
 export interface UpdateUserUseCaseRequest {
@@ -19,11 +20,11 @@ export const UpdateUserUseCase = class {
         let { password } = request;
 
         if (!userId) {
-            throw new Error('User ID is required!');
+            throw httpError(400, 'User ID is required!');
         }
         
         if (!username && !email && !password) {
-            throw new Error('New data to one of the fields is required!');
+            throw httpError(400, 'New data to one of the fields is required!');
         }
 
         if (password) {

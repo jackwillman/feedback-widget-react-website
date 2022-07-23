@@ -1,5 +1,7 @@
 import bcrypt from 'bcryptjs';
 
+import { httpError } from '../../../helpers';
+
 import { UsersRepository } from '../repositories/users.repository';
 
 export interface SubmitUserUseCaseRequest {
@@ -18,15 +20,15 @@ export const SubmitUserUseCase = class {
         let { password } = request;
 
         if (!username) {
-            throw new Error('Username is required');
+            throw httpError(400, 'Username is required');
         }
 
         if (!email) {
-            throw new Error('Email is required');
+            throw httpError(400, 'Email is required');
         }
 
         if (!password) {
-            throw new Error('Password is required');
+            throw httpError(400, 'Password is required');
         }
 
         const salt = await bcrypt.genSalt(10);

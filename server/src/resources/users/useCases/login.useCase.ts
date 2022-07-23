@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
 
 import config from '../../../config';
-import { JwtAdapter } from '../adapters/jwt.adapter';
+import { httpError } from '../../../helpers';
 
+import { JwtAdapter } from '../adapters/jwt.adapter';
 import { UsersRepository } from '../repositories/users.repository';
 
 export interface LoginUseCaseRequest {
@@ -31,17 +32,17 @@ export const LoginUseCase = class {
 		}
 
 		if (!user) {
-			throw new Error('Wrong username, email or password.');
+            throw httpError(400, 'Wrong username, email or password.');
 		}
 
 		const validPassword = await bcrypt.compare(password, user.password);
 		if (!validPassword) {
-			throw new Error('Wrong username, email or password.');
+			throw httpError(400, 'Wrong username, email or password.');
 		}
 
 		const secretKey = config.JWT_SECRET;
 		if (!secretKey) {
-			throw new Error('Missing Secret Key.');
+            throw httpError(500, 'Missing Secret Key');
 		}
 
 		const partialSession = {

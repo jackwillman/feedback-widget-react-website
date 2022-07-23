@@ -9,11 +9,12 @@ export const GetAllUsersUseCase = class {
     async execute() {
         const userList = await this.usersRepository.getAll();
 
+        const selectedData : UserSelectedDataList = {};
+
         if (!userList) {
-            return;
+            return selectedData;
         }
 
-        const selectedData : UserSelectedDataList = {};
         userList.forEach((user) => {
             
             selectedData[user.id] = {

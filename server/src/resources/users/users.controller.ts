@@ -9,7 +9,6 @@ import { SubmitUserUseCase } from './useCases/submitUser.useCase';
 import { UpdateUserUseCase } from './useCases/updateUser.useCase';
 import { DeleteUserUseCase } from './useCases/deleteUser.useCase';
 import { LoginUseCase } from './useCases/login.useCase';
-import { isString } from '../../helpers';
 import { JwtSimpleJwtAdapter } from './adapters/jwtSimple.jwt.adapter';
 
 export const getUser = async function getUserController(
@@ -32,7 +31,7 @@ export const getUser = async function getUserController(
         }
         
     } else {
-        if (!isString(userId)) {
+        if (typeof userId !== 'string') {
             res.status(400).send('User ID is not a string');
             return;
         }
@@ -88,7 +87,8 @@ export const putUser = async function putUserController(
     );
 
     const userId = req.query.id;
-    if (!isString(userId)) {
+
+    if (typeof userId !== 'string') {
         res.status(400).send('User ID is not a string');
         return;
     }
@@ -115,7 +115,7 @@ export const deleteUser = async function deleteUserController(
     );
 
     const userId = req.query.id;
-    if (!isString(userId)) {
+    if (typeof userId !== 'string') {
         res.status(400).send('User ID is not a string');
         return;
     }

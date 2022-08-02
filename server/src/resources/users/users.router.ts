@@ -18,8 +18,10 @@ const usersRouter = express.Router();
 
 usersRouter
     .route('/')
-    .get(catchErrors(getUser))
-    .post(
+    .get(
+        catchMiddlewareErrors(authMiddleware.execute),
+        catchErrors(getUser)
+    ).post(
         [sanitize.username, sanitize.email],
         catchErrors(postUser)
     ).put(

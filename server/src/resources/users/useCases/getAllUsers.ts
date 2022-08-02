@@ -16,10 +16,8 @@ export const GetAllUsersUseCase = class {
         }
 
         userList.forEach((user) => {
-            
             selectedData[user.id] = {
                 username : user.username,
-                email : user.email
             };
         });
         return selectedData;

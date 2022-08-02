@@ -10,8 +10,10 @@ export interface User {
     password: Password;
 };
 
-export type UserSelectedData = Omit<User, "id" | "password">;
-export type UserSelectedDataList = Record<Id, UserSelectedData>;
+export type UserSelectedData = Omit<User, "password">;
+export type UserSelectedDataForList = Omit<User, "id" | "email" | "password" >;
+export type UserSelectedDataList = Record<Id, UserSelectedDataForList>;
+
 export type UserInputData = Omit<User, "id">;
 
 export interface UserUpdateData extends Partial<UserInputData> {

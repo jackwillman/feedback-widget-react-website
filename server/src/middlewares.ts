@@ -47,7 +47,7 @@ export const handleErrorLogging = function logErrorsMiddleware(
 	res : Response, 
 	next : NextFunction
 ) {
-	res.status(error.httpCode || 500).send({ error : error.message });
+	res.status(error.httpCode || 500).json({ error : error.message });
 };
 
 export const CheckJwtAuthorization = class {
@@ -77,13 +77,7 @@ export const CheckJwtAuthorization = class {
 			throw httpError(401, `Failed to decode or validate authorization token. Reason: ${decodeResult.type}.`);
 		}
 
-		const decodedSession = decodeResult.session;
-
-		if (req.query.id !== decodedSession.userId) {
-			throw httpError(403, 'You do not have permission to access this resource.');
-		}
-
-		return decodedSession;
+		return decodeResult.session;
 	};
 
 	static handleSessionExpiration(

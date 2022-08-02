@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
+import { httpError } from '../../helpers';
+
 import { PrismaUsersRepository } from './repositories/prisma';
 
 import { GetUserUseCase } from './useCases/getUser';
@@ -24,14 +26,16 @@ export const getUser = async function getUserController(
 
         result = await getAllUsersUseCase.execute();
         if (!result) {
-            res.status(404).send('No user was found');
-            return;
+            throw httpError(404, 'No user was found');
         }
         
     } else {
         if (typeof userId !== 'string') {
-            res.status(400).send('User ID is not a string');
-            return;
+            throw httpError(400, 'User ID is not a string');
+        }
+
+        if (req.query.id !== res.locals.userId) {
+            throw httpError(403, 'You do not have permission to access this resource.');
         }
 
         const getUserUseCase = new GetUserUseCase(
@@ -40,13 +44,11 @@ export const getUser = async function getUserController(
         result = await getUserUseCase.execute({ userId });
 
         if (!result) {
-            res.status(404).send('User not found');
-            return;
+            throw httpError(404, 'User not found');
         }
     }
 
     res.status(200).json(result);
-    return;
 };
 
 export const postUser = async function postUserController(
@@ -72,7 +74,6 @@ export const postUser = async function postUserController(
     });
 
     res.status(201).send();
-    return;
 };
 
 export const putUser = async function putUserController(
@@ -87,8 +88,11 @@ export const putUser = async function putUserController(
     const userId = req.query.id;
 
     if (typeof userId !== 'string') {
-        res.status(400).send('User ID is not a string');
-        return;
+        throw httpError(400, 'User ID is not a string');
+    }
+
+    if (req.query.id !== res.locals.userId) {
+        throw httpError(403, 'You do not have permission to access this resource.');
     }
     
     const { username, email, password } = req.body;
@@ -100,7 +104,6 @@ export const putUser = async function putUserController(
     });
 
     res.status(201).send();
-    return;
 };
 
 export const deleteUser = async function deleteUserController(
@@ -114,12 +117,14 @@ export const deleteUser = async function deleteUserController(
 
     const userId = req.query.id;
     if (typeof userId !== 'string') {
-        res.status(400).send('User ID is not a string');
-        return;
+        throw httpError(400, 'User ID is not a string');
+    }
+
+    if (req.query.id !== res.locals.userId) {
+        throw httpError(403, 'You do not have permission to access this resource.');
     }
 
     await deleteUserUseCase.execute({ userId });
 
     res.status(200).send();
-    return;
 };

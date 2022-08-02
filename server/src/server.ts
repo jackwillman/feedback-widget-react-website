@@ -1,17 +1,21 @@
 import express from 'express';
 import cors from 'cors';
 
+import config from './config';
 import router from './router';
 import { handleErrorLogging, handleNotFound } from './middlewares';
 
 const app = express();
 
 app.use(cors());
-app.use(express.json({limit : '1mb'}));
-app.use(router);
-app.use(handleErrorLogging);
-app.use(handleNotFound);
+app.use(express.json({limit : config.jsonSizeLimit}));
 
-app.listen(process.env.PORT || 3333, () => {
-    console.log('HTTP server running!');
+app.use(router);
+
+app.use(handleNotFound);
+app.use(handleErrorLogging);
+
+const port = config.port;
+app.listen(port, () => {
+    console.log(`HTTP server running! Listening at port ${port}`);
 });

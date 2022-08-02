@@ -1,10 +1,10 @@
 type UserId = string;
 type Username = string;
 type Email = string;
-type Secret = string;
 type Token = string;
 type Issued = number;
 type Expires = number;
+export type Secret = string;
 
 export interface Session {
     userId : UserId;
@@ -30,12 +30,19 @@ export interface DecodeSessionData {
     sessionToken : Token;
 };
 
-export interface DecodeResult {
-    type: string;
-    session?: Session;
+export type DecodeResult = {
+    type : "valid";
+    session : Session;
+} | {
+    type : "integrity-error";
+} | {
+    type : "invalid-token";
 };
+
+export type ExpirationStatus = string;
 
 export interface JwtAdapter {
     encodeSession : (encodeSessionData : EncodeSessionData) => EncodeResult;
     decodeSession : (decodeSessionData : DecodeSessionData) => DecodeResult;
+    checkExpirationStatus : (session : Session) => ExpirationStatus;
 };

@@ -1,15 +1,13 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
-import { PrismaUsersRepository } from './repositories/prisma.users.repository';
+import { PrismaUsersRepository } from './repositories/prisma';
 
-import { GetUserUseCase } from './useCases/getUser.useCase';
-import { GetAllUsersUseCase } from './useCases/getAllUsers.UseCase';
-import { SubmitUserUseCase } from './useCases/submitUser.useCase';
-import { UpdateUserUseCase } from './useCases/updateUser.useCase';
-import { DeleteUserUseCase } from './useCases/deleteUser.useCase';
-import { LoginUseCase } from './useCases/login.useCase';
-import { JwtSimpleJwtAdapter } from './adapters/jwtSimple.jwt.adapter';
+import { GetUserUseCase } from './useCases/getUser';
+import { GetAllUsersUseCase } from './useCases/getAllUsers';
+import { SubmitUserUseCase } from './useCases/submitUser';
+import { UpdateUserUseCase } from './useCases/updateUser';
+import { DeleteUserUseCase } from './useCases/deleteUser';
 
 export const getUser = async function getUserController(
     req : Request, 
@@ -123,29 +121,5 @@ export const deleteUser = async function deleteUserController(
     await deleteUserUseCase.execute({ userId });
 
     res.status(200).send();
-    return;
-};
-
-export const login = async function loginUserController(
-    req : Request, 
-    res : Response
-) {
-
-    const prismaUsersRepository = new PrismaUsersRepository();
-    const jwtSimpleJwtAdapter = new JwtSimpleJwtAdapter();
-    const loginUseCase = new LoginUseCase(
-        prismaUsersRepository,
-        jwtSimpleJwtAdapter
-    );
-
-    const userIdentifier = req.body.email || req.body.username;
-    const { password } = req.body;
-    
-    const { token } = await loginUseCase.execute({
-        userIdentifier,
-        password
-    });
-
-    res.header('x-access-token', token).status(200).send();
     return;
 };

@@ -1,4 +1,4 @@
-import { UsersRepository, UserSelectedDataList } from '../repositories/users.repository';
+import { UsersRepository, UserSelectedDataList } from '../repositories';
 
 
 export const GetAllUsersUseCase = class {

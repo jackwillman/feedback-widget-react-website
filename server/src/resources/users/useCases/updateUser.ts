@@ -1,7 +1,8 @@
 import bcrypt from 'bcryptjs';
 
 import { httpError } from '../../../helpers';
-import { UsersRepository } from '../repositories/users.repository';
+
+import { UsersRepository } from '../repositories';
 
 export interface UpdateUserUseCaseRequest {
     userId : string;

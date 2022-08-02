@@ -1,7 +1,15 @@
 import { encode, decode, TAlgorithm } from "jwt-simple";
 
-import { isError } from "../../../helpers";
-import { DecodeSessionData, EncodeSessionData, JwtAdapter, Session } from "./jwt.adapter";
+import { addHttpCode, httpError, isError } from "../../helpers";
+import config from "../../config";
+
+import { 
+    DecodeSessionData, 
+    DecodeResult, 
+    EncodeSessionData, 
+    JwtAdapter, 
+    Session 
+} from ".";
 
 export const JwtSimpleJwtAdapter = class implements JwtAdapter {
 
@@ -15,8 +23,7 @@ export const JwtSimpleJwtAdapter = class implements JwtAdapter {
     ) {
 
         const issued = Date.now();
-        const fifteenMinutesInMs = 15 * 60 * 1000;
-        const expires = issued + fifteenMinutesInMs;
+        const expires = issued + config.token.expirationTime;
         
         const session: Session = {
             ...partialSession,
@@ -32,33 +39,32 @@ export const JwtSimpleJwtAdapter = class implements JwtAdapter {
         };
     };
 
-    decodeSession(
-        {
-            secretKey,
-            sessionToken
-        } : DecodeSessionData
-    ) {
+    decodeSession({
+        secretKey,
+        sessionToken
+    } : DecodeSessionData) : DecodeResult {
         let result: Session;
 
         try {
             result = decode(sessionToken, secretKey, false, this.algorithm);
         } catch (_error) {
             if (!isError(_error)) {
-                throw _error;
+                throw httpError(500, 'Error decoding session. Error is not an instance of the Error object. Error: ' + String(_error));
             }
-            const error : Error = _error
+            
+            const error = addHttpCode(401, _error);
 
             if (error.message === "No token supplied" || error.message === "Not enough or too many segments") {
                 return {
-                    type: "invalid-token"
+                    type : "invalid-token"
                 };
             } else if (error.message === "Signature verification failed" || error.message === "Algorithm not supported") {
                 return {
-                    type: "integrity-error"
+                    type : "integrity-error"
                 };
             } else if (error.message.indexOf("Unexpected token") === 0) {
                 return {
-                    type: "invalid-token"
+                    type : "invalid-token"
                 };
             }
 
@@ -66,8 +72,24 @@ export const JwtSimpleJwtAdapter = class implements JwtAdapter {
         }
 
         return {
-            type: "valid",
-            session: result
+            type : "valid",
+            session : result
         };
+    };
+
+    checkExpirationStatus(session: Session) {
+        const now = Date.now();
+    
+        if (session.expires > now) {
+            return "active";
+        }
+    
+        const renewalPeriod = session.expires + config.token.renewalPeriod;
+    
+        if (renewalPeriod > now) {
+            return "grace";
+        }
+    
+        return "expired";
     };
 };

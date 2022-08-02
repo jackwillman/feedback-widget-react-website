@@ -3,25 +3,26 @@ import bcrypt from 'bcryptjs';
 import config from '../../../config';
 import { httpError } from '../../../helpers';
 
-import { JwtAdapter } from '../adapters/jwt.adapter';
-import { UsersRepository } from '../repositories/users.repository';
+import { JwtAdapter } from '../../../adapters/jwt';
+import { User, UsersRepository } from '../../users/repositories';
+
+type UserIdentifier = string;
+type Password = string;
 
 export interface LoginUseCaseRequest {
-	userIdentifier : string,
-	password : string
+	userIdentifier : UserIdentifier,
+	password : Password
 };
 
 export const LoginUseCase = class {
-    constructor (
+    constructor(
         private usersRepository : UsersRepository,
 		private jwtAdapter : JwtAdapter
     ) {};
-	
-    async execute(
-		{ userIdentifier, password } : LoginUseCaseRequest
-	) {
+
+	async getUser(userIdentifier : UserIdentifier) {
 		if (!userIdentifier) {
-			throw new Error ('Please enter your username or email');
+			throw httpError(400, 'Please enter your username or email');
 		}
 		
 		let user;
@@ -31,16 +32,19 @@ export const LoginUseCase = class {
 			user = await this.usersRepository.getByUsername(userIdentifier);
 		}
 
-		if (!user) {
-            throw httpError(400, 'Wrong username, email or password.');
-		}
+		return user;
+	};
 
+	async createSession(
+		user : User,
+		password : Password
+	) {
 		const validPassword = await bcrypt.compare(password, user.password);
 		if (!validPassword) {
 			throw httpError(400, 'Wrong username, email or password.');
 		}
 
-		const secretKey = config.JWT_SECRET;
+		const secretKey = config.secrets.JWT_SECRET;
 		if (!secretKey) {
             throw httpError(500, 'Missing Secret Key');
 		}
@@ -55,5 +59,17 @@ export const LoginUseCase = class {
 			secretKey,
 			partialSession
 		});
+	};
+	
+    async execute(
+		{ userIdentifier, password } : LoginUseCaseRequest
+	) {
+		const user = await this.getUser(userIdentifier);
+		if (!user) {
+            throw httpError(400, 'Wrong username, email or password.');
+		}
+		
+		const session = await this.createSession(user, password);
+		return session;
 	};
 };

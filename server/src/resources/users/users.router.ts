@@ -1,31 +1,34 @@
 import express from 'express';
 
-import { catchErrors } from '../../middlewares';
+import { CheckJwtAuthorization, catchErrors, catchMiddlewareErrors } from '../../middlewares';
 import { sanitize } from './users.middlewares';
 
+import { JwtSimpleJwtAdapter } from '../../adapters/jwt/jwtSimple';
 import {
     getUser,
     postUser,
     putUser,
-    deleteUser,
-    login
+    deleteUser
 } from './users.controller';
+
+const jwtSimpleAdapter = new JwtSimpleJwtAdapter();
+const authMiddleware = new CheckJwtAuthorization(jwtSimpleAdapter);
 
 const usersRouter = express.Router();
 
 usersRouter
-    .route('/users')
+    .route('/')
     .get(catchErrors(getUser))
     .post(
         [sanitize.username, sanitize.email],
         catchErrors(postUser)
     ).put(
         [sanitize.username, sanitize.email],
+        catchMiddlewareErrors(authMiddleware.execute), 
         catchErrors(putUser)
-    ).delete(catchErrors(deleteUser));
-
-usersRouter
-    .route('/session')
-    .post(catchErrors(login));
+    ).delete(
+        catchMiddlewareErrors(authMiddleware.execute), 
+        catchErrors(deleteUser)
+    );
 
 export default usersRouter;

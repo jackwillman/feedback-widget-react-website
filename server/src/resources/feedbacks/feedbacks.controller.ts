@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
-import { NodemailerMailAdapter } from './adapters/nodemailer.mail.adapter';
-import { PrismaFeedbacksRepository } from './repositories/prisma.feedbacks.repository';
-import { SubmitFeedbackUseCase } from './useCases/submitFeedback.useCase';
+import { NodemailerMailAdapter } from '../../adapters/mail/nodemailer';
+import { PrismaFeedbacksRepository } from './repositories/prisma';
+import { SubmitFeedbackUseCase } from './useCases/submitFeedback';
 
-const postFeedback = async function postFeedbackController(
+export const postFeedback = async function postFeedbackController(
     req : Request, 
     res : Response
 ) {
@@ -33,8 +33,4 @@ const postFeedback = async function postFeedbackController(
 
     res.status(201).send();
     return;
-};
-
-export default {
-    postFeedback
 };

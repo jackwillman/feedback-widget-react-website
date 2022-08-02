@@ -1,5 +1,5 @@
 import prisma from "../../../prisma";
-import { Id, Username, Email, UserUpdateData, UsersRepository, UserInputData } from "./users.repository";
+import { Id, Username, Email, UserUpdateData, UsersRepository, UserInputData } from ".";
 
 export const PrismaUsersRepository = class implements UsersRepository {
     

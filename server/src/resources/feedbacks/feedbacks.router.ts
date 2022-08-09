@@ -1,14 +1,35 @@
 import express from 'express';
 
-import { catchErrors } from '../../middlewares';
+import { 
+    catchErrors,
+    catchMiddlewareErrors,
+    CheckJwtAuthorization
+} from '../../middlewares';
 import { sanitize } from './feedbacks.middlewares';
-import { postFeedback } from './feedbacks.controller';
+
+import { JwtSimpleJwtAdapter } from '../../adapters/jwt/jwtSimple';
+
+import { getFeedbacks, postFeedback } from './feedbacks.controller';
+
+const jwtSimpleAdapter = new JwtSimpleJwtAdapter();
+const authMiddleware = new CheckJwtAuthorization(jwtSimpleAdapter);
 
 const feedbacksRouter = express.Router();
 
 feedbacksRouter
     .route('/')
     .post(
+        [sanitize.type, sanitize.comment],
+        catchErrors(postFeedback)
+    );
+
+feedbacksRouter
+    .route('/auth/')
+    .get(
+        catchMiddlewareErrors(authMiddleware.execute),
+        catchErrors(getFeedbacks)
+    ).post(
+        catchMiddlewareErrors(authMiddleware.execute),
         [sanitize.type, sanitize.comment],
         catchErrors(postFeedback)
     );

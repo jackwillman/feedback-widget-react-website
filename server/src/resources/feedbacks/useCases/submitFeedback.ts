@@ -6,7 +6,8 @@ import { FeedbacksRepository } from '../repositories';
 export interface SubmitFeedbackUseCaseRequest {
     type : string;
     comment : string;
-    screenshot?: string;
+    screenshot: string | null;
+    userId : string | null;
 };
 
 export const SubmitFeedbackUseCase = class {
@@ -29,7 +30,7 @@ export const SubmitFeedbackUseCase = class {
     };
 
     async execute (request : SubmitFeedbackUseCaseRequest) {
-        const { type, comment, screenshot } = request;
+        const { type, comment, screenshot, userId } = request;
 
         if (!type) {
             throw httpError(400, 'Type is required');
@@ -46,11 +47,17 @@ export const SubmitFeedbackUseCase = class {
         await this.feedbacksRepository.create({
             type,
             comment,
-            screenshot
+            screenshot,
+            userId
         });
 
         await this.mailAdapter.sendMail(
-            this.mailContent({ type, comment, screenshot })
+            this.mailContent({ 
+                type, 
+                comment, 
+                screenshot, 
+                userId 
+            })
         );
     };
 };

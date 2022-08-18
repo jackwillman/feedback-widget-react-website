@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
-import { httpError } from '../../helpers';
+import { httpError, checkAuth } from '../../helpers';
 
 import { NodemailerMailAdapter } from '../../adapters/mail/nodemailer';
 import { PrismaFeedbacksRepository } from './repositories/prisma';
@@ -20,14 +20,10 @@ export const getFeedbacks = async function getFeedbacksController(
     );
 
     const userId = req.query.id;
-
-    if (typeof userId !== 'string') {
+    if (!userId || typeof userId !== 'string') {
         throw httpError(400, 'User ID is not a string');
     }
-
-    if (req.query.id !== res.locals.userId) {
-        throw httpError(403, 'You do not have permission to access this resource.');
-    }
+    checkAuth(res, userId);
 
     const feedbackList = await getFeedbacksUseCase.execute({ userId });
 
@@ -42,7 +38,6 @@ export const postFeedback = async function postFeedbackController(
     if (!errors.isEmpty()) {
         res.status(400).json({ errors : errors.array() });
     }
-    
     
     const prismaFeedbacksRepository = new PrismaFeedbacksRepository();
     const nodemailerMailAdapter = new NodemailerMailAdapter();
@@ -66,10 +61,7 @@ export const postFeedback = async function postFeedbackController(
         if (typeof userId !== 'string') {
             throw httpError(400, 'User ID is not a string');
         }
-    
-        if (req.query.id !== res.locals.userId) {
-            throw httpError(403, 'You do not have permission to access this resource.');
-        }
+        checkAuth(res, userId);
         
         dataToSubmit.userId = userId;
     }

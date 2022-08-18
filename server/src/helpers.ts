@@ -1,4 +1,4 @@
-import { NextFunction } from "express";
+import { NextFunction, Response } from "express";
 
 export const isError = function returnTrueIfTypeIsError(error : unknown) : error is Error {
     return error instanceof Error;
@@ -33,4 +33,13 @@ export const passError = function passErrorToNextFunction(
 ) {
     const error = httpError(httpCode, message);
     next(error);
+};
+
+export const checkAuth = function checkUserAuthorization(
+    res : Response,
+    userId : string
+) {
+    if (userId !== res.locals.session.userId) {
+        throw httpError(403, 'You do not have permission to access this resource.');
+    }
 };

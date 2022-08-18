@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
-import { httpError } from '../../helpers';
+import { httpError, checkAuth } from '../../helpers';
 
 import { PrismaUsersRepository } from './repositories/prisma';
 
@@ -11,44 +11,45 @@ import { SubmitUserUseCase } from './useCases/submitUser';
 import { UpdateUserUseCase } from './useCases/updateUser';
 import { DeleteUserUseCase } from './useCases/deleteUser';
 
-export const getUser = async function getUserController(
+export const getUsers = async function getUserController(
     req : Request, 
     res : Response
 ) {    
     const prismaUsersRepository = new PrismaUsersRepository();
-    let result;
-    const userId = req.query.id;
+    const getAllUsersUseCase = new GetAllUsersUseCase(
+        prismaUsersRepository
+    );
 
-    if (!userId) {
-        const getAllUsersUseCase = new GetAllUsersUseCase(
-            prismaUsersRepository
-        );
-
-        result = await getAllUsersUseCase.execute();
-        if (!result) {
-            throw httpError(404, 'No user was found');
-        }
-        
-    } else {
-        if (typeof userId !== 'string') {
-            throw httpError(400, 'User ID is not a string');
-        }
-
-        if (req.query.id !== res.locals.userId) {
-            throw httpError(403, 'You do not have permission to access this resource.');
-        }
-
-        const getUserUseCase = new GetUserUseCase(
-            prismaUsersRepository
-        );
-        result = await getUserUseCase.execute({ userId });
-
-        if (!result) {
-            throw httpError(404, 'User not found');
-        }
+    const result = await getAllUsersUseCase.execute();
+    if (!result) {
+        throw httpError(404, 'No user was found');
     }
 
-    res.status(200).json(result);
+    res.status(200).json(result);    
+};
+
+export const getUser = async function getUserController(
+    req : Request, 
+    res : Response
+) {    
+    
+    const userId = req.query.id;
+    if (!userId || typeof userId !== 'string') {
+        throw httpError(400, 'User ID is not a string');
+    }
+    checkAuth(res, userId);
+
+    const prismaUsersRepository = new PrismaUsersRepository();
+    const getUserUseCase = new GetUserUseCase(
+        prismaUsersRepository
+    );
+
+    const user = await getUserUseCase.execute({ userId });
+    if (!user) {
+        throw httpError(404, 'User not found');
+    }
+
+    res.status(200).json(user);
 };
 
 export const postUser = async function postUserController(
@@ -86,14 +87,10 @@ export const putUser = async function putUserController(
     );
 
     const userId = req.query.id;
-
-    if (typeof userId !== 'string') {
+    if (!userId || typeof userId !== 'string') {
         throw httpError(400, 'User ID is not a string');
     }
-
-    if (req.query.id !== res.locals.userId) {
-        throw httpError(403, 'You do not have permission to access this resource.');
-    }
+    checkAuth(res, userId);
     
     const { username, email, password } = req.body;
     await updateUserUseCase.execute({
@@ -116,13 +113,10 @@ export const deleteUser = async function deleteUserController(
     );
 
     const userId = req.query.id;
-    if (typeof userId !== 'string') {
+    if (!userId || typeof userId !== 'string') {
         throw httpError(400, 'User ID is not a string');
     }
-
-    if (req.query.id !== res.locals.userId) {
-        throw httpError(403, 'You do not have permission to access this resource.');
-    }
+    checkAuth(res, userId);
 
     await deleteUserUseCase.execute({ userId });
 

@@ -5,6 +5,7 @@ import { sanitize } from './users.middlewares';
 
 import { JwtSimpleJwtAdapter } from '../../adapters/jwt/jwtSimple';
 import {
+    getUsers,
     getUser,
     postUser,
     putUser,
@@ -18,7 +19,7 @@ const usersRouter = express.Router();
 
 usersRouter
     .route('/')
-    .get(catchErrors(getUser))
+    .get(catchErrors(getUsers))
     .post(
         [sanitize.username, sanitize.email],
         catchErrors(postUser)

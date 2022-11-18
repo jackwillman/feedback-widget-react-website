@@ -1,11 +1,17 @@
 import { SubmitFeedbackUseCase } from "./submitFeedback";
 
-const createFeedbackSpy = jest.fn();
-const sendMailSpy = jest.fn();
+const feedbacksRepositorySpy = {
+    create : jest.fn(),
+    get : jest.fn()
+};
+const mailAdapterSpy = {
+    sendMail : jest.fn()
+};
+
 
 const submitFeedback = new SubmitFeedbackUseCase(
-    { create : createFeedbackSpy },
-    { sendMail : sendMailSpy }
+    feedbacksRepositorySpy,
+    mailAdapterSpy
 );
 
 describe('Submit feedback', () => {

@@ -1,4 +1,5 @@
 import { SubmitFeedbackUseCase } from "./submitFeedback";
+import { GetFeedbacksUseCase } from "./getFeedbacks";
 
 const feedbacksRepositorySpy = {
     create : jest.fn(),
@@ -12,6 +13,10 @@ const mailAdapterSpy = {
 const submitFeedback = new SubmitFeedbackUseCase(
     feedbacksRepositorySpy,
     mailAdapterSpy
+);
+
+const getFeedbacks = new GetFeedbacksUseCase(
+    feedbacksRepositorySpy
 );
 
 describe('Submit feedback', () => {
@@ -63,6 +68,22 @@ describe('Submit feedback', () => {
             comment : 'ta tudo bugado',
             screenshot : 'test.png',
             userId : null
+        })).rejects.toThrow();
+    });
+});
+
+describe('Get feedbacks', () => {
+    it('should be able to get feedbacks', async () => {
+        await expect(getFeedbacks.execute({
+            userId : 'joaozinho'
+        })).resolves.not.toThrow();
+
+        expect(feedbacksRepositorySpy.get).toHaveBeenCalled();
+    });
+
+    it('should not be able to get feedbacks without user ID', async () => {
+        await expect(getFeedbacks.execute({
+            userId : ''
         })).rejects.toThrow();
     });
 });

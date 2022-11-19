@@ -19,12 +19,12 @@ const jwtAdapterSpy = {
 const login = new LoginUseCase(
     usersRepositorySpy,
     jwtAdapterSpy
-);
+); 
 
 describe('Get User', () => {
     it('should be able to get user with username', async () => {
         await expect(login.getUser(
-            'fausto'
+            'joaozinho'
         )).resolves.not.toThrow();
 
         expect(usersRepositorySpy.getByUsername).toHaveBeenCalled();
@@ -32,7 +32,7 @@ describe('Get User', () => {
 
     it('should be able to get user with email', async () => {
         await expect(login.getUser(
-            'fausto@silva.oloco'
+            'jlrscaini@yahoo.com.br'
         )).resolves.not.toThrow();
 
         expect(usersRepositorySpy.getByEmail).toHaveBeenCalled();
@@ -46,24 +46,23 @@ describe('Get User', () => {
 });
 
 describe('Create Session', () => {
-    const exampleUser = {
-        id : "04e95aa3-dedf-41e9-8a33-154ef628310b",
-        email : "fausto@silva.oloco",
-        username : "faustinho",
-        password : "holanda"
-    };
-
-    it('should be able to create session', () => {
-        expect(login.createSession(
-            exampleUser,
-            exampleUser.password
-        )).not.toThrow();
+    
+    it('should be able to create session', async () => {
+        await expect(login.createSession(
+            {
+                id : 'a87d40fd-19af-414b-a7bc-8baba8104fa9',
+                email : 'jlrscaini@yahoo.com.br',
+                username : 'joaozinho',
+                password : 'joaozinho'
+            },
+            'joaozinho'
+        )).resolves.not.toThrow();
 
         expect(jwtAdapterSpy.encodeSession).toHaveBeenCalled();
     });
 
-    it('should not be able to create session, user does not exist', () => {
-        expect(login.createSession(
+    it('should not be able to create session, user does not exist', async () => {
+        await expect(login.createSession(
             {
                 id : '04e95aa3-dedf-41e9-8a33-154ef699999c',
                 email : 'ine@xist.not',
@@ -71,11 +70,11 @@ describe('Create Session', () => {
                 password : 'inexists'
             },
             'abc'
-        )).toThrow();
+        )).rejects.toThrow();
     });
 
-    it('should not be able to create session, empty user', () => {
-        expect(login.createSession(
+    it('should not be able to create session, empty user', async () => {
+        await expect(login.createSession(
             {
                 id : '',
                 email : '',
@@ -83,21 +82,31 @@ describe('Create Session', () => {
                 password : ''
             },
             'abc'
-        )).toThrow();
+        )).rejects.toThrow();
     });
 
-    it('should not be able to create session, wrong password', () => {
-        expect(login.createSession(
-            exampleUser,
+    it('should not be able to create session, wrong password', async () => {
+        await expect(login.createSession(
+            {
+                id : 'a87d40fd-19af-414b-a7bc-8baba8104fa9',
+                email : 'jlrscaini@yahoo.com.br',
+                username : 'joaozinho',
+                password : 'joaozinho'
+            },
             'abc'
-        )).toThrow();
+        )).rejects.toThrow();
     });
 
-    it('should not be able to create session, missing password', () => {
-        expect(login.createSession(
-            exampleUser,
+    it('should not be able to create session, missing password', async () => {
+        await expect(login.createSession(
+            {
+                id : 'a87d40fd-19af-414b-a7bc-8baba8104fa9',
+                email : 'jlrscaini@yahoo.com.br',
+                username : 'joaozinho',
+                password : 'joaozinho'
+            },
             ''
-        )).toThrow();
+        )).rejects.toThrow();
     });
 });
 

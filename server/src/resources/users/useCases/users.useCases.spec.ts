@@ -27,12 +27,22 @@ describe('Get User', () => {
         await expect(getUser.execute({
             userId : 'a87d40fd-19af-414b-a7bc-8baba8104fa9'
         })).resolves.not.toThrow(); 
+        
+        expect(usersRepositorySpy.getById).toHaveBeenCalled();
+    });
+
+    it('should not be able to get user without user ID', async () => {
+        await expect(getUser.execute({
+            userId : ''
+        })).rejects.toThrow(); 
     });
 });
 
 describe('Get All Users', () => {
     it('should be able to get all users', async () => {
         await expect(getAllUsers.execute()).resolves.not.toThrow(); 
+
+        expect(usersRepositorySpy.getAll).toHaveBeenCalled();
     });
 });
 
@@ -59,4 +69,4 @@ describe('Delete User', () => {
     it('should be able to delete user', async () => {
         
     });
-})
+});

@@ -15,15 +15,16 @@ const submitFeedback = new SubmitFeedbackUseCase(
 );
 
 describe('Submit feedback', () => {
-    it('should be able to submit a feedback', async () => {
+    it('should be able to submit a feedback with a screenshot', async () => {
         await expect(submitFeedback.execute({
             type : 'BUG',
             comment : 'example comment',
             screenshot : 'data:image/png;base64aigthrweiugh9eharu9gerh',
+            userId : null
         })).resolves.not.toThrow();
 
-        expect(createFeedbackSpy).toHaveBeenCalled();
-        expect(sendMailSpy).toHaveBeenCalled();
+        expect(feedbacksRepositorySpy.create).toHaveBeenCalled();
+        expect(mailAdapterSpy.sendMail).toHaveBeenCalled();
     });
 
     it('should be able to submit a feedback without a screenshot', async () => {
@@ -31,10 +32,11 @@ describe('Submit feedback', () => {
             type : 'BUG',
             comment : 'example comment',
             screenshot : '',
+            userId : null
         })).resolves.not.toThrow();
 
-        expect(createFeedbackSpy).toHaveBeenCalled();
-        expect(sendMailSpy).toHaveBeenCalled();
+        expect(feedbacksRepositorySpy.create).toHaveBeenCalled();
+        expect(mailAdapterSpy.sendMail).toHaveBeenCalled();
     });
 
     it('should not be able to submit a feedback without type', async () => {
@@ -42,6 +44,7 @@ describe('Submit feedback', () => {
             type : '',
             comment : 'example comment',
             screenshot : 'data:image/png;base64aigthrweiugh9eharu9gerh',
+            userId : null
         })).rejects.toThrow();
     });
 
@@ -50,13 +53,16 @@ describe('Submit feedback', () => {
             type : 'BUG',
             comment : '',
             screenshot : 'data:image/png;base64aigthrweiugh9eharu9gerh',
+            userId : null
         })).rejects.toThrow();
     });
+    
     it('should not be able to submit a feedback with an invalid screenshot', async () => {
         await expect(submitFeedback.execute({
             type : 'BUG',
             comment : 'ta tudo bugado',
             screenshot : 'test.png',
+            userId : null
         })).rejects.toThrow();
     });
 });

@@ -20,7 +20,7 @@ export const GetUserUseCase = class {
         const user = await this.usersRepository.getById(userId);
         
         if (!user) {
-            return;
+            throw httpError(404, 'User not found!');
         }
         
         const selectedData = {

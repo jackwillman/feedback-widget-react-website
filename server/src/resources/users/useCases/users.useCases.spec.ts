@@ -36,6 +36,12 @@ describe('Get User', () => {
             userId : ''
         })).rejects.toThrow(); 
     });
+
+    it('should not be able to get user with a invalid user ID', async () => {
+        await expect(getUser.execute({
+            userId : 'invalid-id'
+        })).rejects.toThrow(); 
+    });
 });
 
 describe('Get All Users', () => {
@@ -47,12 +53,38 @@ describe('Get All Users', () => {
 });
 
 describe('Submit User', () => {
-    it('should be able to submit user', async () => {
+    it('should be able to create user', async () => {
         await expect(submitUser.execute({
             username : `user${Math.random() * 100000}`,
             email : `email${Math.random() * 100000}@email.com`,
             password : 'password'
         })).resolves.not.toThrow(); 
+
+        expect(usersRepositorySpy.create).toHaveBeenCalled();
+    });
+
+    it('should be not able to create user without username', async () => {
+        await expect(submitUser.execute({
+            username : '',
+            email : `email${Math.random() * 100000}@email.com`,
+            password : 'password'
+        })).rejects.toThrow(); 
+    });
+
+    it('should be not able to create user without email', async () => {
+        await expect(submitUser.execute({
+            username : `user${Math.random() * 100000}`,
+            email : '',
+            password : 'password'
+        })).rejects.toThrow(); 
+    });
+
+    it('should be not able to create user without password', async () => {
+        await expect(submitUser.execute({
+            username : `user${Math.random() * 100000}`,
+            email : `email${Math.random() * 100000}@email.com`,
+            password : ''
+        })).rejects.toThrow(); 
     });
 });
 
@@ -62,6 +94,30 @@ describe('Update User', () => {
             userId : '5e815d19-4000-4634-8320-b5cf443a646e',
             email : `newmail${Math.random()*1000}`
         })).resolves.not.toThrow();
+
+        expect(usersRepositorySpy.update).toHaveBeenCalled();
+    });
+
+    it('should be able to update the password of a user', async () => {
+        await expect(updateUser.execute({
+            userId : '5e815d19-4000-4634-8320-b5cf443a646e',
+            password : `password${Math.random()*100}`
+        })).resolves.not.toThrow();
+
+        expect(usersRepositorySpy.update).toHaveBeenCalled();
+    });
+
+    it('should not be able to update user without user ID', async () => {
+        await expect(updateUser.execute({
+            userId : '',
+            email : `newmail${Math.random()*1000}`
+        })).rejects.toThrow();
+    });
+
+    it('should not be able to update user without email or username or password', async () => {
+        await expect(updateUser.execute({
+            userId : '5e815d19-4000-4634-8320-b5cf443a646e'
+        })).rejects.toThrow();
     });
 });
 

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64% </span>
+                <span class="strong">61.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>48/75</span>
+                <span class='fraction'>55/90</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64% </span>
+                <span class="strong">61.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>48/75</span>
+                <span class='fraction'>55/90</span>
             </div>
         
             
@@ -137,7 +137,25 @@
 <a name='L72'></a><a href='#L72'>72</a>
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -175,13 +193,24 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -201,6 +230,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -217,10 +247,12 @@ import config from '../../../config';
 import { httpError } from '../../../helpers';
 &nbsp;
 import { JwtAdapter } from '../../../adapters/jwt';
+import { HashAdapter } from '../../../adapters/hash';
 import { User, UsersRepository } from '../../users/repositories';
 &nbsp;
 type UserIdentifier = string;
 type Password = string;
+type IsPasswordValid = boolean;
 &nbsp;
 export interface LoginUseCaseRequest {
 	userIdentifier : UserIdentifier,
@@ -230,7 +262,8 @@ export interface LoginUseCaseRequest {
 export const LoginUseCase = class {
     constructor(
         private usersRepository : UsersRepository,
-		private jwtAdapter : JwtAdapter
+		private jwtAdapter : JwtAdapter,
+		private hashAdapter : HashAdapter
     ) {};
 &nbsp;
 	async getUser(userIdentifier : UserIdentifier) {
@@ -248,15 +281,26 @@ export const LoginUseCase = class {
 		return user;
 	};
 &nbsp;
-	async createSession(
+	async checkPassword(
 		user : User,
 		password : Password
 	) {
-		const validPassword = await bcrypt.compare(password, user.password);
-		if (!validPassword) {
-			throw httpError(400, 'Wrong username, email or password.');
-		}
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
+		const isPasswordValid = await this.hashAdapter.checkPassword({
+			inputPassword : password, 
+			savedPassword : user.password
+		});
+		return isPasswordValid;
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	async createSession(</span>
+<span class="cstat-no" title="statement not covered" >		user : User,</span>
+<span class="cstat-no" title="statement not covered" >		isPasswordValid : IsPasswordValid</span>
+<span class="cstat-no" title="statement not covered" >	) {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >		if (!isPasswordValid) {</span>
+<span class="cstat-no" title="statement not covered" >			throw httpError(400, 'Wrong username, email or password.');</span>
+<span class="cstat-no" title="statement not covered" >		}</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >		const secretKey = config.secrets.JWT_SECRET;</span>
 <span class="cstat-no" title="statement not covered" >		if (!secretKey) {</span>
 <span class="cstat-no" title="statement not covered" >            throw httpError(500, 'Missing Secret Key');</span>
@@ -282,7 +326,8 @@ export const LoginUseCase = class {
 <span class="cstat-no" title="statement not covered" >            throw httpError(400, 'Wrong username, email or password.');</span>
 <span class="cstat-no" title="statement not covered" >		}</span>
 <span class="cstat-no" title="statement not covered" >		</span>
-<span class="cstat-no" title="statement not covered" >		const session = await this.createSession(user, password);</span>
+<span class="cstat-no" title="statement not covered" >		const isPasswordValid = await this.checkPassword(user, password);</span>
+<span class="cstat-no" title="statement not covered" >		const session = await this.createSession(user, isPasswordValid);</span>
 <span class="cstat-no" title="statement not covered" >		return session;</span>
 <span class="cstat-no" title="statement not covered" >	};</span>
 };</pre></td></tr></table></pre>
@@ -292,7 +337,7 @@ export const LoginUseCase = class {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Nov 22 2022 12:48:02 GMT-0300 (Horário Padrão de Brasília)
+                at Thu Nov 24 2022 16:01:37 GMT-0300 (Horário Padrão de Brasília)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

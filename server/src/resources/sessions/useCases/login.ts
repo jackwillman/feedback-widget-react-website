@@ -4,10 +4,12 @@ import config from '../../../config';
 import { httpError } from '../../../helpers';
 
 import { JwtAdapter } from '../../../adapters/jwt';
+import { HashAdapter } from '../../../adapters/hash';
 import { User, UsersRepository } from '../../users/repositories';
 
 type UserIdentifier = string;
 type Password = string;
+type IsPasswordValid = boolean;
 
 export interface LoginUseCaseRequest {
 	userIdentifier : UserIdentifier,
@@ -17,7 +19,8 @@ export interface LoginUseCaseRequest {
 export const LoginUseCase = class {
     constructor(
         private usersRepository : UsersRepository,
-		private jwtAdapter : JwtAdapter
+		private jwtAdapter : JwtAdapter,
+		private hashAdapter : HashAdapter
     ) {};
 
 	async getUser(userIdentifier : UserIdentifier) {
@@ -35,12 +38,23 @@ export const LoginUseCase = class {
 		return user;
 	};
 
-	async createSession(
+	async checkPassword(
 		user : User,
 		password : Password
 	) {
-		const validPassword = await bcrypt.compare(password, user.password);
-		if (!validPassword) {
+		const isPasswordValid = await this.hashAdapter.checkPassword({
+			inputPassword : password, 
+			savedPassword : user.password
+		});
+		return isPasswordValid;
+	}
+
+	async createSession(
+		user : User,
+		isPasswordValid : IsPasswordValid
+	) {
+
+		if (!isPasswordValid) {
 			throw httpError(400, 'Wrong username, email or password.');
 		}
 
@@ -69,7 +83,8 @@ export const LoginUseCase = class {
             throw httpError(400, 'Wrong username, email or password.');
 		}
 		
-		const session = await this.createSession(user, password);
+		const isPasswordValid = await this.checkPassword(user, password);
+		const session = await this.createSession(user, isPasswordValid);
 		return session;
 	};
 };

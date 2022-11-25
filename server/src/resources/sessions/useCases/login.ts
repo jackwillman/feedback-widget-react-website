@@ -9,11 +9,13 @@ import { User, UsersRepository } from '../../users/repositories';
 
 type UserIdentifier = string;
 type Password = string;
+type SecretKey = string;
 type IsPasswordValid = boolean;
 
 export interface LoginUseCaseRequest {
 	userIdentifier : UserIdentifier,
-	password : Password
+	password : Password,
+	secretKey : SecretKey
 };
 
 export const LoginUseCase = class {
@@ -51,16 +53,12 @@ export const LoginUseCase = class {
 
 	async createSession(
 		user : User,
-		isPasswordValid : IsPasswordValid
+		isPasswordValid : IsPasswordValid,
+		secretKey : SecretKey
 	) {
 
 		if (!isPasswordValid) {
 			throw httpError(400, 'Wrong username, email or password.');
-		}
-
-		const secretKey = config.secrets.JWT_SECRET;
-		if (!secretKey) {
-            throw httpError(500, 'Missing Secret Key');
 		}
 
 		const partialSession = {
@@ -75,8 +73,11 @@ export const LoginUseCase = class {
 		});
 	};
 	
-    async execute(
-		{ userIdentifier, password } : LoginUseCaseRequest
+    async execute({ 
+		userIdentifier, 
+		password,
+		secretKey 
+	} : LoginUseCaseRequest
 	) {
 		const user = await this.getUser(userIdentifier);
 		if (!user) {
@@ -84,7 +85,11 @@ export const LoginUseCase = class {
 		}
 		
 		const isPasswordValid = await this.checkPassword(user, password);
-		const session = await this.createSession(user, isPasswordValid);
+		const session = await this.createSession(
+			user, 
+			isPasswordValid,
+			secretKey
+		);
 		return session;
 	};
 };

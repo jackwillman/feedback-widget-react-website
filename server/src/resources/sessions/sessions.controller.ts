@@ -1,12 +1,14 @@
 import { Request, Response } from 'express';
 
 import config from '../../config';
+import { httpError } from '../../helpers';
 
 import { PrismaUsersRepository } from '../users/repositories/prisma';
 import { JwtSimpleJwtAdapter } from '../../adapters/jwt/jwtSimple';
 import { BcryptHashAdapter } from '../../adapters/hash/bcrypt';
 
 import { LoginUseCase } from './useCases/login';
+
 
 export const login = async function loginUserController(
     req : Request, 
@@ -23,10 +25,16 @@ export const login = async function loginUserController(
 
     const userIdentifier = req.body.email || req.body.username;
     const { password } = req.body;
+    const secretKey = config.secrets.JWT_SECRET;
+
+    if (!secretKey) {
+        throw httpError(500, 'Missing Secret Key');
+    }
     
     const { token } = await loginUseCase.execute({
         userIdentifier,
-        password
+        password,
+        secretKey
     });
 
     res.header(config.token.headerName, token).status(201).send();

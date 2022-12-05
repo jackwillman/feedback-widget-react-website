@@ -11,6 +11,9 @@ const DesktopMenu = function DesktopMenuComponent({ setCurrentPage } : PageProps
             <MenuButton onClick={() => setCurrentPage('Dashboard')}>
                 Dashboard
             </MenuButton>
+            <MenuButton onClick={() => setCurrentPage('Login')}>
+                Log In
+            </MenuButton>
         </MenuButtonsDiv>
     );
 };

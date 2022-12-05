@@ -1,7 +1,8 @@
-import { ExistingPage } from '.';
-import Home from './Pages/Home';
-import About from './Pages/About';
-import Dashboard from './Pages/Dashboard';
+import { ExistingPage } from '..';
+import Home from './Home';
+import About from './About';
+import Dashboard from './Dashboard';
+import Login from './Login';
 
 interface CurrentPageProps {
     currentPage : ExistingPage;
@@ -33,6 +34,12 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
                     setCurrentPage={ setCurrentPage }
                 />
             );
+        case 'Login':
+            return (
+                <Login
+                    setCurrentPage={ setCurrentPage }
+                />
+            )
         default:
             return (
                 <Home 

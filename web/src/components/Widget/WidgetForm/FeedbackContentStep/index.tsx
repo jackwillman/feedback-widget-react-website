@@ -45,31 +45,33 @@ const FeedbackContentStep = function FeedbackContentStep( {
         onFeedbackSent();
     };
 
-    return ( <>
-        <header>
-            <LeftArrowButton 
-                onFeedbackRestartRequested={ onFeedbackRestartRequested } 
-            />
-            <FeedbackContentHeader feedbackType={ feedbackType } />
-            <CloseButton />
-        </header>
-
-        <FeedbackForm onSubmit={ handleSubmitFeedback }>
-            <FormTextArea setComment={ setComment }/>
-
-            <FeedbackFormFooter>
-                <ScreenshotButton 
-                    screenshot={ screenshot }
-                    handleSetScreenshot={ setScreenshot }
+    return ( 
+        <>
+            <header>
+                <LeftArrowButton 
+                    onFeedbackRestartRequested={ onFeedbackRestartRequested } 
                 />
+                <FeedbackContentHeader feedbackType={ feedbackType } />
+                <CloseButton />
+            </header>
 
-                <SubmitButton 
-                    isSendingFeedback={ isSendingFeedback }
-                    comment={ comment }
-                />
-            </FeedbackFormFooter>
-        </FeedbackForm>
-    </> );
+            <FeedbackForm onSubmit={ handleSubmitFeedback }>
+                <FormTextArea setComment={ setComment }/>
+
+                <FeedbackFormFooter>
+                    <ScreenshotButton 
+                        screenshot={ screenshot }
+                        handleSetScreenshot={ setScreenshot }
+                    />
+
+                    <SubmitButton 
+                        isSendingFeedback={ isSendingFeedback }
+                        comment={ comment }
+                    />
+                </FeedbackFormFooter>
+            </FeedbackForm>
+        </> 
+    );
 };
 
 export default FeedbackContentStep;

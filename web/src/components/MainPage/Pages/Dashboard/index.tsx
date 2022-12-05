@@ -1,14 +1,24 @@
+import api from '../../../../lib/api';
+
 import { PageProps } from "../..";
 
-import { PageDiv, TextDiv, BiggerText } from '../styled';
+import { 
+    PageDiv, 
+    TextDiv, 
+    NormalText,
+    BiggerText 
+} from '../styled';
 
-const Dashboard = function DashboardComponent({ setCurrentPage } : PageProps) {
+const Dashboard = function DashboardPageComponent({ setCurrentPage } : PageProps) {
     return (
         <PageDiv>
             <TextDiv>
                 <BiggerText>
-                    Coming soon.
+                    On the way
                 </BiggerText>
+                <NormalText>
+                    Import here
+                </NormalText>
             </TextDiv>
         </PageDiv>
     );

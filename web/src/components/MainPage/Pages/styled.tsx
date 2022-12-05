@@ -13,7 +13,7 @@ export const TextDiv = tw.div`
     ml-[calc(11vw)]
 `;
 
-const Text = tw.p`
+export const Text = tw.p`
     font-sans
     not-italic
     tracking-[0.045em]

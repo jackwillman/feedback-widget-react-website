@@ -1,5 +1,5 @@
 interface FormTextAreaProps {
-    setComment : (comment : string) => void
+    setComment : (comment : string) => void;
 };
 
 const FormTextArea = function FormTextAreaComponent(

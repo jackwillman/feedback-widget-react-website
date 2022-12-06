@@ -3,8 +3,8 @@ import { FormEvent, useState } from "react";
 import api from "../../../../lib/api";
 
 import { FeedbackType } from "../feedbackType";
-import CloseButton from "../../Misc/CloseButton";
-import ScreenshotButton from "../../Misc/ScreenshotButton";
+import CloseButton from "../../../Misc/CloseButton";
+import ScreenshotButton from "../../../Misc/ScreenshotButton";
 import LeftArrowButton from "./LeftArrowButton";
 import FeedbackContentHeader from "./FeedbackContentHeader";
 import FormTextArea from "./FormTextArea";

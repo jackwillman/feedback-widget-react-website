@@ -3,7 +3,8 @@ import { useState, FormEvent } from 'react';
 import api from '../../../../lib/api';
 
 import { PageProps } from '../..';
-import FormTextArea from './FormTextArea';
+import LoginFormTextArea from './LoginFormTextArea';
+import LoginSubmitButton from './LoginSubmitButton';
 
 import { 
     PageDiv,
@@ -44,8 +45,6 @@ const Login = function LoginPageComponent({ setCurrentPage } : PageProps) {
         setIsSendingLoginInput(false);
     };
 
-
-
     return (
         <PageDiv>
             <TextDiv>
@@ -56,34 +55,20 @@ const Login = function LoginPageComponent({ setCurrentPage } : PageProps) {
                     <LoginText>
                         Username or E-mail
                     </LoginText>
-                    <FormTextArea setInput={ setUserIdentifier }/>
+                    <LoginFormTextArea setInput={ setUserIdentifier }/>
                     <LoginText>
                         Password
                     </LoginText>
-                    <FormTextArea setInput={ setUserPassword }/>
-                    <p>FOOTER DIV</p>
-                        <p>SUBMIT BUTTON COMPONENT</p>
+                    <LoginFormTextArea setInput={ setUserPassword }/>
+                    <LoginSubmitButton 
+                        isSendingLoginInput={ isSendingLoginInput }
+                        userIdentifier={ userIdentifier }
+                        userPassword={ userPassword }
+                    />
                 </LoginForm>
             </TextDiv>
         </PageDiv>
     );
-    /* FAZER FORMULARIO DAQUI E OLOCAR NO LUGAR DE NORMAL TEXT
-                <FeedbackForm onSubmit={ handleSubmitFeedback }>
-                    <FormTextArea setComment={ setComment }/>
-
-                    <FeedbackFormFooter>
-                        <ScreenshotButton 
-                            screenshot={ screenshot }
-                            handleSetScreenshot={ setScreenshot }
-                        />
-
-                        <SubmitButton 
-                            isSendingFeedback={ isSendingFeedback }
-                            comment={ comment }
-                        />
-                    </FeedbackFormFooter>
-                </FeedbackForm>
-    */
 };
 
 export default Login;

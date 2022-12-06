@@ -2,7 +2,7 @@ interface FormTextAreaProps {
     setInput : (input : string) => void
 };
 
-const FormTextArea = function LoginFormTextAreaComponent(
+const LoginFormTextArea = function LoginFormTextAreaComponent(
     { setInput } : FormTextAreaProps
 ) {
     return (
@@ -13,4 +13,4 @@ const FormTextArea = function LoginFormTextAreaComponent(
     );
 };
 
-export default FormTextArea;
+export default LoginFormTextArea;

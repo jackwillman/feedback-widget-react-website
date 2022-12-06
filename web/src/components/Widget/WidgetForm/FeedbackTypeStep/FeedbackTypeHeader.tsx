@@ -1,4 +1,4 @@
-import CloseButton from "../../Misc/CloseButton";
+import CloseButton from "../../../Misc/CloseButton";
 
 import { FeedbackTypeHeaderSpan } from './styled';
 

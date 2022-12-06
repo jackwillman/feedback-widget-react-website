@@ -1,10 +1,10 @@
-import Loading from "../../Misc/Loading";
+import Loading from "../../../Misc/Loading";
 
 import { FeedbackFormSubmit } from './styled';
 
 interface SubmitButtonProps {
-    isSendingFeedback : boolean
-    comment : string
+    isSendingFeedback : boolean;
+    comment : string;
 };
 
 const SubmitButton = function SubmitButtonComponent(

@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import { Cookies } from 'react-cookie';
 
 import api from '../../../../lib/api';
 
@@ -9,8 +10,7 @@ import LoginSubmitButton from './LoginSubmitButton';
 import { 
     PageDiv,
     TextDiv,
-    BigText,
-    NormalText 
+    BigText 
 } from '../styled';
 import {
     LoginForm,
@@ -29,17 +29,23 @@ const Login = function LoginPageComponent({ setCurrentPage } : PageProps) {
         event.preventDefault();
         
         setIsSendingLoginInput(true);
-    
+        
+        let response;
         if (userIdentifier.includes('@')) {
-            await api.post('/sessions', {
+            response = await api.post('/sessions', {
                 email : userIdentifier,
                 password : userPassword
             });
         } else {
-            await api.post('/sessions', {
+            response = await api.post('/sessions', {
                 username : userIdentifier,
                 password : userPassword
             });
+        }
+        
+        if (response.status && response.status === 201) {
+            const token = response.headers['x-access-token'];
+            console.log(token);
         }
 
         setIsSendingLoginInput(false);

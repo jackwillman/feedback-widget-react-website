@@ -7,7 +7,7 @@ interface SubmitButtonProps {
     comment : string;
 };
 
-const SubmitButton = function SubmitButtonComponent(
+const SubmitButton = function FeedbackFormSubmitButtonComponent(
     { isSendingFeedback, comment } : SubmitButtonProps
 ) {
     return (

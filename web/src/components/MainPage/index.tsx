@@ -14,6 +14,7 @@ export interface PageProps {
 
 const MainPage = function MainPageComponent() {
     const [currentPage, setCurrentPage] = useState<ExistingPage>('Home');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
         <MainDiv>
@@ -21,6 +22,7 @@ const MainPage = function MainPageComponent() {
             <CurrentPage 
                 currentPage={ currentPage }
                 setCurrentPage={ setCurrentPage }
+                setIsLoggedIn={ setIsLoggedIn }
             />
         </MainDiv>
     );

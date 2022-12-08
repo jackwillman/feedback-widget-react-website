@@ -3,7 +3,8 @@ import tw from "tailwind-styled-components";
 import { Text } from '../styled';
 
 export const LoginForm = tw.form`
-    min-w-[200px] w-[calc(15vw)]
+    min-w-[200px] 
+    w-[calc(15vw)]
     py-6
 `;
 
@@ -15,20 +16,25 @@ export const LoginText = tw(Text)`
     xl:leading-[32px]
 `;
 
+
 export const LoginFormSubmit = tw.button`
-    p-2 
+    font-bold
+    text-base
+    xl:text-lg
+    text-zinc-800
+    bg-brand-500 
+    hover:bg-brand-300 
+    transition-colors
+    min-w-[170px] 
+    w-full
+    h-10
+    my-3
     rounded 
     border-transparent 
     flex-1 
     flex 
     justify-center 
     items-center 
-    text-sm
-    font-bold
-    text-zinc-800
-    bg-brand-500 
-    hover:bg-brand-300 
-    transition-colors
     focus:outline-none 
     focus:ring-2 
     focus:ring-offset-2 

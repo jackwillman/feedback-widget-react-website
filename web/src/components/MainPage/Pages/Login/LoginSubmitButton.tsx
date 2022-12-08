@@ -25,7 +25,7 @@ const LoginSubmitButton = function ({
         >
             {
                 isSendingLoginInput
-                    ? Loading
+                    ? <Loading />
                     : 'Log In'
             }
         </LoginFormSubmit>

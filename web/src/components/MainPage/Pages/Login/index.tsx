@@ -17,8 +17,16 @@ import {
     LoginText
 } from './styled';
 
+interface LoginProps extends PageProps {
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
+};
 
-const Login = function LoginPageComponent({ setCurrentPage } : PageProps) {
+const Login = function LoginPageComponent(
+    { 
+        setCurrentPage, 
+        setIsLoggedIn 
+    } : LoginProps
+) {
     const [userIdentifier, setUserIdentifier] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
@@ -43,9 +51,9 @@ const Login = function LoginPageComponent({ setCurrentPage } : PageProps) {
             });
         }
         
-        if (response.status && response.status === 201) {
+        if (response && response.status && response.status === 201) {
             const token = response.headers['x-access-token'];
-            console.log(token);
+            setIsLoggedIn(true);
         }
 
         setIsSendingLoginInput(false);

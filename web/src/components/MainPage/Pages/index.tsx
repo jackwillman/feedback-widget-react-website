@@ -7,12 +7,14 @@ import Login from './Login';
 interface CurrentPageProps {
     currentPage : ExistingPage;
     setCurrentPage : (page : ExistingPage) => void;
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
 };
 
 const CurrentPage = function SwitchCaseToGetCurrentPage(
     {
         currentPage,
-        setCurrentPage
+        setCurrentPage,
+        setIsLoggedIn
     } : CurrentPageProps
 ) {
     switch (currentPage) {
@@ -38,6 +40,7 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
             return (
                 <Login
                     setCurrentPage={ setCurrentPage }
+                    setIsLoggedIn={ setIsLoggedIn }
                 />
             )
         default:

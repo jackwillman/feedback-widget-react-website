@@ -30,6 +30,7 @@ const Login = function LoginPageComponent(
     const [userIdentifier, setUserIdentifier] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const handleLogin = async function submitLoginInput(
         event : FormEvent
@@ -54,6 +55,9 @@ const Login = function LoginPageComponent(
         if (response && response.status && response.status === 201) {
             const token = response.headers['x-access-token'];
             setIsLoggedIn(true);
+            console.log(JSON.stringify(response["headers"]))
+        } else {
+            setIsError(true);
         }
 
         setIsSendingLoginInput(false);
@@ -79,6 +83,10 @@ const Login = function LoginPageComponent(
                         userIdentifier={ userIdentifier }
                         userPassword={ userPassword }
                     />
+                    { isError
+                        ? <LoginText>Erro</LoginText> 
+                        : <></>                      
+                    }
                 </LoginForm>
             </TextDiv>
         </PageDiv>

@@ -51,11 +51,13 @@ const Login = function LoginPageComponent(
                 password : userPassword
             });
         }
+
+        console.log(JSON.stringify(response));
         
         if (response && response.status && response.status === 201) {
             const token = response.headers['x-access-token'];
             setIsLoggedIn(true);
-            console.log(JSON.stringify(response["headers"]))
+            console.log(JSON.stringify(response))
         } else {
             setIsError(true);
         }
@@ -94,3 +96,36 @@ const Login = function LoginPageComponent(
 };
 
 export default Login;
+
+const RESPONSE_EXAMPLE_FROM_FRONTEND = {
+    "data":"",
+    "status":201,
+    "statusText":"Created",
+    "headers":{"content-length":"0"},
+    "config": {
+        "transitional":{
+            "silentJSONParsing":true,
+            "forcedJSONParsing":true,
+            "clarifyTimeoutError":false
+        },
+        "transformRequest":[null],
+        "transformResponse":[null],
+        "timeout":0,
+        "xsrfCookieName":"XSRF-TOKEN",
+        "xsrfHeaderName":"X-XSRF-TOKEN",
+        "maxContentLength":-1,
+        "maxBodyLength":-1,
+        "env":{
+            "FormData":null
+        },
+        "headers":{
+            "Accept":"application/json, text/plain, */*",
+            "Content-Type":"application/json"
+        },
+        "baseURL":"http://localhost:3333",
+        "method":"post",
+        "url":"/sessions",
+        "data":"{\"username\":\"joaozinho\",\"password\":\"joaozinho\"}"
+    },
+        "request":{}
+};

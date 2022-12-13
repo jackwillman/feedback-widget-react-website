@@ -46,18 +46,18 @@ const Login = function LoginPageComponent(
 
         }).then((response) => {
             const token = response.headers['x-access-token'];
+            
             setIsLoggedIn(true);
-            console.log('\n\n\n\nRESPONSE:\n\n',response);
 
         }).catch((err) => {
             if (err.response) {
+                console.log(err.response.data);
                 setError(err.response.data.error);
             } else if (err.request) {
                 console.log(err.request);
             } else {
-                console.log('\n\n\n\nERROR:\n\n', err.message);
+                console.log('Error: ', err.message);
             }
-            console.log(err.config);
 
         }).then(() => {
             setIsSendingLoginInput(false);
@@ -95,36 +95,3 @@ const Login = function LoginPageComponent(
 };
 
 export default Login;
-
-const RESPONSE_EXAMPLE_FROM_FRONTEND = {
-    "data":"",
-    "status":201,
-    "statusText":"Created",
-    "headers":{"content-length":"0"},
-    "config": {
-        "transitional":{
-            "silentJSONParsing":true,
-            "forcedJSONParsing":true,
-            "clarifyTimeoutError":false
-        },
-        "transformRequest":[null],
-        "transformResponse":[null],
-        "timeout":0,
-        "xsrfCookieName":"XSRF-TOKEN",
-        "xsrfHeaderName":"X-XSRF-TOKEN",
-        "maxContentLength":-1,
-        "maxBodyLength":-1,
-        "env":{
-            "FormData":null
-        },
-        "headers":{
-            "Accept":"application/json, text/plain, */*",
-            "Content-Type":"application/json"
-        },
-        "baseURL":"http://localhost:3333",
-        "method":"post",
-        "url":"/sessions",
-        "data":"{\"username\":\"joaozinho\",\"password\":\"joaozinho\"}"
-    },
-        "request":{}
-};

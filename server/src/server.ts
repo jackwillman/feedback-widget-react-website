@@ -7,8 +7,17 @@ import { handleErrorLogging, handleNotFound } from './middlewares';
 
 const app = express();
 
-app.use(cors());
-app.use(express.json({limit : config.jsonSizeLimit}));
+app.use(
+    cors({
+        exposedHeaders : config.token.headerName
+    })
+);
+
+app.use(
+    express.json({
+        limit : config.jsonSizeLimit
+    })
+);
 
 app.use(router);
 

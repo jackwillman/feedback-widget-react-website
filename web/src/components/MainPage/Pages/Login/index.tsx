@@ -30,39 +30,38 @@ const Login = function LoginPageComponent(
     const [userIdentifier, setUserIdentifier] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState('');
 
-    const handleLogin = async function submitLoginInput(
+    const handleLogin = function submitLoginInput(
         event : FormEvent
     ) {
         event.preventDefault();
-        
         setIsSendingLoginInput(true);
-        
-        let response;
-        if (userIdentifier.includes('@')) {
-            response = await api.post('/sessions', {
-                email : userIdentifier,
-                password : userPassword
-            });
-        } else {
-            response = await api.post('/sessions', {
-                username : userIdentifier,
-                password : userPassword
-            });
-        }
 
-        console.log(JSON.stringify(response));
-        
-        if (response && response.status && response.status === 201) {
+        const userIdentifierType = userIdentifier.includes('@') ? 'email' : 'username';
+
+        api.post('/sessions', {
+            [userIdentifierType] : userIdentifier,
+            password : userPassword
+
+        }).then((response) => {
             const token = response.headers['x-access-token'];
             setIsLoggedIn(true);
-            console.log(JSON.stringify(response))
-        } else {
-            setIsError(true);
-        }
+            console.log('\n\n\n\nRESPONSE:\n\n',response);
 
-        setIsSendingLoginInput(false);
+        }).catch((err) => {
+            if (err.response) {
+                setError(err.response.data.error);
+            } else if (err.request) {
+                console.log(err.request);
+            } else {
+                console.log('\n\n\n\nERROR:\n\n', err.message);
+            }
+            console.log(err.config);
+
+        }).then(() => {
+            setIsSendingLoginInput(false);
+        });
     };
 
     return (
@@ -85,8 +84,8 @@ const Login = function LoginPageComponent(
                         userIdentifier={ userIdentifier }
                         userPassword={ userPassword }
                     />
-                    { isError
-                        ? <LoginText>Erro</LoginText> 
+                    { error
+                        ? error
                         : <></>                      
                     }
                 </LoginForm>

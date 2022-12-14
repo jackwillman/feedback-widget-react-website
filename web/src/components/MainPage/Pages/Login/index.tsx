@@ -1,7 +1,8 @@
 import { useState, FormEvent } from 'react';
-import { Cookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 
 import api from '../../../../lib/api';
+import config from '../../../../config';
 
 import { PageProps } from '../..';
 import LoginFormTextArea from './LoginFormTextArea';
@@ -40,13 +41,19 @@ const Login = function LoginPageComponent(
 
         const userIdentifierType = userIdentifier.includes('@') ? 'email' : 'username';
 
-        api.post('/sessions', {
+        api.post(config.path.sessions, {
             [userIdentifierType] : userIdentifier,
             password : userPassword
 
         }).then((response) => {
-            const token = response.headers['x-access-token'];
-            
+            const token = response.headers[config.sessionToken.headerName];
+            const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName]);
+            const expirationDate = new Date(Date.now() + config.sessionToken.duration);
+            setCookie(config.sessionToken.cookieName, token, {
+                path : config.path.main,
+                expires : expirationDate
+            });
+
             setIsLoggedIn(true);
 
         }).catch((err) => {

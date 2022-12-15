@@ -1,7 +1,5 @@
 import api from '../../../../lib/api';
 
-import { PageProps } from "../..";
-
 import { 
     PageDiv, 
     TextDiv, 
@@ -9,7 +7,7 @@ import {
     BiggerText 
 } from '../styled';
 
-const Dashboard = function DashboardPageComponent({ setCurrentPage } : PageProps) {
+const Dashboard = function DashboardPageComponent() {
     return (
         <PageDiv>
             <TextDiv>

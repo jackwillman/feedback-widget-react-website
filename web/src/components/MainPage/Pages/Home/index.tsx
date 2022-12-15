@@ -1,5 +1,3 @@
-import { PageProps } from '../..';
-
 import { 
     PageDiv,
     BiggerText,
@@ -14,7 +12,7 @@ import {
 
 import heroUrl from '../../../../images/hero.svg';
 
-const Home = function HomePageComponent({ setCurrentPage } : PageProps) {
+const Home = function HomePageComponent() {
     return (
         <PageDiv>
             <HomeTextDiv>

@@ -1,4 +1,8 @@
-import { ExistingPage } from '..';
+import { 
+    ExistingPage,
+    SetCurrentPage,
+    SetIsLoggedIn
+} from '..';
 import Home from './Home';
 import About from './About';
 import Dashboard from './Dashboard';
@@ -6,8 +10,8 @@ import Login from './Login';
 
 interface CurrentPageProps {
     currentPage : ExistingPage;
-    setCurrentPage : (page : ExistingPage) => void;
-    setIsLoggedIn : (isLoggedIn : boolean) => void;
+    setCurrentPage : SetCurrentPage;
+    setIsLoggedIn : SetIsLoggedIn;
 };
 
 const CurrentPage = function SwitchCaseToGetCurrentPage(
@@ -20,21 +24,15 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
     switch (currentPage) {
         case 'Home':
             return (
-                <Home 
-                    setCurrentPage={ setCurrentPage }
-                />
+                <Home />
             );
         case 'About':
             return (
-                <About 
-                    setCurrentPage={ setCurrentPage }
-                />
+                <About />
             );
         case 'Dashboard':
             return (
-                <Dashboard 
-                    setCurrentPage={ setCurrentPage }
-                />
+                <Dashboard />
             );
         case 'Login':
             return (
@@ -45,9 +43,7 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
             )
         default:
             return (
-                <Home 
-                    setCurrentPage={ setCurrentPage }
-                />
+                <Home/>
             );
     }
 };

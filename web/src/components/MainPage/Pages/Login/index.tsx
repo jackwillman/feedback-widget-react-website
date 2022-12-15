@@ -1,11 +1,13 @@
 import { useState, FormEvent } from 'react';
 import { useCookies } from 'react-cookie';
 
-
 import api from '../../../../lib/api';
 import config from '../../../../lib/config';
 
-import { PageProps } from '../..';
+import { 
+    SetCurrentPage,
+    SetIsLoggedIn,
+ } from '../..';
 import LoginFormTextArea from './LoginFormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';
 
@@ -19,15 +21,15 @@ import {
     LoginText
 } from './styled';
 
-
-interface LoginProps extends PageProps {
-    setIsLoggedIn : (isLoggedIn : boolean) => void;
+interface LoginProps {
+    setCurrentPage : SetCurrentPage; 
+    setIsLoggedIn : SetIsLoggedIn;
 };
 
 const Login = function LoginPageComponent(
     { 
         setCurrentPage, 
-        setIsLoggedIn 
+        setIsLoggedIn,
     } : LoginProps
 ) {
     const [userIdentifier, setUserIdentifier] = useState('');
@@ -41,6 +43,7 @@ const Login = function LoginPageComponent(
     ) {
         event.preventDefault();
         setIsSendingLoginInput(true);
+        setErrorState('');
 
         const userIdentifierType = userIdentifier.includes('@') ? 'email' : 'username';
 
@@ -56,6 +59,7 @@ const Login = function LoginPageComponent(
                 expires : expirationDate
             });
             setIsLoggedIn(true);
+            setCurrentPage('Home');
 
         }).catch((error) => {
             if (error.response) {

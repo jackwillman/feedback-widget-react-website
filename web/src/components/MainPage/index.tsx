@@ -7,10 +7,10 @@ import { MainDiv } from './styled';
 
 
 export type ExistingPage = 'Home' | 'About' | 'Dashboard' | 'Login';
-
-export interface PageProps {
-    setCurrentPage : (page : ExistingPage) => void;
-};
+export type CurrentPage = string;
+export type SetCurrentPage = (page : ExistingPage) => void;
+export type IsLoggedIn = boolean;
+export type SetIsLoggedIn = (isLoggedIn : boolean) => void;
 
 const MainPage = function MainPageComponent() {
     const [currentPage, setCurrentPage] = useState<ExistingPage>('Home');
@@ -18,7 +18,11 @@ const MainPage = function MainPageComponent() {
 
     return (
         <MainDiv>
-            <PageHeader setCurrentPage={ setCurrentPage } />
+            <PageHeader 
+                setCurrentPage={ setCurrentPage }                
+                setIsLoggedIn={ setIsLoggedIn }
+                isLoggedIn={ isLoggedIn }
+            />
             <CurrentPage 
                 currentPage={ currentPage }
                 setCurrentPage={ setCurrentPage }

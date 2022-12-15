@@ -1,10 +1,26 @@
-import { PageProps } from '..';
+import { 
+    SetCurrentPage,
+    SetIsLoggedIn,
+    IsLoggedIn
+ } from '..';
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
 
 import { HeaderDiv, CompanyButton } from './styled';
 
-const PageHeader = function PageHeaderComponent({ setCurrentPage } : PageProps) {
+interface PageHeaderProps {
+    setCurrentPage : SetCurrentPage,
+    setIsLoggedIn : SetIsLoggedIn,
+    isLoggedIn : IsLoggedIn
+};
+
+const PageHeader = function PageHeaderComponent(
+    { 
+        setCurrentPage,
+        setIsLoggedIn,
+        isLoggedIn
+    } : PageHeaderProps
+) {
     return (
         <HeaderDiv>
             <CompanyButton onClick={() => setCurrentPage('Home')}>

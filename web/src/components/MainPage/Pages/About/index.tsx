@@ -1,5 +1,3 @@
-import { PageProps } from "../..";
-
 import { 
     PageDiv,
     BigText,
@@ -10,7 +8,7 @@ import {
     AboutNormalTextDiv
 } from './styled';
 
-const About = function AboutPageComponent({ setCurrentPage } : PageProps) {
+const About = function AboutPageComponent() {
     return (
         <PageDiv>
             <AboutTextDiv>

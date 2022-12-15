@@ -33,7 +33,11 @@ const PageHeader = function PageHeaderComponent(
                 isLoggedIn={ isLoggedIn }
             />
 
-            <MobileMenu setCurrentPage={ setCurrentPage }/>
+            <MobileMenu 
+                setCurrentPage={ setCurrentPage }
+                setIsLoggedIn={ setIsLoggedIn }
+                isLoggedIn={ isLoggedIn }
+            />
         </HeaderDiv>
     );
 };

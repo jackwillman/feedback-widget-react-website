@@ -36,7 +36,7 @@ const DesktopMenu = function DesktopMenuComponent(
                         <MenuButton onClick={() => setCurrentPage('Login')}>
                             Log In
                         </MenuButton>
-                        <MenuButton onClick={() => setCurrentPage('Sign Up')}>
+                        <MenuButton onClick={() => setCurrentPage('Signup')}>
                             Sign Up
                         </MenuButton>
                     </MenuButtonsDiv>

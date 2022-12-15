@@ -42,7 +42,7 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
                     setIsLoggedIn={ setIsLoggedIn }
                 />
             );
-        case 'Sign Up':
+        case 'Signup':
             return (
                 <Signup />
             );

@@ -1,4 +1,8 @@
 import api from '../../../../lib/api';
+import config from '../../../../lib/config';
+
+import { CookiesType } from '..';
+
 
 import { 
     PageDiv, 
@@ -7,7 +11,13 @@ import {
     BiggerText 
 } from '../styled';
 
-const Dashboard = function DashboardPageComponent() {
+interface DashboardProps {
+    cookies : CookiesType;
+};
+
+const Dashboard = function DashboardPageComponent(
+    { cookies } : CookiesType
+) {
     return (
         <PageDiv>
             <TextDiv>
@@ -15,7 +25,7 @@ const Dashboard = function DashboardPageComponent() {
                     On the way
                 </BiggerText>
                 <NormalText>
-                    Import here
+                    Import here: { cookies[config.sessionToken.cookieName] }
                 </NormalText>
             </TextDiv>
         </PageDiv>

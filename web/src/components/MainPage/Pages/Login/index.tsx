@@ -8,6 +8,8 @@ import {
     SetCurrentPage,
     SetIsLoggedIn,
  } from '../..';
+ import { SetCookie } from '..';
+
 import LoginFormTextArea from './LoginFormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';
 
@@ -24,19 +26,20 @@ import {
 interface LoginProps {
     setCurrentPage : SetCurrentPage; 
     setIsLoggedIn : SetIsLoggedIn;
+    setCookie : SetCookie;
 };
 
 const Login = function LoginPageComponent(
     { 
         setCurrentPage, 
         setIsLoggedIn,
+        setCookie
     } : LoginProps
 ) {
     const [userIdentifier, setUserIdentifier] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
     const [errorState, setErrorState] = useState('');
-    const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName]);
 
     const handleLogin = function submitLoginInput(
         event : FormEvent

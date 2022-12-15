@@ -1,10 +1,9 @@
 import { useState, FormEvent } from 'react';
 import { useCookies } from 'react-cookie';
 
-import api from '../../../../lib/api';
-import config from '../../../../config';
 
-import { setTokenCookie } from './setTokenCookie';
+import api from '../../../../lib/api';
+import config from '../../../../lib/config';
 
 import { PageProps } from '../..';
 import LoginFormTextArea from './LoginFormTextArea';
@@ -19,7 +18,6 @@ import {
     LoginForm,
     LoginText
 } from './styled';
-import { handleLoginError } from './handleLoginError';
 
 
 interface LoginProps extends PageProps {
@@ -36,6 +34,7 @@ const Login = function LoginPageComponent(
     const [userPassword, setUserPassword] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
     const [errorState, setErrorState] = useState('');
+    const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName]);
 
     const handleLogin = function submitLoginInput(
         event : FormEvent
@@ -50,14 +49,23 @@ const Login = function LoginPageComponent(
             password : userPassword
 
         }).then((response) => {
-            setTokenCookie({ response });
+            const token = response.headers[config.sessionToken.headerName];
+            const expirationDate = new Date(Date.now() + config.sessionToken.duration);
+            setCookie(config.sessionToken.cookieName, token, {
+                path : config.path.main,
+                expires : expirationDate
+            });
             setIsLoggedIn(true);
 
         }).catch((error) => {
-            handleLoginError({
-                error,
-                setErrorState
-            });
+            if (error.response) {
+                console.log(error.response.data);
+                setErrorState(error.response.data.error);
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log('Error: ', error.message);
+            }
 
         }).then(() => {
             setIsSendingLoginInput(false);

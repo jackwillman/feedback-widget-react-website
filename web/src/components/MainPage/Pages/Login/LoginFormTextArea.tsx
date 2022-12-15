@@ -1,5 +1,5 @@
 interface FormTextAreaProps {
-    setInput : (input : string) => void
+    setInput : (input : string) => void;
 };
 
 const LoginFormTextArea = function LoginFormTextAreaComponent(

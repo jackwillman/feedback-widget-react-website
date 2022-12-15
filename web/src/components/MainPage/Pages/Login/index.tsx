@@ -4,6 +4,8 @@ import { useCookies } from 'react-cookie';
 import api from '../../../../lib/api';
 import config from '../../../../config';
 
+import { setTokenCookie } from './setTokenCookie';
+
 import { PageProps } from '../..';
 import LoginFormTextArea from './LoginFormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';
@@ -17,6 +19,8 @@ import {
     LoginForm,
     LoginText
 } from './styled';
+import { handleLoginError } from './handleLoginError';
+
 
 interface LoginProps extends PageProps {
     setIsLoggedIn : (isLoggedIn : boolean) => void;
@@ -31,7 +35,7 @@ const Login = function LoginPageComponent(
     const [userIdentifier, setUserIdentifier] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
-    const [error, setError] = useState('');
+    const [errorState, setErrorState] = useState('');
 
     const handleLogin = function submitLoginInput(
         event : FormEvent
@@ -46,25 +50,14 @@ const Login = function LoginPageComponent(
             password : userPassword
 
         }).then((response) => {
-            const token = response.headers[config.sessionToken.headerName];
-            const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName]);
-            const expirationDate = new Date(Date.now() + config.sessionToken.duration);
-            setCookie(config.sessionToken.cookieName, token, {
-                path : config.path.main,
-                expires : expirationDate
-            });
-
+            setTokenCookie({ response });
             setIsLoggedIn(true);
 
-        }).catch((err) => {
-            if (err.response) {
-                console.log(err.response.data);
-                setError(err.response.data.error);
-            } else if (err.request) {
-                console.log(err.request);
-            } else {
-                console.log('Error: ', err.message);
-            }
+        }).catch((error) => {
+            handleLoginError({
+                error,
+                setErrorState
+            });
 
         }).then(() => {
             setIsSendingLoginInput(false);
@@ -91,8 +84,8 @@ const Login = function LoginPageComponent(
                         userIdentifier={ userIdentifier }
                         userPassword={ userPassword }
                     />
-                    { error
-                        ? error
+                    { errorState
+                        ? errorState
                         : <></>                      
                     }
                 </LoginForm>

@@ -1,20 +1,47 @@
-import { PageProps } from '../..';
+import { PageHeaderProps } from '..';
 
 import { MenuButtonsDiv, MenuButton } from './styled';
 
-const DesktopMenu = function DesktopMenuComponent({ setCurrentPage } : PageProps) {
+const DesktopMenu = function DesktopMenuComponent(
+    { 
+        setCurrentPage,
+        setIsLoggedIn,
+        isLoggedIn
+    } : PageHeaderProps
+) {
     return (
-        <MenuButtonsDiv>
-            <MenuButton onClick={() => setCurrentPage('About')}>
-                About
-            </MenuButton>
-            <MenuButton onClick={() => setCurrentPage('Dashboard')}>
-                Dashboard
-            </MenuButton>
-            <MenuButton onClick={() => setCurrentPage('Login')}>
-                Log In
-            </MenuButton>
-        </MenuButtonsDiv>
+        <>
+            { 
+                isLoggedIn
+                ?
+                    <MenuButtonsDiv>
+                        <MenuButton onClick={() => setCurrentPage('About')}>
+                            About
+                        </MenuButton>
+                        <MenuButton onClick={() => setCurrentPage('Dashboard')}>
+                            Dashboard
+                        </MenuButton>
+                        <MenuButton onClick={() => {
+                            setIsLoggedIn(false);
+                            setCurrentPage('Home');
+                        }}>
+                            Log Out
+                        </MenuButton>
+                    </MenuButtonsDiv>
+                :
+                    <MenuButtonsDiv>
+                        <MenuButton onClick={() => setCurrentPage('About')}>
+                            About
+                        </MenuButton>
+                        <MenuButton onClick={() => setCurrentPage('Login')}>
+                            Log In
+                        </MenuButton>
+                        <MenuButton onClick={() => setCurrentPage('Sign Up')}>
+                            Sign Up
+                        </MenuButton>
+                    </MenuButtonsDiv>
+            }
+        </>
     );
 };
 

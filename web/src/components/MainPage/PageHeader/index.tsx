@@ -8,7 +8,7 @@ import MobileMenu from './MobileMenu';
 
 import { HeaderDiv, CompanyButton } from './styled';
 
-interface PageHeaderProps {
+export interface PageHeaderProps {
     setCurrentPage : SetCurrentPage,
     setIsLoggedIn : SetIsLoggedIn,
     isLoggedIn : IsLoggedIn
@@ -27,7 +27,11 @@ const PageHeader = function PageHeaderComponent(
                 Better<a className='text-brand-500'>Site</a>
             </CompanyButton>
 
-            <DesktopMenu setCurrentPage={ setCurrentPage }/>
+            <DesktopMenu 
+                setCurrentPage={ setCurrentPage }
+                setIsLoggedIn={ setIsLoggedIn }
+                isLoggedIn={ isLoggedIn }
+            />
 
             <MobileMenu setCurrentPage={ setCurrentPage }/>
         </HeaderDiv>

@@ -6,7 +6,7 @@ import CurrentPage from './Pages';
 import { MainDiv } from './styled';
 
 
-export type ExistingPage = 'Home' | 'About' | 'Dashboard' | 'Login';
+export type ExistingPage = 'Home' | 'About' | 'Dashboard' | 'Login' | 'Sign Up';
 export type CurrentPage = string;
 export type SetCurrentPage = (page : ExistingPage) => void;
 export type IsLoggedIn = boolean;

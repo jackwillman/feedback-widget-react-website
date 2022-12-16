@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useState } from 'react';
 
 import api from '../../../../lib/api';
@@ -13,6 +15,7 @@ import {
     BiggerText 
 } from '../styled';
 
+
 interface DashboardProps {
     cookies : CookiesType;
 };
@@ -22,16 +25,19 @@ const Dashboard = function DashboardPageComponent(
 ) {
     const [isGettingUser, setIsGettingUser] = useState(false);
     const [getUserError, setGetUserError] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
 
     const handleGetUser = function GetUserFromServer() {
-        
         setIsGettingUser(true);
         setGetUserError('');
+        setEmail('');
+        setUsername('');
 
         const tokenHeader = config.sessionToken.headerName;
-        const sessionToken = cookies(config.sessionToken.cookieName);
-        const userId = cookies(config.user.id.cookieName);
-        
+        const sessionToken = cookies[config.sessionToken.cookieName];
+        const userId = cookies[config.user.id.cookieName];
+
         api.get(config.path.user, { 
             params : {
                 id : userId
@@ -41,10 +47,10 @@ const Dashboard = function DashboardPageComponent(
             }
         })
             .then((response) => {
-                console.log(response);             
-            }) 
-
-        /*
+                setUsername(response.data[config.user.username]);
+                setEmail(response.data[config.user.email])
+            });
+        /* FUNCAO DE LOGIN COMO EXEMPLO PRA CONCLUIR ESTA
 
         api.post(config.path.sessions, {
             [userIdentifierType] : userIdentifier,
@@ -75,16 +81,28 @@ const Dashboard = function DashboardPageComponent(
         });
         */
     };
+
+    React.useEffect(() => handleGetUser());               
     
     return (
         <PageDiv>
             <TextDiv>
                 <BiggerText>
-                    On the way
+                    Dashboard
                 </BiggerText>
-                <NormalText>
-                    Import here:
-                </NormalText>
+                { username && email
+                    ? 
+                        <NormalText>
+                            Username: { username }
+                            <br /><br />
+                            E-mail: { email }
+                        </NormalText>
+                    :
+                        <NormalText>
+                            Error: { getUserError }
+                        </NormalText>
+                }
+                
             </TextDiv>
         </PageDiv>
     );

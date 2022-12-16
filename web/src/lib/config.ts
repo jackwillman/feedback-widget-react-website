@@ -3,7 +3,9 @@ const config = {
         id : {
             cookieName : 'user-id',
             responseName : 'userId'
-        }
+        },
+        email : 'email',
+        username : 'username'
     },
     sessionToken : {
         duration : 3 * 60 * 60 * 1000, // 3 hours

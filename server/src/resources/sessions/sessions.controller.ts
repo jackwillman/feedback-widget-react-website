@@ -31,12 +31,12 @@ export const login = async function loginUserController(
         throw httpError(500, 'Missing Secret Key');
     }
     
-    const { token } = await loginUseCase.execute({
+    const { userId, session } = await loginUseCase.execute({
         userIdentifier,
         password,
         secretKey
     });
 
-    res.header(config.token.headerName, token).status(201).send();
+    res.header(config.token.headerName, session.token).status(201).json({ userId });
     return;
 };

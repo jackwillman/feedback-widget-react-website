@@ -90,6 +90,9 @@ export const LoginUseCase = class {
 			isPasswordValid,
 			secretKey
 		);
-		return session;
+		return {
+			userId : user.id,
+			session
+		};
 	};
 };

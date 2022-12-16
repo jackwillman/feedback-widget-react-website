@@ -1,5 +1,4 @@
 import { useState, FormEvent } from 'react';
-import { useCookies } from 'react-cookie';
 
 import api from '../../../../lib/api';
 import config from '../../../../lib/config';
@@ -39,14 +38,14 @@ const Login = function LoginPageComponent(
     const [userIdentifier, setUserIdentifier] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
-    const [errorState, setErrorState] = useState('');
+    const [loginError, setLoginError] = useState('');
 
     const handleLogin = function submitLoginInput(
         event : FormEvent
     ) {
         event.preventDefault();
         setIsSendingLoginInput(true);
-        setErrorState('');
+        setLoginError('');
 
         const userIdentifierType = userIdentifier.includes('@') ? 'email' : 'username';
 
@@ -55,9 +54,17 @@ const Login = function LoginPageComponent(
             password : userPassword
 
         }).then((response) => {
+            const tokenCookie = config.sessionToken.cookieName;
             const token = response.headers[config.sessionToken.headerName];
             const expirationDate = new Date(Date.now() + config.sessionToken.duration);
-            setCookie(config.sessionToken.cookieName, token, {
+            setCookie(tokenCookie, token, {
+                path : config.path.main,
+                expires : expirationDate
+            });
+
+            const userIdCookie = config.user.id.cookieName;
+            const userId = response.data[config.user.id.responseName]
+            setCookie(userIdCookie, userId, {
                 path : config.path.main,
                 expires : expirationDate
             });
@@ -67,7 +74,7 @@ const Login = function LoginPageComponent(
         }).catch((error) => {
             if (error.response) {
                 console.log(error.response.data);
-                setErrorState(error.response.data.error);
+                setLoginError(error.response.data.error);
             } else if (error.request) {
                 console.log(error.request);
             } else {
@@ -99,8 +106,8 @@ const Login = function LoginPageComponent(
                         userIdentifier={ userIdentifier }
                         userPassword={ userPassword }
                     />
-                    { errorState
-                        ? errorState
+                    { loginError
+                        ? loginError
                         : <></>                      
                     }
                 </LoginForm>

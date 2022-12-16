@@ -1,4 +1,10 @@
 const config = {
+    user : {
+        id : {
+            cookieName : 'user-id',
+            responseName : 'userId'
+        }
+    },
     sessionToken : {
         duration : 3 * 60 * 60 * 1000, // 3 hours
         headerName : 'x-access-token',
@@ -6,7 +12,8 @@ const config = {
     },
     path : {
         main : '/',
-        sessions : '/sessions'
+        sessions : '/sessions',
+        user : '/users/auth'
     }
 };
 

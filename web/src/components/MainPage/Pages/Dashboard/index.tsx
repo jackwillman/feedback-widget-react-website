@@ -11,10 +11,13 @@ import { CookiesType } from '..';
 import { 
     PageDiv, 
     TextDiv, 
-    NormalText,
     BiggerText 
 } from '../styled';
-import { DashboardDiv } from './styled';
+import { 
+    DashboardDiv,
+    DashboardText,
+    DashboardRightText
+ } from './styled';
 
 
 interface DashboardProps {
@@ -82,16 +85,28 @@ const Dashboard = function DashboardPageComponent(
                                 <Loading />
                             :
                                 username && email
-                                    ? 
-                                        <NormalText>
-                                            Username: { username }
-                                            <br /> <br />
-                                            E-mail: { email }
-                                        </NormalText>
+                                    ?
+                                        <>
+                                            <DashboardText>
+                                                Username: 
+                                            </DashboardText>
+                                            <DashboardRightText>
+                                                { username }
+                                            </DashboardRightText>
+                                            <DashboardText>
+                                                <br /> <br />
+                                            </DashboardText>
+                                            <DashboardText>
+                                                E-mail: 
+                                            </DashboardText>
+                                            <DashboardRightText>
+                                                { email }
+                                            </DashboardRightText>
+                                        </>
                                     :
-                                        <NormalText>
+                                        <DashboardText>
                                             Error: { getUserError }
-                                        </NormalText>
+                                        </DashboardText>
                     }
                 </DashboardDiv>
             </TextDiv>

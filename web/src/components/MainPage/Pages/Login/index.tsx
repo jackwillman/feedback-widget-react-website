@@ -81,7 +81,7 @@ const Login = function LoginPageComponent(
                 console.log('Error: ', error.message);
             }
 
-        }).then(() => {
+        }).finally(() => {
             setIsSendingLoginInput(false);
         });
     };
@@ -106,9 +106,10 @@ const Login = function LoginPageComponent(
                         userIdentifier={ userIdentifier }
                         userPassword={ userPassword }
                     />
-                    { loginError
-                        ? loginError
-                        : <></>                      
+                    { 
+                        loginError
+                            ? loginError
+                            : <></>                      
                     }
                 </LoginForm>
             </TextDiv>

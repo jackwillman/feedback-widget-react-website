@@ -5,8 +5,8 @@ import { useState } from 'react';
 import api from '../../../../lib/api';
 import config from '../../../../lib/config';
 
+import Loading from '../../../Misc/Loading';
 import { CookiesType } from '..';
-
 
 import { 
     PageDiv, 
@@ -14,6 +14,7 @@ import {
     NormalText,
     BiggerText 
 } from '../styled';
+import { DashboardDiv } from './styled';
 
 
 interface DashboardProps {
@@ -35,6 +36,7 @@ const Dashboard = function DashboardPageComponent(
         setUsername('');
 
         const tokenHeader = config.sessionToken.headerName;
+        
         const sessionToken = cookies[config.sessionToken.cookieName];
         const userId = cookies[config.user.id.cookieName];
 
@@ -45,41 +47,24 @@ const Dashboard = function DashboardPageComponent(
             headers : {
                 [tokenHeader] : sessionToken
             }
-        })
-            .then((response) => {
-                setUsername(response.data[config.user.username]);
-                setEmail(response.data[config.user.email])
-            });
-        /* FUNCAO DE LOGIN COMO EXEMPLO PRA CONCLUIR ESTA
-
-        api.post(config.path.sessions, {
-            [userIdentifierType] : userIdentifier,
-            password : userPassword
 
         }).then((response) => {
-            const token = response.headers[config.sessionToken.headerName];
-            const expirationDate = new Date(Date.now() + config.sessionToken.duration);
-            setCookie(config.sessionToken.cookieName, token, {
-                path : config.path.main,
-                expires : expirationDate
-            });
-            setIsLoggedIn(true);
-            setCurrentPage('Home');
-
+            setUsername(response.data[config.user.username]);
+            setEmail(response.data[config.user.email])
+            
         }).catch((error) => {
             if (error.response) {
                 console.log(error.response.data);
-                setErrorState(error.response.data.error);
+                setGetUserError(error.response.data.error);
             } else if (error.request) {
                 console.log(error.request);
             } else {
                 console.log('Error: ', error.message);
             }
 
-        }).then(() => {
-            setIsSendingLoginInput(false);
+        }).finally(() => {
+            setIsGettingUser(false);
         });
-        */
     };
 
     React.useEffect(() => handleGetUser());               
@@ -90,19 +75,25 @@ const Dashboard = function DashboardPageComponent(
                 <BiggerText>
                     Dashboard
                 </BiggerText>
-                { username && email
-                    ? 
-                        <NormalText>
-                            Username: { username }
-                            <br /><br />
-                            E-mail: { email }
-                        </NormalText>
-                    :
-                        <NormalText>
-                            Error: { getUserError }
-                        </NormalText>
-                }
-                
+                <DashboardDiv>
+                    {
+                        isGettingUser
+                            ?
+                                <Loading />
+                            :
+                                username && email
+                                    ? 
+                                        <NormalText>
+                                            Username: { username }
+                                            <br /> <br />
+                                            E-mail: { email }
+                                        </NormalText>
+                                    :
+                                        <NormalText>
+                                            Error: { getUserError }
+                                        </NormalText>
+                    }
+                </DashboardDiv>
             </TextDiv>
         </PageDiv>
     );

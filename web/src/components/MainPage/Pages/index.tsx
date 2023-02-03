@@ -29,7 +29,7 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
         setIsLoggedIn
     } : CurrentPageProps
 ) {
-    const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName, config.user.idCookieName]);
+    const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName, config.user.id.cookieName]);
     switch (currentPage) {
         case 'Home':
             return (

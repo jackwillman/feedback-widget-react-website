@@ -61,3 +61,22 @@ export const FeedbackFormSubmit = tw.button`
     disabled:opacity-50 
     disabled:hover:bg-brand-500
 `;
+
+export const formTextAreaClass = `
+    min-w-[304px]
+    w-full min-h-[112px]
+    text-sm
+    rounded
+    resize-none
+    placeholder-zinc-400
+    text-zinc-100
+    border-zinc-600
+    bg-transparent
+    focus:border-brand-500
+    focus:ring-brand-500
+    focus:ring-1
+    focus:outline-none
+    scrollbar-thin
+    scrollbar-thumb-zinc-700
+    scrollbar-track-transparent
+`;

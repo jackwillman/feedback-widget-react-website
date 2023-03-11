@@ -43,3 +43,22 @@ export const LoginFormSubmit = tw.button`
     disabled:opacity-50 
     disabled:hover:bg-brand-500
 `;
+
+export const loginTextAreaClass = `
+    w-full 
+    h-10 
+    text-sm 
+    rounded 
+    resize-none 
+    placeholder-zinc-400 
+    text-zinc-100 
+    border-zinc-600 
+    bg-transparent 
+    focus:border-brand-500 
+    focus:ring-brand-500 
+    focus:ring-1 
+    focus:outline-none 
+    scrollbar-thin  
+    scrollbar-thumb-zinc-700 
+    scrollbar-track-transparent
+`;

@@ -1,3 +1,5 @@
+import { loginTextAreaClass } from './styled';
+
 interface FormTextAreaProps {
     setInput : (input : string) => void;
 };
@@ -7,7 +9,7 @@ const LoginFormTextArea = function LoginFormTextAreaComponent(
 ) {
     return (
         <textarea
-            className="w-full h-10 text-sm rounded resize-none placeholder-zinc-400 text-zinc-100 border-zinc-600 bg-transparent focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none scrollbar-thin  scrollbar-thumb-zinc-700 scrollbar-track-transparent"
+            className={ loginTextAreaClass }
             onChange={ event => setInput(event.target.value) }
         />
     );

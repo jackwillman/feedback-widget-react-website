@@ -32,7 +32,6 @@ const FeedbackContentStep = function FeedbackContentStep( {
         event : FormEvent
     ) {
         event.preventDefault();
-        
         setIsSendingFeedback(true);
     
         await api.post('/feedbacks', {

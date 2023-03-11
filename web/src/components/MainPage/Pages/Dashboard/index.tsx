@@ -1,12 +1,15 @@
-import React from 'react';
-
-import { useState } from 'react';
+import { 
+    useEffect,
+    useState, 
+    FormEvent 
+} from 'react';
 
 import api from '../../../../lib/api';
 import config from '../../../../lib/config';
+import { CookiesType } from '..';
 
 import Loading from '../../../Misc/Loading';
-import { CookiesType } from '..';
+import DashboardFormTextArea from './DashboardFormTextArea';
 
 import { 
     PageDiv, 
@@ -15,8 +18,10 @@ import {
 } from '../styled';
 import { 
     DashboardDiv,
-    DashboardText,
-    DashboardRightText
+    DashboardItemRow,
+    DashboardErrorBox,
+    dashboardTextBoxClass,
+    DashboardText
  } from './styled';
 
 
@@ -31,8 +36,11 @@ const Dashboard = function DashboardPageComponent(
     const [getUserError, setGetUserError] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [isUpdatingUser, setIsUpdatingUser] = useState(false);
+    const [newUsername, setNewUsername] = useState('');
+    const [newEmail, setNewEmail] = useState('');
 
-    const handleGetUser = function GetUserFromServer() {
+    const handleGetUser = function getUserFromServer() {
         setIsGettingUser(true);
         setGetUserError('');
         setEmail('');
@@ -70,7 +78,16 @@ const Dashboard = function DashboardPageComponent(
         });
     };
 
-    React.useEffect(() => handleGetUser());               
+    const handleUpdateUser = function updateUserOnServer(
+        event : FormEvent
+    ) {
+        event.preventDefault();
+        setIsUpdatingUser(true);
+
+        setIsUpdatingUser(false);
+    };
+
+    useEffect(() => handleGetUser());               
     
     return (
         <PageDiv>
@@ -78,37 +95,46 @@ const Dashboard = function DashboardPageComponent(
                 <BiggerText>
                     Dashboard
                 </BiggerText>
-                <DashboardDiv>
                     {
                         isGettingUser
                             ?
-                                <Loading />
+                                <DashboardDiv>
+                                    <Loading />
+                                </DashboardDiv>
                             :
                                 username && email
                                     ?
-                                        <>
-                                            <DashboardText>
-                                                Username: 
-                                            </DashboardText>
-                                            <DashboardRightText>
-                                                { username }
-                                            </DashboardRightText>
-                                            <DashboardText>
-                                                <br /> <br />
-                                            </DashboardText>
-                                            <DashboardText>
-                                                E-mail: 
-                                            </DashboardText>
-                                            <DashboardRightText>
-                                                { email }
-                                            </DashboardRightText>
-                                        </>
+                                        <DashboardDiv>
+                                            <DashboardItemRow>
+                                                <DashboardText>Username:</DashboardText>
+                                                <textarea 
+                                                    className={dashboardTextBoxClass}
+                                                    placeholder={ username }
+                                                />
+                                                <DashboardFormTextArea 
+                                                    originalValue={ username }
+                                                    setInput={ setNewUsername }
+                                                />
+                                            </DashboardItemRow>
+
+                                            <DashboardItemRow>
+                                                <DashboardText>E-mail:</DashboardText>
+                                                <DashboardFormTextArea 
+                                                    originalValue={ email }
+                                                    setInput={ setNewEmail }
+                                                />
+                                            </DashboardItemRow>
+                                        </DashboardDiv>
                                     :
-                                        <DashboardText>
-                                            Error: { getUserError }
-                                        </DashboardText>
+                                        <DashboardDiv>
+                                            <DashboardItemRow>
+                                                <DashboardText>Error:</DashboardText>
+                                                <DashboardErrorBox>
+                                                    <DashboardText>{ getUserError }</DashboardText>
+                                                </DashboardErrorBox>
+                                            </DashboardItemRow>
+                                        </DashboardDiv>
                     }
-                </DashboardDiv>
             </TextDiv>
         </PageDiv>
     );

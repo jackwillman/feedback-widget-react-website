@@ -10,6 +10,7 @@ import { CookiesType } from '..';
 
 import Loading from '../../../Misc/Loading';
 import DashboardFormTextArea from './DashboardFormTextArea';
+import DashboardUpdateButton from './DashboardUpdateButton';
 
 import { 
     PageDiv, 
@@ -17,13 +18,12 @@ import {
     BiggerText 
 } from '../styled';
 import { 
-    DashboardDiv,
+    DashboardForm,
     DashboardItemRow,
     DashboardErrorBox,
     dashboardTextBoxClass,
     DashboardText
  } from './styled';
-
 
 interface DashboardProps {
     cookies : CookiesType;
@@ -36,7 +36,7 @@ const Dashboard = function DashboardPageComponent(
     const [getUserError, setGetUserError] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [isUpdatingUser, setIsUpdatingUser] = useState(false);
+    const [isSendingNewUserData, setIsSendingNewUserData] = useState(false);
     const [newUsername, setNewUsername] = useState('');
     const [newEmail, setNewEmail] = useState('');
 
@@ -82,9 +82,9 @@ const Dashboard = function DashboardPageComponent(
         event : FormEvent
     ) {
         event.preventDefault();
-        setIsUpdatingUser(true);
+        setIsSendingNewUserData(true);
 
-        setIsUpdatingUser(false);
+        setIsSendingNewUserData(false);
     };
 
     useEffect(() => handleGetUser());               
@@ -98,13 +98,13 @@ const Dashboard = function DashboardPageComponent(
                     {
                         isGettingUser
                             ?
-                                <DashboardDiv>
+                                <DashboardForm>
                                     <Loading />
-                                </DashboardDiv>
+                                </DashboardForm>
                             :
                                 username && email
                                     ?
-                                        <DashboardDiv>
+                                        <DashboardForm>
                                             <DashboardItemRow>
                                                 <DashboardText>Username:</DashboardText>
                                                 <textarea 
@@ -124,16 +124,23 @@ const Dashboard = function DashboardPageComponent(
                                                     setInput={ setNewEmail }
                                                 />
                                             </DashboardItemRow>
-                                        </DashboardDiv>
+                                            <DashboardItemRow>
+                                                <DashboardUpdateButton
+                                                    isSendingNewUserData={ isSendingNewUserData }
+                                                    newUsername={ newUsername }
+                                                    newEmail={ newEmail }
+                                                />
+                                            </DashboardItemRow>
+                                        </DashboardForm>
                                     :
-                                        <DashboardDiv>
+                                        <DashboardForm>
                                             <DashboardItemRow>
                                                 <DashboardText>Error:</DashboardText>
                                                 <DashboardErrorBox>
                                                     <DashboardText>{ getUserError }</DashboardText>
                                                 </DashboardErrorBox>
                                             </DashboardItemRow>
-                                        </DashboardDiv>
+                                        </DashboardForm>
                     }
             </TextDiv>
         </PageDiv>

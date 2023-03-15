@@ -10,7 +10,7 @@ export type ExistingPage = 'Home' | 'About' | 'Dashboard' | 'Login' | 'Signup';
 export type CurrentPage = string;
 export type SetCurrentPage = (page : ExistingPage) => void;
 export type IsLoggedIn = boolean;
-export type SetIsLoggedIn = (isLoggedIn : boolean) => void;
+export type SetIsLoggedIn = (isLoggedIn : IsLoggedIn) => void;
 
 const MainPage = function MainPageComponent() {
     const [currentPage, setCurrentPage] = useState<ExistingPage>('Home');

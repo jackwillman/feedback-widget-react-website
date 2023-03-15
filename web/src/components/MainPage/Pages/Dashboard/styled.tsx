@@ -2,7 +2,7 @@ import tw from "tailwind-styled-components/dist/tailwind";
 
 import { Text } from '../styled';
 
-export const DashboardDiv = tw.div`
+export const DashboardForm = tw.form`
     relative 
     bg-zinc-900 
     rounded-2xl 
@@ -10,7 +10,7 @@ export const DashboardDiv = tw.div`
 
     mt-[47px]
     w-[500px]
-    h-[180px]
+    h-[200px]
 `;
 
 export const DashboardItemRow = tw.div`
@@ -34,6 +34,33 @@ export const DashboardText = tw(Text)`
     xl:text-lg
     leading-[22px]
     xl:leading-[32px]
+`;
+
+export const DashboardUpdateFormSubmit = tw.button`
+    font-bold
+    text-base
+    xl:text-lg
+    text-zinc-800
+    bg-brand-500 
+    hover:bg-brand-300 
+    transition-colors
+    min-w-[170px] 
+    w-full
+    h-10
+    my-3
+    rounded 
+    border-transparent 
+    flex-1 
+    flex 
+    justify-center 
+    items-center 
+    focus:outline-none 
+    focus:ring-2 
+    focus:ring-offset-2 
+    focus:ring-offset-zinc-900 
+    focus:ring-brand-500
+    disabled:opacity-50 
+    disabled:hover:bg-brand-500
 `;
 
 export const dashboardTextBoxClass = `

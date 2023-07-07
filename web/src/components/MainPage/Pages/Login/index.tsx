@@ -15,12 +15,10 @@ import LoginSubmitButton from './LoginSubmitButton';
 import { 
     PageDiv,
     TextDiv,
-    BigText 
+    BigText,
+    AccountForm,
+    AccountFormText 
 } from '../styled';
-import {
-    LoginForm,
-    LoginText
-} from './styled';
 
 interface LoginProps {
     setCurrentPage : SetCurrentPage; 
@@ -92,14 +90,14 @@ const Login = function LoginPageComponent(
                 <BigText>
                     Log In
                 </BigText>
-                <LoginForm onSubmit={ handleLogin }>
-                    <LoginText>
+                <AccountForm onSubmit={ handleLogin }>
+                    <AccountFormText>
                         Username or E-mail
-                    </LoginText>
+                    </AccountFormText>
                     <LoginFormTextArea setInput={ setUserIdentifier }/>
-                    <LoginText>
+                    <AccountFormText>
                         Password
-                    </LoginText>
+                    </AccountFormText>
                     <LoginFormTextArea setInput={ setUserPassword }/>
                     <LoginSubmitButton 
                         isSendingLoginInput={ isSendingLoginInput }
@@ -111,7 +109,7 @@ const Login = function LoginPageComponent(
                             ? loginError
                             : <></>                      
                     }
-                </LoginForm>
+                </AccountForm>
             </TextDiv>
         </PageDiv>
     );

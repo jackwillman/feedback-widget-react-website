@@ -1,6 +1,6 @@
 import Loading from '../../../Misc/Loading';
 
-import { LoginFormSubmit } from './styled';
+import { AccountFormSubmit } from '../styled';
 
 interface LoginSubmitButtonProps {
     isSendingLoginInput : boolean;
@@ -15,7 +15,7 @@ const LoginSubmitButton = function ({
     } : LoginSubmitButtonProps
 ) {
     return (
-        <LoginFormSubmit
+        <AccountFormSubmit
             type="submit"
             disabled={ 
                 userIdentifier.length === 0 
@@ -28,7 +28,7 @@ const LoginSubmitButton = function ({
                     ? <Loading />
                     : 'Log In'
             }
-        </LoginFormSubmit>
+        </AccountFormSubmit>
     );
 };
 

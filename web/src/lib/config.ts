@@ -15,6 +15,7 @@ const config = {
     path : {
         main : '/',
         sessions : '/sessions',
+        users : 'users',
         user : '/users/auth'
     }
 };

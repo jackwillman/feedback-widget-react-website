@@ -4,14 +4,14 @@ import { AccountFormSubmit } from '../styled';
 
 interface SignupSubmitButtonProps {
     isSendingSignupInput : boolean;
-    userId : string;
+    username : string;
     userEmail : string;
     userPassword : string;
 };
 
 const SignupSubmitButton = function ({ 
         isSendingSignupInput, 
-        userId, 
+        username, 
         userEmail,
         userPassword 
     } : SignupSubmitButtonProps
@@ -20,7 +20,7 @@ const SignupSubmitButton = function ({
         <AccountFormSubmit
             type="submit"
             disabled={ 
-                userId.length === 0 
+                username.length === 0 
                 || userEmail.length === 0
                 || userPassword.length === 0 
                 || isSendingSignupInput 

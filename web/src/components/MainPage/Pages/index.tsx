@@ -12,6 +12,7 @@ import About from './About';
 import Dashboard from './Dashboard';
 import Login from './Login';
 import Signup from './Signup';
+import AccountCreated from './AccountCreated';
 
 export type SetCookie = (name : string, value : any, options?: any) => void;
 export type CookiesType = { [x: string] : any };
@@ -53,7 +54,13 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
             );
         case 'Signup':
             return (
-                <Signup />
+                <Signup 
+                    setCurrentPage={ setCurrentPage }
+                />
+            );
+        case 'AccountCreated':
+            return (
+                <AccountCreated />
             );
         default:
             return (

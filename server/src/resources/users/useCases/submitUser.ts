@@ -24,11 +24,15 @@ export const SubmitUserUseCase = class {
         }
 
         if (!email) {
-            throw httpError(400, 'Email is required');
+            throw httpError(400, 'E-mail is required');
         }
 
         if (!password) {
             throw httpError(400, 'Password is required');
+        }
+
+        if (!email.includes('@')) {
+            throw httpError(400, 'E-mail is invalid');
         }
 
         const salt = await bcrypt.genSalt(10);

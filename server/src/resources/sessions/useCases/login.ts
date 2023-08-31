@@ -1,6 +1,3 @@
-import bcrypt from 'bcryptjs';
-
-import config from '../../../config';
 import { httpError } from '../../../helpers';
 
 import { JwtAdapter } from '../../../adapters/jwt';

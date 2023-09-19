@@ -50,6 +50,16 @@ const Signup = function SignupPageComponent (
             if (error.message) {
                 setSignupError(error.message);
             }
+            /*
+            if (error.response) {
+                console.log(error.response.data);
+                setSignupError(error.response.data.error);
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log('Error: ', error.message);
+            }
+            */
 
         }).finally(() => {
             setIsSendingSignupInput(false);

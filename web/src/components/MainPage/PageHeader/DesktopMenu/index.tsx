@@ -23,7 +23,7 @@ const DesktopMenu = function DesktopMenuComponent(
                         </MenuButton>
                         <MenuButton onClick={() => {
                             setIsLoggedIn(false);
-                            setCurrentPage('Home');
+                            setCurrentPage('LoggedOut');
                         }}>
                             Log Out
                         </MenuButton>

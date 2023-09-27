@@ -6,8 +6,17 @@ import {
 } from 'express';
 
 import config from './config';
-import { ErrorCoded, httpError, passError } from './helpers';
-import { Secret, ExpirationStatus, JwtAdapter, Session } from './adapters/jwt';
+import { 
+	ErrorCoded, 
+	httpError, 
+	passError 
+} from './helpers';
+import { 
+	Secret, 
+	ExpirationStatus, 
+	JwtAdapter, 
+	Session 
+} from './adapters/jwt';
 
 export const catchErrors = function catchErrorsInControllerMethods(
     controllerMethod : (req : Request, res : Response) => Promise<void>

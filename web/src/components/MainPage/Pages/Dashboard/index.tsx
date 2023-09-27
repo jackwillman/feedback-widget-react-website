@@ -98,9 +98,7 @@ const Dashboard = function DashboardPageComponent(
                     {
                         isGettingUser
                             ?
-                                <DashboardForm>
-                                    <Loading />
-                                </DashboardForm>
+                                <Loading />
                             :
                                 username && email
                                     ?

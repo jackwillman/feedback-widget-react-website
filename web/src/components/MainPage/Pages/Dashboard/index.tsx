@@ -4,13 +4,12 @@ import {
     FormEvent 
 } from 'react';
 
-import api from '../../../../lib/api';
-import config from '../../../../lib/config';
 import { CookiesType } from '..';
 
 import Loading from '../../../Misc/Loading';
 import DashboardFormTextArea from './DashboardFormTextArea';
 import DashboardUpdateButton from './DashboardUpdateButton';
+import handleGetUser from './handleGetUser';
 
 import { 
     PageDiv, 
@@ -33,50 +32,13 @@ const Dashboard = function DashboardPageComponent(
     { cookies } : DashboardProps
 ) {
     const [isGettingUser, setIsGettingUser] = useState(false);
-    const [getUserError, setGetUserError] = useState('');
+    const [userError, setUserError] = useState('');
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
+    const [userEmail, setUserEmail] = useState('');
     const [isSendingNewUserData, setIsSendingNewUserData] = useState(false);
     const [newUsername, setNewUsername] = useState('');
-    const [newEmail, setNewEmail] = useState('');
+    const [newUserEmail, setNewUserEmail] = useState('');
 
-    const handleGetUser = function getUserFromServer() {
-        setIsGettingUser(true);
-        setGetUserError('');
-        setEmail('');
-        setUsername('');
-
-        const tokenHeader = config.sessionToken.headerName;
-        
-        const sessionToken = cookies[config.sessionToken.cookieName];
-        const userId = cookies[config.user.id.cookieName];
-
-        api.get(config.path.user, { 
-            params : {
-                id : userId
-            },
-            headers : {
-                [tokenHeader] : sessionToken
-            }
-
-        }).then((response) => {
-            setUsername(response.data[config.user.username]);
-            setEmail(response.data[config.user.email])
-            
-        }).catch((error) => {
-            if (error.response) {
-                console.log(error.response.data);
-                setGetUserError(error.response.data.error);
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log('Error: ', error.message);
-            }
-
-        }).finally(() => {
-            setIsGettingUser(false);
-        });
-    };
 
     const handleUpdateUser = function updateUserOnServer(
         event : FormEvent
@@ -87,7 +49,13 @@ const Dashboard = function DashboardPageComponent(
         setIsSendingNewUserData(false);
     };
 
-    useEffect(() => handleGetUser());               
+    useEffect(() => handleGetUser({
+        setIsGettingUser,
+        setUserError,
+        setUserEmail,
+        setUsername,
+        cookies
+    }));               
     
     return (
         <PageDiv>
@@ -100,7 +68,7 @@ const Dashboard = function DashboardPageComponent(
                             ?
                                 <Loading />
                             :
-                                username && email
+                                username && userEmail
                                     ?
                                         <DashboardForm>
                                             <DashboardItemRow>
@@ -118,15 +86,15 @@ const Dashboard = function DashboardPageComponent(
                                             <DashboardItemRow>
                                                 <DashboardText>E-mail:</DashboardText>
                                                 <DashboardFormTextArea 
-                                                    originalValue={ email }
-                                                    setInput={ setNewEmail }
+                                                    originalValue={ userEmail }
+                                                    setInput={ setNewUserEmail }
                                                 />
                                             </DashboardItemRow>
                                             <DashboardItemRow>
                                                 <DashboardUpdateButton
                                                     isSendingNewUserData={ isSendingNewUserData }
                                                     newUsername={ newUsername }
-                                                    newEmail={ newEmail }
+                                                    newEmail={ newUserEmail }
                                                 />
                                             </DashboardItemRow>
                                         </DashboardForm>
@@ -135,7 +103,7 @@ const Dashboard = function DashboardPageComponent(
                                             <DashboardItemRow>
                                                 <DashboardText>Error:</DashboardText>
                                                 <DashboardErrorBox>
-                                                    <DashboardText>{ getUserError }</DashboardText>
+                                                    <DashboardText>{ userError }</DashboardText>
                                                 </DashboardErrorBox>
                                             </DashboardItemRow>
                                         </DashboardForm>

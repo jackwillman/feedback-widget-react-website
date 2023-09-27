@@ -45,21 +45,29 @@ const Signup = function SignupPageComponent (
             setCurrentPage('AccountCreated');
 
         }).catch((error) => {
-            setSignupError(JSON.stringify(error));
-            console.log(error);  
-            if (error.message) {
-                setSignupError(error.message);
-            }
-            /*
+           
             if (error.response) {
                 console.log(error.response.data);
-                setSignupError(error.response.data.error);
+                if (error.response.data.errors) {
+                    const errorArray = error.response.data.errors;
+                    let errorMessage = 'Error! '
+                    let i = 0;
+                    while (i < errorArray.length) {
+                        errorMessage += `${errorArray[i].msg} `
+                        i++
+                    }
+                    setSignupError(errorMessage);
+                    
+                }
+                else {
+                    setSignupError(error.response.data.error);
+                }
             } else if (error.request) {
                 console.log(error.request);
             } else {
                 console.log('Error: ', error.message);
+                console.log(error);
             }
-            */
 
         }).finally(() => {
             setIsSendingSignupInput(false);

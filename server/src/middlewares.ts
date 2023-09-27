@@ -4,6 +4,7 @@ import {
 	RequestHandler, 
 	NextFunction
 } from 'express';
+import { body } from 'express-validator';
 
 import config from './config';
 import { 
@@ -11,6 +12,7 @@ import {
 	httpError, 
 	passError 
 } from './helpers';
+
 import { 
 	Secret, 
 	ExpirationStatus, 
@@ -57,6 +59,28 @@ export const handleErrorLogging = function logErrorsMiddleware(
 	next : NextFunction
 ) {
 	res.status(error.httpCode || 500).json({ error : error.message });
+};
+
+export const validate = {
+	username : body('username').
+				optional().
+				trim().
+				blacklist('@{}/;').
+				escape().
+				isLength({min:6, max:20}).
+				withMessage('Not A Valid Username. Must have at least 6 characters, and a maximum of 20 characters.'),
+	email : body('email').
+				optional().
+				trim().
+				blacklist('{}/;').
+				isEmail().
+				normalizeEmail().
+				withMessage('Not A Valid E-mail Adress. '),
+	password : body('password').
+				exists().
+				notEmpty().
+				isLength({min:6, max:20}).
+				withMessage('Not A Valid Password. Must have at least 6 characters, and a maximum of 20 characters.'),
 };
 
 export const CheckJwtAuthorization = class {

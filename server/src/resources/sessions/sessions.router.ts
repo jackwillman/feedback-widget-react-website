@@ -1,6 +1,9 @@
 import express from 'express';
 
-import { catchErrors } from '../../middlewares';
+import { 
+    catchErrors, 
+    validate 
+} from '../../middlewares';
 
 import { login } from './sessions.controller';
 
@@ -8,6 +11,9 @@ const sessionsRouter = express.Router();
 
 sessionsRouter
     .route('/')
-    .post(catchErrors(login));
+    .post(
+        [validate.username, validate.email, validate.password],
+        catchErrors(login)
+    );
 
 export default sessionsRouter;

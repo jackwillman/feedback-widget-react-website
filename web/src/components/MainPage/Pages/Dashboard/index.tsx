@@ -30,7 +30,7 @@ interface DashboardProps {
 };
 
 const Dashboard = function DashboardPageComponent(
-    { cookies } : CookiesType
+    { cookies } : DashboardProps
 ) {
     const [isGettingUser, setIsGettingUser] = useState(false);
     const [getUserError, setGetUserError] = useState('');

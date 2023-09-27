@@ -43,7 +43,9 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
             );
         case 'Dashboard':
             return (
-                <Dashboard />
+                <Dashboard 
+                    cookies={ cookies }
+                />
             );
         case 'Login':
             return (

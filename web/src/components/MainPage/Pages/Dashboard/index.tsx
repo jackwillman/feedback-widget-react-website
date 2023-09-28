@@ -38,9 +38,11 @@ const Dashboard = function DashboardPageComponent(
     const [updateError, setUpdateError] = useState('');
     const [username, setUsername] = useState('');
     const [userEmail, setUserEmail] = useState('');
+    const [userPassword, setUserPassword] = useState('');
     const [isSendingNewUserData, setIsSendingNewUserData] = useState(false);
     const [newUsername, setNewUsername] = useState('');
     const [newUserEmail, setNewUserEmail] = useState('');
+    const [newUserPassword, setNewUserPassword] = useState('');
 
     const handleUpdateUser = function updateUserOnServer(
         event : FormEvent
@@ -50,7 +52,9 @@ const Dashboard = function DashboardPageComponent(
         setUpdateError('');
 
         api.put(config.path.user, {
-
+            username,
+            email : userEmail,
+            password : userPassword
         }).then((response) => {
 
         }).catch((error), {

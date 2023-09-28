@@ -4,6 +4,9 @@ import {
     FormEvent 
 } from 'react';
 
+import api from '../../../../lib/api';
+import config from '../../../../lib/config';
+
 import { CookiesType } from '..';
 
 import Loading from '../../../Misc/Loading';
@@ -32,26 +35,35 @@ const Dashboard = function DashboardPageComponent(
     { cookies } : DashboardProps
 ) {
     const [isGettingUser, setIsGettingUser] = useState(false);
-    const [userError, setUserError] = useState('');
+    const [updateError, setUpdateError] = useState('');
     const [username, setUsername] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [isSendingNewUserData, setIsSendingNewUserData] = useState(false);
     const [newUsername, setNewUsername] = useState('');
     const [newUserEmail, setNewUserEmail] = useState('');
 
-
     const handleUpdateUser = function updateUserOnServer(
         event : FormEvent
     ) {
         event.preventDefault();
         setIsSendingNewUserData(true);
+        setUpdateError('');
 
-        setIsSendingNewUserData(false);
+        api.put(config.path.user, {
+
+        }).then((response) => {
+
+        }).catch((error), {
+
+        }).finally(() => {
+            setIsSendingNewUserData(false);
+        });
+        
     };
 
     useEffect(() => handleGetUser({
         setIsGettingUser,
-        setUserError,
+        setUserError: setUpdateError,
         setUserEmail,
         setUsername,
         cookies
@@ -99,9 +111,15 @@ const Dashboard = function DashboardPageComponent(
                         :
                             <DashboardForm>
                                 <DashboardItemRow>
-                                    <DashboardText>Error:</DashboardText>
                                     <DashboardErrorBox>
-                                        <DashboardText>{ userError }</DashboardText>
+                                        <DashboardText>
+                                            { 
+                                                updateError ?
+                                                    updateError
+                                                :
+                                                    <></>
+                                            }
+                                        </DashboardText>
                                     </DashboardErrorBox>
                                 </DashboardItemRow>
                             </DashboardForm>

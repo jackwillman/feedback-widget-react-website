@@ -63,51 +63,49 @@ const Dashboard = function DashboardPageComponent(
                 <BiggerText>
                     Dashboard
                 </BiggerText>
-                    {
-                        isGettingUser
-                            ?
-                                <Loading />
-                            :
-                                username && userEmail
-                                    ?
-                                        <DashboardForm>
-                                            <DashboardItemRow>
-                                                <DashboardText>Username:</DashboardText>
-                                                <textarea 
-                                                    className={dashboardTextBoxClass}
-                                                    placeholder={ username }
-                                                />
-                                                <DashboardFormTextArea 
-                                                    originalValue={ username }
-                                                    setInput={ setNewUsername }
-                                                />
-                                            </DashboardItemRow>
+                {
+                    isGettingUser ?
+                        <Loading />
+                    :
+                        username && userEmail ?
+                            <DashboardForm>
+                                <DashboardItemRow>
+                                    <DashboardText>Username:</DashboardText>
+                                    <textarea 
+                                        className={dashboardTextBoxClass}
+                                        placeholder={ username }
+                                    />
+                                    <DashboardFormTextArea 
+                                        originalValue={ username }
+                                        setInput={ setNewUsername }
+                                    />
+                                </DashboardItemRow>
 
-                                            <DashboardItemRow>
-                                                <DashboardText>E-mail:</DashboardText>
-                                                <DashboardFormTextArea 
-                                                    originalValue={ userEmail }
-                                                    setInput={ setNewUserEmail }
-                                                />
-                                            </DashboardItemRow>
-                                            <DashboardItemRow>
-                                                <DashboardUpdateButton
-                                                    isSendingNewUserData={ isSendingNewUserData }
-                                                    newUsername={ newUsername }
-                                                    newEmail={ newUserEmail }
-                                                />
-                                            </DashboardItemRow>
-                                        </DashboardForm>
-                                    :
-                                        <DashboardForm>
-                                            <DashboardItemRow>
-                                                <DashboardText>Error:</DashboardText>
-                                                <DashboardErrorBox>
-                                                    <DashboardText>{ userError }</DashboardText>
-                                                </DashboardErrorBox>
-                                            </DashboardItemRow>
-                                        </DashboardForm>
-                    }
+                                <DashboardItemRow>
+                                    <DashboardText>E-mail:</DashboardText>
+                                    <DashboardFormTextArea 
+                                        originalValue={ userEmail }
+                                        setInput={ setNewUserEmail }
+                                    />
+                                </DashboardItemRow>
+                                <DashboardItemRow>
+                                    <DashboardUpdateButton
+                                        isSendingNewUserData={ isSendingNewUserData }
+                                        newUsername={ newUsername }
+                                        newEmail={ newUserEmail }
+                                    />
+                                </DashboardItemRow>
+                            </DashboardForm>
+                        :
+                            <DashboardForm>
+                                <DashboardItemRow>
+                                    <DashboardText>Error:</DashboardText>
+                                    <DashboardErrorBox>
+                                        <DashboardText>{ userError }</DashboardText>
+                                    </DashboardErrorBox>
+                                </DashboardItemRow>
+                            </DashboardForm>
+                }
             </TextDiv>
         </PageDiv>
     );

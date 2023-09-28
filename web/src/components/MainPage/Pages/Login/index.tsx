@@ -105,9 +105,10 @@ const Login = function LoginPageComponent(
                         userPassword={ userPassword }
                     />
                     { 
-                        loginError
-                            ? loginError
-                            : <></>                      
+                        loginError ? 
+                            loginError
+                        : 
+                            <></>                      
                     }
                 </AccountForm>
             </TextDiv>

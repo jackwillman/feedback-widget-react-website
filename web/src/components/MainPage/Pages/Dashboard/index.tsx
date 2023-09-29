@@ -36,6 +36,7 @@ const Dashboard = function DashboardPageComponent(
 ) {
     const [isGettingUser, setIsGettingUser] = useState(false);
     const [updateError, setUpdateError] = useState('');
+    const [updateSuccess, setUpdateSuccess] = useState(false);
     const [username, setUsername] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
@@ -50,14 +51,34 @@ const Dashboard = function DashboardPageComponent(
         event.preventDefault();
         setIsSendingNewUserData(true);
         setUpdateError('');
+        setUpdateSuccess(false);
+
+        if (!newUsername) {
+            setNewUserEmail(username);
+        }
+
+        if (!newUserEmail) {
+            setNewUserEmail(userEmail);
+        }
+
+        if (!newUserPassword) {
+            setNewUserPassword(userPassword);
+        }
 
         api.put(config.path.user, {
-            username,
-            email : userEmail,
-            password : userPassword
+            username : newUsername,
+            email : newUserEmail,
+            password : newUserPassword
         }).then((response) => {
+            setUpdateSuccess(true);
+        }).catch((error) => {
 
-        }).catch((error), {
+            if (error.response) {
+                console.log(error.response.data);
+            }
+            else {
+                console.log(error);
+            }
 
         }).finally(() => {
             setIsSendingNewUserData(false);
@@ -121,7 +142,10 @@ const Dashboard = function DashboardPageComponent(
                                                 updateError ?
                                                     updateError
                                                 :
-                                                    <></>
+                                                    updateSuccess ?
+                                                        <>Your account has been updated!</>
+                                                    :
+                                                        <></>
                                             }
                                         </DashboardText>
                                     </DashboardErrorBox>

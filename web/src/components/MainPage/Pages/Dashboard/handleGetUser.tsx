@@ -4,8 +4,8 @@ import config from '../../../../lib/config';
 import { CookiesType } from '..';
 
 interface HandleGetUserProps {
-    setIsGettingUser : (isGettingUser : boolean) => void;
-    setUserError : (userError : string) => void;
+    setIsUserGotten : (isGettingUser : boolean) => void;
+    setUpdateError : (userError : string) => void;
     setUserEmail : (userEmail : string) => void;
     setUsername : (username : string) => void;
     cookies : CookiesType;
@@ -13,15 +13,15 @@ interface HandleGetUserProps {
 
 const handleGetUser = function getUserFromServer(
     {
-        setIsGettingUser,
-        setUserError,
+        setIsUserGotten,
+        setUpdateError,
         setUserEmail,
         setUsername,
         cookies
     } : HandleGetUserProps
 ) {
-    setIsGettingUser(true);
-    setUserError('');
+    setIsUserGotten(false);
+    setUpdateError('');
     setUserEmail('');
     setUsername('');
 
@@ -45,7 +45,7 @@ const handleGetUser = function getUserFromServer(
     }).catch((error) => {
         if (error.response) {
             console.log(error.response.data);
-            setUserError(error.response.data.error);
+            setUpdateError(error.response.data.error);
         } else if (error.request) {
             console.log(error.request);
         } else {
@@ -53,7 +53,7 @@ const handleGetUser = function getUserFromServer(
         }
 
     }).finally(() => {
-        setIsGettingUser(false);
+        setIsUserGotten(true);
     });
 };
 

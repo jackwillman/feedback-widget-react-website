@@ -34,7 +34,7 @@ interface DashboardProps {
 const Dashboard = function DashboardPageComponent(
     { cookies } : DashboardProps
 ) {
-    const [isGettingUser, setIsGettingUser] = useState(false);
+    const [isUserGotten, setIsUserGotten] = useState(false);
     const [updateError, setUpdateError] = useState('');
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [username, setUsername] = useState('');
@@ -87,8 +87,8 @@ const Dashboard = function DashboardPageComponent(
     };
 
     useEffect(() => handleGetUser({
-        setIsGettingUser,
-        setUserError: setUpdateError,
+        setIsUserGotten,
+        setUpdateError,
         setUserEmail,
         setUsername,
         cookies
@@ -101,7 +101,7 @@ const Dashboard = function DashboardPageComponent(
                     Dashboard
                 </BiggerText>
                 {
-                    isGettingUser ?
+                    !isUserGotten ?
                         <Loading />
                     :
                         username && userEmail ?

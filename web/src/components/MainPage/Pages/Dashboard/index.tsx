@@ -86,13 +86,14 @@ const Dashboard = function DashboardPageComponent(
         
     };
 
-    useEffect(() => handleGetUser({
-        setIsUserGotten,
-        setUpdateError,
-        setUserEmail,
-        setUsername,
-        cookies
-    }));               
+    useEffect(() => {
+        handleGetUser({
+            setIsUserGotten,
+            setUpdateError,
+            setUserEmail,
+            setUsername,
+            cookies});    
+    }, []);               
     
     return (
         <PageDiv>
@@ -105,7 +106,7 @@ const Dashboard = function DashboardPageComponent(
                         <Loading />
                     :
                         username && userEmail ?
-                            <DashboardForm>
+                            <DashboardForm onSubmit={ handleUpdateUser }>
                                 <DashboardItemRow>
                                     <DashboardText>Username:</DashboardText>
                                     <textarea 
@@ -134,23 +135,21 @@ const Dashboard = function DashboardPageComponent(
                                 </DashboardItemRow>
                             </DashboardForm>
                         :
-                            <DashboardForm>
-                                <DashboardItemRow>
-                                    <DashboardErrorBox>
-                                        <DashboardText>
-                                            { 
-                                                updateError ?
-                                                    updateError
+                            <DashboardItemRow>
+                                <DashboardErrorBox>
+                                    <DashboardText>
+                                        {
+                                            updateError ?
+                                                updateError
+                                            :
+                                                updateSuccess ?
+                                                    <>Your account has been updated!</>
                                                 :
-                                                    updateSuccess ?
-                                                        <>Your account has been updated!</>
-                                                    :
-                                                        <></>
-                                            }
-                                        </DashboardText>
-                                    </DashboardErrorBox>
-                                </DashboardItemRow>
-                            </DashboardForm>
+                                                    <></>
+                                        }
+                                    </DashboardText>
+                                </DashboardErrorBox>
+                            </DashboardItemRow>
                 }
             </TextDiv>
         </PageDiv>

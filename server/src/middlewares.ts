@@ -97,6 +97,7 @@ export const CheckJwtAuthorization = class {
 	) {
 		const requestHeader = config.token.headerName;
 		const requestToken = req.header(config.token.headerName);	
+		
 		if (!requestToken) {
 			throw httpError(401, `Required ${requestHeader} not found.`);
 		}

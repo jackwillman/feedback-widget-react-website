@@ -70,12 +70,11 @@ const Dashboard = function DashboardPageComponent(
         }
 
         api.put(config.path.user, {
-            params : {
-                id : userId,
-                username : newUsername,
-                email : newUserEmail,
-                password : newUserPassword
-            }, 
+            id : userId,
+            username : newUsername,
+            email : newUserEmail,
+            password : newUserPassword
+        }, { 
             headers : {
                 [tokenHeader] : sessionToken
             }

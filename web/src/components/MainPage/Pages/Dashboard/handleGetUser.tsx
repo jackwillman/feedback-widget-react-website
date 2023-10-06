@@ -26,7 +26,6 @@ const handleGetUser = function getUserFromServer(
     setUsername('');
 
     const tokenHeader = config.sessionToken.headerName;
-    
     const sessionToken = cookies[config.sessionToken.cookieName];
     const userId = cookies[config.user.id.cookieName];
 

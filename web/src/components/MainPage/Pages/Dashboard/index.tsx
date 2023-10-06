@@ -45,6 +45,10 @@ const Dashboard = function DashboardPageComponent(
     const [newUserEmail, setNewUserEmail] = useState('');
     const [newUserPassword, setNewUserPassword] = useState('');
 
+    const tokenHeader = config.sessionToken.headerName;
+    const sessionToken = cookies[config.sessionToken.cookieName];
+    const userId = cookies[config.user.id.cookieName];
+
     const handleUpdateUser = function updateUserOnServer(
         event : FormEvent
     ) {
@@ -66,9 +70,15 @@ const Dashboard = function DashboardPageComponent(
         }
 
         api.put(config.path.user, {
-            username : newUsername,
-            email : newUserEmail,
-            password : newUserPassword
+            params : {
+                id : userId,
+                username : newUsername,
+                email : newUserEmail,
+                password : newUserPassword
+            }, 
+            headers : {
+                [tokenHeader] : sessionToken
+            }
         }).then((response) => {
             setUpdateSuccess(true);
         }).catch((error) => {

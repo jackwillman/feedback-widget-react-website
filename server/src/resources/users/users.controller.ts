@@ -81,16 +81,22 @@ export const putUser = async function putUserController(
     req : Request, 
     res : Response
 ) {
-    const prismaUsersRepository = new PrismaUsersRepository();
-    const updateUserUseCase = new UpdateUserUseCase(
-        prismaUsersRepository
-    );
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors : errors.array() });
+        return;
+    }
 
     const userId = req.query.id;
     if (!userId || typeof userId !== 'string') {
         throw httpError(400, 'User ID is not a string');
     }
     checkAuth(res, userId);
+
+    const prismaUsersRepository = new PrismaUsersRepository();
+    const updateUserUseCase = new UpdateUserUseCase(
+        prismaUsersRepository
+    );
     
     const { username, email, password } = req.body;
     await updateUserUseCase.execute({

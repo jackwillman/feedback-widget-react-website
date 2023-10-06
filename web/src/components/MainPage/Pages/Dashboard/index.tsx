@@ -102,7 +102,11 @@ const Dashboard = function DashboardPageComponent(
             setUpdateError,
             setUserEmail,
             setUsername,
-            cookies});    
+            tokenHeader,
+            sessionToken,
+            userId,
+            cookies
+        });    
     }, []);               
     
     return (

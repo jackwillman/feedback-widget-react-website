@@ -81,14 +81,29 @@ const Dashboard = function DashboardPageComponent(
         }).then((response) => {
             setUpdateSuccess(true);
         }).catch((error) => {
-
             if (error.response) {
                 console.log(error.response.data);
-            }
-            else {
+                if (error.response.data.errors) {
+                    const errorArray = error.response.data.errors;
+                    let errorMessage = 'Error! '
+                    let i = 0;
+                    
+                    while (i < errorArray.length) {
+                        errorMessage += `${errorArray[i].msg} `
+                        i++
+                    }
+                    setUpdateError(errorMessage);
+                    
+                }
+                else {
+                    setUpdateError(error.response.data.error);
+                }
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log('Error: ', error.message);
                 console.log(error);
             }
-
         }).finally(() => {
             setIsSendingNewUserData(false);
         });
@@ -148,21 +163,19 @@ const Dashboard = function DashboardPageComponent(
                                 </DashboardItemRow>
                             </DashboardForm>
                         :
-                            <DashboardItemRow>
-                                <DashboardErrorBox>
-                                    <DashboardText>
-                                        {
-                                            updateError ?
-                                                updateError
+                            <DashboardErrorBox>
+                                <DashboardText>
+                                    {
+                                        updateError ?
+                                            updateError
+                                        :
+                                            updateSuccess ?
+                                                <>Your account has been updated!</>
                                             :
-                                                updateSuccess ?
-                                                    <>Your account has been updated!</>
-                                                :
-                                                    <></>
-                                        }
-                                    </DashboardText>
-                                </DashboardErrorBox>
-                            </DashboardItemRow>
+                                                <></>
+                                    }
+                                </DashboardText>
+                            </DashboardErrorBox>      
                 }
             </TextDiv>
         </PageDiv>

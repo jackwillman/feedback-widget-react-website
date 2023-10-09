@@ -53,8 +53,8 @@ const Signup = function SignupPageComponent (
                     let errorMessage = 'Error! '
                     let i = 0;
                     while (i < errorArray.length) {
-                        errorMessage += `${errorArray[i].msg} `
-                        i++
+                        errorMessage += `${errorArray[i].msg} `;
+                        i++;
                     }
                     setSignupError(errorMessage);
                     

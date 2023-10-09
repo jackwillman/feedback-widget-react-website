@@ -89,8 +89,8 @@ const Dashboard = function DashboardPageComponent(
                     let i = 0;
                     
                     while (i < errorArray.length) {
-                        errorMessage += `${errorArray[i].msg} `
-                        i++
+                        errorMessage += `${errorArray[i].msg} `;
+                        i++;
                     }
                     setUpdateError(errorMessage);
                     

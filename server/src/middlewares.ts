@@ -61,7 +61,7 @@ export const handleErrorLogging = function logErrorsMiddleware(
 	res.status(error.httpCode || 500).json({ error : error.message });
 };
 
-export const validate = {
+export const postValidate = {
 	username : body('username').
 				optional().
 				trim().
@@ -80,6 +80,27 @@ export const validate = {
 				exists().
 				notEmpty().
 				isLength({min:6, max:20}).
+				withMessage('Not A Valid Password. Must have at least 6 characters, and a maximum of 20 characters.'),
+};
+
+export const putValidate = {
+	username : body('username').
+				optional().
+				trim().
+				blacklist('@{}/;').
+				escape().
+				isLength({ min : 6, max : 20 }).
+				withMessage('Not A Valid Username. Must have at least 6 characters, and a maximum of 20 characters.'),
+	email : body('email').
+				optional({ nullable : true }).
+				trim().
+				blacklist('{}/;').
+				isEmail().
+				normalizeEmail().
+				withMessage('Not A Valid E-mail Adress. '),
+	password : body('password').
+				optional({ nullable : true }).
+				isLength({ min : 6, max : 20 }).
 				withMessage('Not A Valid Password. Must have at least 6 characters, and a maximum of 20 characters.'),
 };
 

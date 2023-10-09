@@ -1,7 +1,14 @@
 import express from 'express';
 
-import { CheckJwtAuthorization, catchErrors, catchMiddlewareErrors } from '../../middlewares';
-import { validate } from '../../middlewares';
+import { 
+    CheckJwtAuthorization, 
+    catchErrors, 
+    catchMiddlewareErrors 
+} from '../../middlewares';
+import { 
+    postValidate,
+    putValidate 
+} from '../../middlewares';
 
 import { JwtSimpleJwtAdapter } from '../../adapters/jwt/jwtSimple';
 import {
@@ -21,7 +28,7 @@ usersRouter
     .route('/')
     .get(catchErrors(getUsers))
     .post(
-        [validate.username, validate.email, validate.password],
+        [postValidate.username, postValidate.email, postValidate.password],
         catchErrors(postUser)
     );
 
@@ -31,7 +38,7 @@ usersRouter
         catchMiddlewareErrors(authMiddleware.execute),
         catchErrors(getUser)
     ).put(
-        [validate.username, validate.email, validate.password],
+        [putValidate.username, putValidate.email, putValidate.password],
         catchMiddlewareErrors(authMiddleware.execute), 
         catchErrors(putUser)
     ).delete(

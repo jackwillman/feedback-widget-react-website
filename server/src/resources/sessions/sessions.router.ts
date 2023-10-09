@@ -2,7 +2,7 @@ import express from 'express';
 
 import { 
     catchErrors, 
-    validate 
+    postValidate 
 } from '../../middlewares';
 
 import { login } from './sessions.controller';
@@ -12,7 +12,7 @@ const sessionsRouter = express.Router();
 sessionsRouter
     .route('/')
     .post(
-        [validate.username, validate.email, validate.password],
+        [postValidate.username, postValidate.email, postValidate.password],
         catchErrors(login)
     );
 

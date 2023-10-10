@@ -44,7 +44,6 @@ const Dashboard = function DashboardPageComponent(
     const [newUserEmail, setNewUserEmail] = useState('');
     const [newUserPassword, setNewUserPassword] = useState('');
 
-
     const handleUpdateUser = function updateUserOnServer(
         event : FormEvent
     ) {

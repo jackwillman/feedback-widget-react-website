@@ -4,6 +4,7 @@ type Email = string;
 type Token = string;
 type Issued = number;
 type Expires = number;
+type Algorithm = string;
 export type Secret = string;
 
 export interface Session {

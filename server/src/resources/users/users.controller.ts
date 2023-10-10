@@ -1,15 +1,18 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
+import config from '../../config';
 import { httpError, checkAuth } from '../../helpers';
 
 import { PrismaUsersRepository } from './repositories/prisma';
+import { BcryptHashAdapter } from '../../adapters/hash/bcrypt';
 
 import { GetUserUseCase } from './useCases/getUser';
 import { GetAllUsersUseCase } from './useCases/getAllUsers';
 import { SubmitUserUseCase } from './useCases/submitUser';
 import { UpdateUserUseCase } from './useCases/updateUser';
 import { DeleteUserUseCase } from './useCases/deleteUser';
+
 
 export const getUsers = async function getUserController(
     req : Request, 
@@ -34,7 +37,7 @@ export const getUser = async function getUserController(
 ) {
     const userId = req.query.id;
     if (!userId || typeof userId !== 'string') {
-        throw httpError(400, 'User ID is not a string');
+        throw httpError(400, 'User ID is invalid');
     }
     checkAuth(res, userId);
 
@@ -55,22 +58,30 @@ export const postUser = async function postUserController(
     req : Request, 
     res : Response
 ) {
+    const saltRounds = config.secrets.SALT_ROUNDS;
+    if (!saltRounds || typeof saltRounds != 'number') {
+        throw httpError(500, 'Number of rounds of Salt is not a number.');
+    }
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.status(400).json({ errors : errors.array() });
         return;
     }
-    
+
     const prismaUsersRepository = new PrismaUsersRepository();
+    const bcryptHashAdapter = new BcryptHashAdapter();
     const submitUserUseCase = new SubmitUserUseCase(
-        prismaUsersRepository
+        prismaUsersRepository,
+        bcryptHashAdapter
     );
 
     const { username, email, password } = req.body;
     await submitUserUseCase.execute({
         username,
         email,
-        password
+        password,
+        saltRounds
     });
 
     res.status(201).send();
@@ -80,6 +91,11 @@ export const putUser = async function putUserController(
     req : Request, 
     res : Response
 ) {
+    const saltRounds = config.secrets.SALT_ROUNDS;
+    if (!saltRounds || typeof saltRounds != 'number') {
+        throw httpError(500, 'Number of rounds of Salt is not a number.');
+    }
+    
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.status(400).json({ errors : errors.array() });
@@ -88,13 +104,15 @@ export const putUser = async function putUserController(
 
     const userId = req.query.id;
     if (!userId || typeof userId !== 'string') {
-        throw httpError(400, 'User ID is not a string');
+        throw httpError(400, 'User ID is invalid');
     }
     checkAuth(res, userId);
 
     const prismaUsersRepository = new PrismaUsersRepository();
+    const bcryptHashAdapter = new BcryptHashAdapter();
     const updateUserUseCase = new UpdateUserUseCase(
-        prismaUsersRepository
+        prismaUsersRepository,
+        bcryptHashAdapter
     );
     
     const { username, email, password } = req.body;
@@ -102,7 +120,8 @@ export const putUser = async function putUserController(
         userId,
         username,
         email,
-        password
+        password,
+        saltRounds
     });
 
     res.status(201).send();
@@ -119,7 +138,7 @@ export const deleteUser = async function deleteUserController(
 
     const userId = req.query.id;
     if (!userId || typeof userId !== 'string') {
-        throw httpError(400, 'User ID is not a string');
+        throw httpError(400, 'User ID is invalid');
     }
     checkAuth(res, userId);
 

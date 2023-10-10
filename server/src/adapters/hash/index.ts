@@ -5,6 +5,12 @@ export interface CheckPasswordData {
     savedPassword : string;
 };
 
+export interface HashPasswordData {
+    password : string;
+    saltRounds : number;
+};
+
 export interface HashAdapter {
     checkPassword : (data : CheckPasswordData) => Promise<IsPasswordValid>;
+    hashPassword : (data : HashPasswordData) => Promise<string>;
 };

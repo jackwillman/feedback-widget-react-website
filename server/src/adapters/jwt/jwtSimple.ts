@@ -1,6 +1,14 @@
-import { encode, decode, TAlgorithm } from "jwt-simple";
+import { 
+    encode, 
+    decode, 
+    TAlgorithm 
+} from "jwt-simple";
 
-import { addHttpCode, httpError, isError } from "../../helpers";
+import { 
+    addHttpCode, 
+    httpError, 
+    isError 
+} from "../../helpers";
 import config from "../../config";
 
 import { 

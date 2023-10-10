@@ -1,12 +1,25 @@
 import bcrypt from 'bcryptjs';
-import { CheckPasswordData, HashAdapter } from '.';
+
+import { 
+    CheckPasswordData, 
+    HashPasswordData,
+    HashAdapter
+} from '.';
 
 export const BcryptHashAdapter = class implements HashAdapter {
     async checkPassword({ 
         inputPassword, 
         savedPassword 
-    }: CheckPasswordData) {
+    } : CheckPasswordData) {
         const isPasswordValid = await bcrypt.compare(inputPassword, savedPassword);
         return isPasswordValid
     };
+    async hashPassword({
+        password,
+        saltRounds
+    } : HashPasswordData) {
+        const salt = await bcrypt.genSalt(saltRounds);
+		const hashedPassword = await bcrypt.hash(password, salt);
+        return hashedPassword;
+    }
 };

@@ -1,7 +1,6 @@
-import bcrypt from 'bcryptjs';
-
 import { httpError } from '../../../helpers';
 
+import { HashAdapter } from '../../../adapters/hash';
 import { UsersRepository } from '../repositories';
 
 export interface UpdateUserUseCaseRequest {
@@ -9,16 +8,22 @@ export interface UpdateUserUseCaseRequest {
     username? : string;
     email? : string;
     password? : string;
+    saltRounds : number;
 };
 
 export const UpdateUserUseCase = class {
     constructor (
-        private usersRepository : UsersRepository
+        private usersRepository : UsersRepository,
+        private hashAdapter : HashAdapter
     ) {};
 
-    async execute (request : UpdateUserUseCaseRequest) {
-        const { userId, username, email } = request;
-        let { password } = request;
+    async execute ({ 
+        userId, 
+        username, 
+        email,
+        password,
+        saltRounds 
+    } : UpdateUserUseCaseRequest) {
 
         if (!userId) {
             throw httpError(400, 'User ID is required!');
@@ -28,9 +33,11 @@ export const UpdateUserUseCase = class {
             throw httpError(400, 'New data to one of the fields is required!');
         }
 
-        if (password) {
-            const salt = await bcrypt.genSalt(10);
-            password = await bcrypt.hash(password, salt);
+        if (password){
+            password = await this.hashAdapter.hashPassword({
+                password,
+                saltRounds
+            });
         }
 
         await this.usersRepository.update({

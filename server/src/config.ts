@@ -10,7 +10,9 @@ const config = {
         renewalPeriod : 3 * 60 * 60 * 1000
     },
     secrets : {
-        JWT_SECRET : process.env.JWT_SECRET
+        JWT_SECRET : process.env.JWT_SECRET,
+        SALT_ROUNDS : process.env.SALT_ROUNDS,
+        T_ALGORITHM : process.env.T_ALGORITHM
     }
 };
 

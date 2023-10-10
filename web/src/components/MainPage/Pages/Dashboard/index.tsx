@@ -109,6 +109,15 @@ const Dashboard = function DashboardPageComponent(
                                         setInput={ setNewUserEmail }
                                     />
                                 </DashboardItemRow>
+
+                                <DashboardItemRow>
+                                    <DashboardText>Password:</DashboardText>
+                                    <DashboardFormTextArea 
+                                        originalValue={ '******' }
+                                        setInput={ setNewUserPassword }
+                                    />
+                                </DashboardItemRow>
+
                                 <DashboardItemRow>
                                     <DashboardUpdateButton
                                         isSendingNewUserData={ isSendingNewUserData }

@@ -1,18 +1,11 @@
-type UserId = string;
-type Username = string;
-type Email = string;
-type Token = string;
-type Issued = number;
-type Expires = number;
-type Algorithm = string;
 export type Secret = string;
 
 export interface Session {
-    userId : UserId;
-    username : Username;
-    email : Email;
-    issued : Issued;
-    expires : Expires;
+    userId : string;
+    username : string;
+    email : string;
+    issued : number;
+    expires : number;
 };
 
 export interface EncodeSessionData {
@@ -21,14 +14,14 @@ export interface EncodeSessionData {
 };
 
 export interface EncodeResult {
-    token: Token,
-    issued: Issued,
-    expires: Expires,
+    token: string,
+    issued: number,
+    expires: number,
 };
 
 export interface DecodeSessionData {
     secretKey: Secret;
-    sessionToken : Token;
+    sessionToken : string;
 };
 
 export type DecodeResult = {

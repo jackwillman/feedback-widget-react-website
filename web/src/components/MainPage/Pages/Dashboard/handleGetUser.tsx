@@ -8,9 +8,6 @@ interface HandleGetUserProps {
     setUpdateError : (userError : string) => void;
     setUserEmail : (userEmail : string) => void;
     setUsername : (username : string) => void;
-    tokenHeader : string;
-    sessionToken : string;
-    userId : string;
     cookies : CookiesType;
 };
 
@@ -20,12 +17,13 @@ const handleGetUser = function getUserFromServer(
         setUpdateError,
         setUserEmail,
         setUsername,
-        tokenHeader,
-        sessionToken,
-        userId,
         cookies
     } : HandleGetUserProps
 ) {
+    const tokenHeader = config.sessionToken.headerName;
+    const sessionToken = cookies[config.sessionToken.cookieName];
+    const userId = cookies[config.user.id.cookieName];
+
     setIsUserGotten(false);
     setUpdateError('');
     setUserEmail('');

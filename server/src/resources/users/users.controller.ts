@@ -31,8 +31,7 @@ export const getUsers = async function getUserController(
 export const getUser = async function getUserController(
     req : Request, 
     res : Response
-) {    
-    
+) {
     const userId = req.query.id;
     if (!userId || typeof userId !== 'string') {
         throw httpError(400, 'User ID is not a string');

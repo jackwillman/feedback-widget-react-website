@@ -5,7 +5,8 @@ const config = {
             responseName : 'userId'
         },
         email : 'email',
-        username : 'username'
+        username : 'username',
+        password : 'password'
     },
     sessionToken : {
         duration : 3 * 60 * 60 * 1000, // 3 hours

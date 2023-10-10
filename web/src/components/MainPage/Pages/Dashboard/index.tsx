@@ -73,6 +73,7 @@ const Dashboard = function DashboardPageComponent(
             setUpdateError,
             setUserEmail,
             setUsername,
+            setUserPassword,
             cookies
         });    
     }, []);               

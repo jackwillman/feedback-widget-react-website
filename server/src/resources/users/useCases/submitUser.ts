@@ -1,6 +1,6 @@
 import { httpError } from '../../../helpers';
 
-import { HashAdapter } from '../../../adapters/hash';
+import { PasswordHashAdapter } from '../../../adapters/passwordHash';
 import { UsersRepository } from '../repositories';
 
 export interface SubmitUserUseCaseRequest {
@@ -13,7 +13,7 @@ export interface SubmitUserUseCaseRequest {
 export const SubmitUserUseCase = class {
     constructor (
         private usersRepository : UsersRepository,
-        private hashAdapter : HashAdapter
+        private passwordHashAdapter : PasswordHashAdapter
     ) {};
 
     async execute({
@@ -39,7 +39,7 @@ export const SubmitUserUseCase = class {
             throw httpError(400, 'E-mail is invalid');
         }
 
-        const hashedPassword = await this.hashAdapter.hashPassword({
+        const hashedPassword = await this.passwordHashAdapter.hashPassword({
             password,
             saltRounds
         });

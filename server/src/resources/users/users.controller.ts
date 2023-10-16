@@ -5,7 +5,7 @@ import config from '../../config';
 import { httpError, checkAuth } from '../../helpers';
 
 import { PrismaUsersRepository } from './repositories/prisma';
-import { BcryptHashAdapter } from '../../adapters/hash/bcrypt';
+import { BcryptHashAdapter } from '../../adapters/passwordHash/bcrypt';
 
 import { GetUserUseCase } from './useCases/getUser';
 import { GetAllUsersUseCase } from './useCases/getAllUsers';

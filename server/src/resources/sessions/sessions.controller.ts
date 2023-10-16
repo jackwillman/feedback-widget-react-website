@@ -5,7 +5,7 @@ import { httpError } from '../../helpers';
 
 import { PrismaUsersRepository } from '../users/repositories/prisma';
 import { JwtSimpleJwtAdapter } from '../../adapters/jwt/jwtSimple';
-import { BcryptHashAdapter } from '../../adapters/hash/bcrypt';
+import { BcryptHashAdapter } from '../../adapters/passwordHash/bcrypt';
 
 import { LoginUseCase } from './useCases/login';
 

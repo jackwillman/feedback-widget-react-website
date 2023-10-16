@@ -1,8 +1,11 @@
 import { httpError } from '../../../helpers';
 
 import { JwtAdapter } from '../../../adapters/jwt';
-import { HashAdapter } from '../../../adapters/hash';
-import { User, UsersRepository } from '../../users/repositories';
+import { PasswordHashAdapter } from '../../../adapters/passwordHash';
+import { 
+	User, 
+	UsersRepository 
+} from '../../users/repositories';
 
 type UserIdentifier = string;
 type Password = string;
@@ -19,7 +22,7 @@ export const LoginUseCase = class {
     constructor(
         private usersRepository : UsersRepository,
 		private jwtAdapter : JwtAdapter,
-		private hashAdapter : HashAdapter
+		private passwordHashAdapter : PasswordHashAdapter
     ) {};
 
 	async getUser(userIdentifier : UserIdentifier) {
@@ -41,7 +44,7 @@ export const LoginUseCase = class {
 		user : User,
 		password : Password
 	) {
-		const isPasswordValid = await this.hashAdapter.checkPassword({
+		const isPasswordValid = await this.passwordHashAdapter.checkPassword({
 			inputPassword : password, 
 			savedPassword : user.password
 		});

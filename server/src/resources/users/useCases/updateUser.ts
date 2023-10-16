@@ -1,6 +1,6 @@
 import { httpError } from '../../../helpers';
 
-import { HashAdapter } from '../../../adapters/hash';
+import { PasswordHashAdapter } from '../../../adapters/passwordHash';
 import { UsersRepository } from '../repositories';
 
 export interface UpdateUserUseCaseRequest {
@@ -14,7 +14,7 @@ export interface UpdateUserUseCaseRequest {
 export const UpdateUserUseCase = class {
     constructor (
         private usersRepository : UsersRepository,
-        private hashAdapter : HashAdapter
+        private passwordHashAdapter : PasswordHashAdapter
     ) {};
 
     async execute ({ 
@@ -34,7 +34,7 @@ export const UpdateUserUseCase = class {
         }
 
         if (password){
-            password = await this.hashAdapter.hashPassword({
+            password = await this.passwordHashAdapter.hashPassword({
                 password,
                 saltRounds
             });

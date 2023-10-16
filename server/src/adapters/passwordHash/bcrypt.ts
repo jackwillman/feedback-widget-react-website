@@ -3,10 +3,10 @@ import bcrypt from 'bcryptjs';
 import { 
     CheckPasswordData, 
     HashPasswordData,
-    HashAdapter
+    PasswordHashingAdapter
 } from '.';
 
-export const BcryptHashAdapter = class implements HashAdapter {
+export const BcryptHashAdapter = class implements PasswordHashingAdapter {
     async checkPassword({ 
         inputPassword, 
         savedPassword 

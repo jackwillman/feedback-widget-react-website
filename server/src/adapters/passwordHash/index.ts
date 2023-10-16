@@ -10,7 +10,7 @@ export interface HashPasswordData {
     saltRounds : number;
 };
 
-export interface HashAdapter {
+export interface PasswordHashAdapter {
     checkPassword : (data : CheckPasswordData) => Promise<IsPasswordValid>;
     hashPassword : (data : HashPasswordData) => Promise<string>;
 };

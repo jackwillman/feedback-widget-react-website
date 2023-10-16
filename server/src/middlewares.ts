@@ -16,9 +16,9 @@ import {
 import { 
 	Secret, 
 	ExpirationStatus, 
-	JwtAdapter, 
+	JsonWebTokenAdapter, 
 	Session 
-} from './adapters/jwt';
+} from './adapters/jsonWebToken';
 
 export const catchErrors = function catchErrorsInControllerMethods(
     controllerMethod : (req : Request, res : Response) => Promise<void>
@@ -105,11 +105,11 @@ export const putValidate = {
 };
 
 export const CheckJwtAuthorization = class {
-	static jwtAdapter: JwtAdapter;
+	static jsonWebTokenAdapter: JsonWebTokenAdapter;
 	constructor(
-		jwtAdapter : JwtAdapter
+		jsonWebTokenAdapter : JsonWebTokenAdapter
 	) {
-		CheckJwtAuthorization.jwtAdapter = jwtAdapter;
+		CheckJwtAuthorization.jsonWebTokenAdapter = jsonWebTokenAdapter;
 	};
 
 	static handleDecodeSession (
@@ -123,7 +123,7 @@ export const CheckJwtAuthorization = class {
 			throw httpError(401, `Required ${requestHeader} not found.`);
 		}
 
-		const decodeResult = this.jwtAdapter.decodeSession({
+		const decodeResult = this.jsonWebTokenAdapter.decodeSession({
 			secretKey, 
 			sessionToken: requestToken
 		});
@@ -140,7 +140,7 @@ export const CheckJwtAuthorization = class {
 		partialSession : Session,
 		secretKey : Secret
 	) {
-		const expiration : ExpirationStatus = this.jwtAdapter.checkExpirationStatus(partialSession);
+		const expiration : ExpirationStatus = this.jsonWebTokenAdapter.checkExpirationStatus(partialSession);
 		if (expiration === "expired") {
 			throw httpError(401, `Authorization token has expired. Please create a new authorization token.`);
 		}
@@ -148,7 +148,7 @@ export const CheckJwtAuthorization = class {
 		let session: Session;
 
 		if (expiration === "grace") {
-			const { token, expires, issued } = this.jwtAdapter.encodeSession({
+			const { token, expires, issued } = this.jsonWebTokenAdapter.encodeSession({
 				secretKey, 
 				partialSession
 			});

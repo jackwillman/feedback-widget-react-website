@@ -35,7 +35,7 @@ export type DecodeResult = {
 
 export type ExpirationStatus = string;
 
-export interface JwtAdapter {
+export interface JsonWebTokenAdapter {
     encodeSession : (encodeSessionData : EncodeSessionData) => EncodeResult;
     decodeSession : (decodeSessionData : DecodeSessionData) => DecodeResult;
     checkExpirationStatus : (session : Session) => ExpirationStatus;

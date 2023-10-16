@@ -7,9 +7,12 @@ import {
 } from '../../middlewares';
 import { sanitize } from './feedbacks.middlewares';
 
-import { JwtSimpleJwtAdapter } from '../../adapters/jwt/jwtSimple';
+import { JwtSimpleJwtAdapter } from '../../adapters/jsonWebToken/jwtSimple';
 
-import { getFeedbacks, postFeedback } from './feedbacks.controller';
+import { 
+    getFeedbacks, 
+    postFeedback 
+} from './feedbacks.controller';
 
 const jwtSimpleAdapter = new JwtSimpleJwtAdapter();
 const authMiddleware = new CheckJwtAuthorization(jwtSimpleAdapter);

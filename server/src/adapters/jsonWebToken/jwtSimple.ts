@@ -15,11 +15,11 @@ import {
     DecodeSessionData, 
     DecodeResult, 
     EncodeSessionData, 
-    JwtAdapter, 
+    JsonWebTokenAdapter, 
     Session 
 } from ".";
 
-export const JwtSimpleJwtAdapter = class implements JwtAdapter {
+export const JwtSimpleJwtAdapter = class implements JsonWebTokenAdapter {
 
     private algorithm : TAlgorithm = "HS512";
 

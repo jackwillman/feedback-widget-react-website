@@ -1,6 +1,6 @@
 import { httpError } from '../../../helpers';
 
-import { JwtAdapter } from '../../../adapters/jwt';
+import { JsonWebTokenAdapter } from '../../../adapters/jsonWebToken';
 import { PasswordHashAdapter } from '../../../adapters/passwordHash';
 import { 
 	User, 
@@ -21,7 +21,7 @@ export interface LoginUseCaseRequest {
 export const LoginUseCase = class {
     constructor(
         private usersRepository : UsersRepository,
-		private jwtAdapter : JwtAdapter,
+		private jsonWebTokenAdapter : JsonWebTokenAdapter,
 		private passwordHashAdapter : PasswordHashAdapter
     ) {};
 
@@ -67,7 +67,7 @@ export const LoginUseCase = class {
 			email : user.email
 		};
 
-		return this.jwtAdapter.encodeSession({
+		return this.jsonWebTokenAdapter.encodeSession({
 			secretKey,
 			partialSession
 		});

@@ -10,7 +10,7 @@ import {
     putValidate 
 } from '../../middlewares';
 
-import { JwtSimpleJwtAdapter } from '../../adapters/jwt/jwtSimple';
+import { JwtSimpleJwtAdapter } from '../../adapters/jsonWebToken/jwtSimple';
 import {
     getUsers,
     getUser,

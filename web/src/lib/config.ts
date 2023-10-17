@@ -14,6 +14,7 @@ const config = {
         cookieName : 'auth-token'
     },
     path : {
+        baseUrl : import.meta.env.VITE_API_URL,
         main : '/',
         sessions : '/sessions',
         users : 'users',

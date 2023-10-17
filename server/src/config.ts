@@ -11,8 +11,7 @@ const config = {
     },
     secrets : {
         JWT_SECRET : process.env.JWT_SECRET,
-        SALT_ROUNDS : process.env.SALT_ROUNDS,
-        T_ALGORITHM : process.env.T_ALGORITHM
+        SALT_ROUNDS : process.env.SALT_ROUNDS
     }
 };
 

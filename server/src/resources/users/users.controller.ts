@@ -3,6 +3,7 @@ import { validationResult } from 'express-validator';
 
 import config from '../../config';
 import { httpError, checkAuth } from '../../helpers';
+import { getSaltRoundsNumber } from './user.helpers';
 
 import { PrismaUsersRepository } from './repositories/prisma';
 import { BcryptHashAdapter } from '../../adapters/passwordHash/bcrypt';
@@ -59,9 +60,7 @@ export const postUser = async function postUserController(
     res : Response
 ) {
     const saltRounds = config.secrets.SALT_ROUNDS;
-    if (!saltRounds || typeof saltRounds != 'number') {
-        throw httpError(500, 'Number of rounds of Salt is not a number.');
-    }
+    const saltRoundsNumber = getSaltRoundsNumber(saltRounds);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -81,7 +80,7 @@ export const postUser = async function postUserController(
         username,
         email,
         password,
-        saltRounds
+        saltRounds : saltRoundsNumber
     });
 
     res.status(201).send();
@@ -92,9 +91,7 @@ export const putUser = async function putUserController(
     res : Response
 ) {
     const saltRounds = config.secrets.SALT_ROUNDS;
-    if (!saltRounds || typeof saltRounds != 'number') {
-        throw httpError(500, 'Number of rounds of Salt is not a number.');
-    }
+    const saltRoundsNumber = getSaltRoundsNumber(saltRounds);
     
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -121,7 +118,7 @@ export const putUser = async function putUserController(
         username,
         email,
         password,
-        saltRounds
+        saltRounds : saltRoundsNumber
     });
 
     res.status(201).send();

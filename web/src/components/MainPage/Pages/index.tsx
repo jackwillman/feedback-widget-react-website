@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 
 import config from '../../../lib/config';
@@ -15,6 +16,8 @@ import Signup from './Signup';
 import AccountCreated from './AccountCreated';
 import LoggedOut from './LoggedOut';
 
+export type UserPassword = string;
+export type SetUserPassword = (password : UserPassword) => void;
 export type SetCookie = (name : string, value : any, options?: any) => void;
 export type CookiesType = { [x: string] : any };
 
@@ -32,6 +35,8 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
     } : CurrentPageProps
 ) {
     const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName, config.user.id.cookieName]);
+    const [userPassword, setUserPassword] = useState('');
+    
     switch (currentPage) {
         case 'Home':
             return (
@@ -44,6 +49,8 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
         case 'Dashboard':
             return (
                 <Dashboard 
+                    setUserPassword={ setUserPassword }
+                    userPassword={ userPassword }
                     cookies={ cookies }
                 />
             );
@@ -53,6 +60,8 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
                     setCurrentPage={ setCurrentPage }
                     setIsLoggedIn={ setIsLoggedIn }
                     setCookie={ setCookie }
+                    setUserPassword={ setUserPassword }
+                    userPassword={ userPassword }
                 />
             );
         case 'Signup':

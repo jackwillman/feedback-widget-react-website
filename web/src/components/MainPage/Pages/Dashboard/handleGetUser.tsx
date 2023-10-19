@@ -8,7 +8,6 @@ interface HandleGetUserProps {
     setUpdateError : (userError : string) => void;
     setUserEmail : (userEmail : string) => void;
     setUsername : (username : string) => void;
-    setUserPassword : (userPassword : string) => void;
     cookies : CookiesType;
 };
 
@@ -18,7 +17,6 @@ const handleGetUser = function getUserFromServer(
         setUpdateError,
         setUserEmail,
         setUsername,
-        setUserPassword,
         cookies
     } : HandleGetUserProps
 ) {
@@ -42,7 +40,6 @@ const handleGetUser = function getUserFromServer(
     }).then((response) => {
         setUsername(response.data[config.user.username]);
         setUserEmail(response.data[config.user.email]);
-        setUserPassword(response.data[config.user.password]);
         
     }).catch((error) => {
         if (error.response) {

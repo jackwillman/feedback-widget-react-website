@@ -1,4 +1,7 @@
-import { useState, FormEvent } from 'react';
+import { 
+    useState, 
+    FormEvent 
+} from 'react';
 
 import api from '../../../../lib/api';
 import config from '../../../../lib/config';
@@ -7,7 +10,11 @@ import {
     SetCurrentPage,
     SetIsLoggedIn,
  } from '../..';
- import { SetCookie } from '..';
+ import { 
+    UserPassword,
+    SetUserPassword,
+    SetCookie
+ } from '..';
 
 import LoginFormTextArea from './LoginFormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';
@@ -24,17 +31,20 @@ interface LoginProps {
     setCurrentPage : SetCurrentPage; 
     setIsLoggedIn : SetIsLoggedIn;
     setCookie : SetCookie;
+    setUserPassword : SetUserPassword;
+    userPassword : UserPassword;
 };
 
 const Login = function LoginPageComponent(
     { 
         setCurrentPage, 
         setIsLoggedIn,
-        setCookie
+        setCookie,
+        setUserPassword,
+        userPassword
     } : LoginProps
 ) {
     const [userIdentifier, setUserIdentifier] = useState('');
-    const [userPassword, setUserPassword] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
     const [loginError, setLoginError] = useState('');
 

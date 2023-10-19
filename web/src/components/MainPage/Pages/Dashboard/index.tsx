@@ -4,7 +4,11 @@ import {
     FormEvent 
 } from 'react';
 
-import { CookiesType } from '..';
+import { 
+    CookiesType,
+    SetUserPassword,
+    UserPassword
+ } from '..';
 
 import Loading from '../../../Misc/Loading';
 
@@ -27,18 +31,23 @@ import {
  } from './styled';
 
 interface DashboardProps {
+    setUserPassword : SetUserPassword;
+    userPassword : UserPassword;
     cookies : CookiesType;
 };
 
 const Dashboard = function DashboardPageComponent(
-    { cookies } : DashboardProps
+    { 
+        setUserPassword,
+        userPassword,
+        cookies
+     } : DashboardProps
 ) {
     const [isUserGotten, setIsUserGotten] = useState(false);
     const [updateError, setUpdateError] = useState('');
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [username, setUsername] = useState('');
     const [userEmail, setUserEmail] = useState('');
-    const [userPassword, setUserPassword] = useState('');
     const [isSendingNewUserData, setIsSendingNewUserData] = useState(false);
     const [newUsername, setNewUsername] = useState('');
     const [newUserEmail, setNewUserEmail] = useState('');
@@ -72,7 +81,6 @@ const Dashboard = function DashboardPageComponent(
             setUpdateError,
             setUserEmail,
             setUsername,
-            setUserPassword,
             cookies
         });    
     }, []);               
@@ -112,7 +120,7 @@ const Dashboard = function DashboardPageComponent(
                                 <DashboardItemRow>
                                     <DashboardText>Password:</DashboardText>
                                     <DashboardFormTextArea 
-                                        originalValue={ '******' }
+                                        originalValue={ userPassword }
                                         setInput={ setNewUserPassword }
                                     />
                                 </DashboardItemRow>

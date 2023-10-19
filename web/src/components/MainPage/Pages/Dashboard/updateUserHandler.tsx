@@ -55,12 +55,18 @@ const updateUserHandler = function logicToUpdateUserOnServer(
         setNewUserPassword(userPassword);
     }
 
+    console.log(
+        `\n user ID: ${userId}\n`
+        )
+
     api.put(config.path.user, {
-        id : userId,
         username : newUsername,
         email : newUserEmail,
         password : newUserPassword
     }, { 
+        params : {
+            id : userId
+        },
         headers : {
             [tokenHeader] : sessionToken
         }
@@ -68,7 +74,6 @@ const updateUserHandler = function logicToUpdateUserOnServer(
         setUpdateSuccess(true);
     }).catch((error) => {
         if (error.response) {
-            console.log(error.response.data);
             if (error.response.data.errors) {
                 const errorArray = error.response.data.errors;
                 let errorMessage = 'Error! '

@@ -1,0 +1,217 @@
+import api from './api';
+import config from './config';
+import { 
+    cookies,
+    setCookie
+} from './cookiesHandlers';
+
+import { ExistingPage } from '../components/MainPage';
+
+interface HandleGetUserProps {
+    setIsUserGotten : (isGettingUser : boolean) => void;
+    setUpdateError : (userError : string) => void;
+    setUserEmail : (userEmail : string) => void;
+    setUsername : (username : string) => void;
+};
+
+interface UpdateUserHandlerProps {
+    setIsSendingNewUserData : (isSendingNewUserData : boolean) => void;
+    setUpdateSuccess : (updateSuccess : boolean) => void;
+    setUpdateError : (updateError : string) => void;
+    setNewUsername : (newUsername : string) => void;
+    setNewUserEmail : (newUserEmail : string) => void;
+    setNewUserPassword : (newUserPassword : string) => void;
+    newUsername : string;
+    username : string;
+    userEmail : string;
+    newUserEmail : string;
+    userPassword : string;
+    newUserPassword : string;
+};
+
+interface LoginHandlerProps {
+    setIsSendingLoginInput : (isSendingLoginInput : boolean) => void;
+    setLoginError : (loginError : string) => void;
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
+    setCurrentPage : (currentPage : ExistingPage) => void;
+    userIdentifier : string;
+    userPassword : string;
+};
+
+export const handleGetUser = function getUserFromServer(
+    {
+        setIsUserGotten,
+        setUpdateError,
+        setUserEmail,
+        setUsername
+    } : HandleGetUserProps
+) {
+    const tokenHeader = config.sessionToken.headerName;
+    const sessionToken = cookies[config.sessionToken.cookieName];
+    const userId = cookies[config.user.id.cookieName];
+
+    setIsUserGotten(false);
+    setUpdateError('');
+    setUserEmail('');
+    setUsername('');
+
+    api.get(config.path.user, { 
+        params : {
+            id : userId
+        },
+        headers : {
+            [tokenHeader] : sessionToken
+        }
+
+    }).then((response) => {
+        setUsername(response.data[config.user.username]);
+        setUserEmail(response.data[config.user.email]);
+        
+    }).catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+            setUpdateError(error.response.data.error);
+        } else if (error.request) {
+            console.log(error.request);
+        } else {
+            console.log('Error: ', error.message);
+        }
+
+    }).finally(() => {
+        setIsUserGotten(true);
+    });
+};
+
+export const updateUserHandler = function logicToUpdateUserOnServer(
+    {
+        setIsSendingNewUserData,
+        setUpdateError,
+        setUpdateSuccess,
+        setNewUsername,
+        setNewUserEmail,
+        setNewUserPassword,
+        username,
+        newUsername,
+        userEmail,
+        newUserEmail,
+        userPassword,
+        newUserPassword
+    } : UpdateUserHandlerProps
+) {
+    const tokenHeader = config.sessionToken.headerName;
+    const sessionToken = cookies[config.sessionToken.cookieName];
+    const userId = cookies[config.user.id.cookieName];
+
+    setIsSendingNewUserData(true);
+    setUpdateError('');
+    setUpdateSuccess(false);
+
+    if (!newUsername) {
+        setNewUsername(username);
+    }
+
+    if (!newUserEmail) {
+        setNewUserEmail(userEmail);
+    }
+
+    if (!newUserPassword) {
+        setNewUserPassword(userPassword);
+    }
+
+    console.log(
+        `\n user ID: ${userId}\n`
+        )
+
+    api.put(config.path.user, {
+        username : newUsername,
+        email : newUserEmail,
+        password : newUserPassword
+    }, { 
+        params : {
+            id : userId
+        },
+        headers : {
+            [tokenHeader] : sessionToken
+        }
+    }).then((response) => {
+        setUpdateSuccess(true);
+    }).catch((error) => {
+        if (error.response) {
+            if (error.response.data.errors) {
+                const errorArray = error.response.data.errors;
+                let errorMessage = 'Error! '
+                let i = 0;
+                
+                while (i < errorArray.length) {
+                    errorMessage += `${errorArray[i].msg} `;
+                    i++;
+                }
+                setUpdateError(errorMessage);
+                
+            }
+            else {
+                setUpdateError(error.response.data.error);
+            }
+        } else if (error.request) {
+            console.log(error.request);
+        } else {
+            console.log('Error: ', error.message);
+            console.log(error);
+        }
+    }).finally(() => {
+        setIsSendingNewUserData(false);
+    });
+    
+};
+
+export const loginHandler = function logicToSubmitLoginInput(
+    {
+        setIsSendingLoginInput,
+        setLoginError,
+        setIsLoggedIn,
+        setCurrentPage,
+        userIdentifier,
+        userPassword
+    } : LoginHandlerProps
+) {
+    setIsSendingLoginInput(true);
+    setLoginError('');
+
+    const userIdentifierType = userIdentifier.includes('@') ? 'email' : 'username';
+
+    api.post(config.path.sessions, {
+        [userIdentifierType] : userIdentifier,
+        password : userPassword
+
+    }).then((response) => {
+        const tokenCookie = config.sessionToken.cookieName;
+        const token = response.headers[config.sessionToken.headerName];
+        const expirationDate = new Date(Date.now() + config.sessionToken.duration);
+        setCookie(tokenCookie, token, {
+            path : config.path.main,
+            expires : expirationDate
+        });
+
+        const userIdCookie = config.user.id.cookieName;
+        const userId = response.data[config.user.id.responseName]
+        setCookie(userIdCookie, userId, {
+            path : config.path.main,
+            expires : expirationDate
+        });
+        setIsLoggedIn(true);
+        setCurrentPage('Home');
+
+    }).catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+            setLoginError(error.response.data.error);
+        } else if (error.request) {
+            console.log(error.request);
+        } else {
+            console.log('Error: ', error.message);
+        }
+
+    }).finally(() => {
+        setIsSendingLoginInput(false);
+    });
+};

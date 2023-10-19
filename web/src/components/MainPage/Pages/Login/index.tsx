@@ -3,19 +3,9 @@ import {
     FormEvent 
 } from 'react';
 
-import api from '../../../../lib/api';
-import config from '../../../../lib/config';
+import { loginHandler } from '../../../../lib/requestHandlers';
 
-import { 
-    SetCurrentPage,
-    SetIsLoggedIn,
- } from '../..';
- import { 
-    UserPassword,
-    SetUserPassword,
-    SetCookie
- } from '..';
-
+import { ExistingPage } from '../..';
 import LoginFormTextArea from './LoginFormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';
 
@@ -28,18 +18,16 @@ import {
 } from '../styled';
 
 interface LoginProps {
-    setCurrentPage : SetCurrentPage; 
-    setIsLoggedIn : SetIsLoggedIn;
-    setCookie : SetCookie;
-    setUserPassword : SetUserPassword;
-    userPassword : UserPassword;
+    setCurrentPage : (currentPage : ExistingPage) => void;
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
+    setUserPassword : (userPassword : string) => void;
+    userPassword : string;
 };
 
 const Login = function LoginPageComponent(
     { 
         setCurrentPage, 
         setIsLoggedIn,
-        setCookie,
         setUserPassword,
         userPassword
     } : LoginProps
@@ -52,45 +40,14 @@ const Login = function LoginPageComponent(
         event : FormEvent
     ) {
         event.preventDefault();
-        setIsSendingLoginInput(true);
-        setLoginError('');
 
-        const userIdentifierType = userIdentifier.includes('@') ? 'email' : 'username';
-
-        api.post(config.path.sessions, {
-            [userIdentifierType] : userIdentifier,
-            password : userPassword
-
-        }).then((response) => {
-            const tokenCookie = config.sessionToken.cookieName;
-            const token = response.headers[config.sessionToken.headerName];
-            const expirationDate = new Date(Date.now() + config.sessionToken.duration);
-            setCookie(tokenCookie, token, {
-                path : config.path.main,
-                expires : expirationDate
-            });
-
-            const userIdCookie = config.user.id.cookieName;
-            const userId = response.data[config.user.id.responseName]
-            setCookie(userIdCookie, userId, {
-                path : config.path.main,
-                expires : expirationDate
-            });
-            setIsLoggedIn(true);
-            setCurrentPage('Home');
-
-        }).catch((error) => {
-            if (error.response) {
-                console.log(error.response.data);
-                setLoginError(error.response.data.error);
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log('Error: ', error.message);
-            }
-
-        }).finally(() => {
-            setIsSendingLoginInput(false);
+        loginHandler({
+            setIsSendingLoginInput,
+            setLoginError,
+            setIsLoggedIn,
+            setCurrentPage,
+            userIdentifier,
+            userPassword
         });
     };
 

@@ -7,7 +7,6 @@ import { MainDiv } from './styled';
 
 
 export type ExistingPage = 'Home' | 'About' | 'Dashboard' | 'Login' | 'Signup' | 'AccountCreated' | 'LoggedOut';
-export type CurrentPage = string;
 export type SetCurrentPage = (page : ExistingPage) => void;
 export type IsLoggedIn = boolean;
 export type SetIsLoggedIn = (isLoggedIn : IsLoggedIn) => void;

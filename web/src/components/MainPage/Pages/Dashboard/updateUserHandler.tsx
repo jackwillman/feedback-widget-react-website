@@ -43,16 +43,24 @@ const updateUserHandler = function logicToUpdateUserOnServer(
     setUpdateError('');
     setUpdateSuccess(false);
 
-    if (!newUsername) {
-        setNewUsername(username);
+    interface NewData {
+        id : any;
+        newUsername? : string;
+        newUserEmail? : string;
+        newUserPassword? : string;
+    };
+    let newData : NewData = { id : userId };
+
+    if (newUsername) {
+        newData.newUsername = newUsername;
     }
 
     if (!newUserEmail) {
-        setNewUserEmail(userEmail);
+        newData.newUserEmail = newUserEmail;
     }
 
     if (!newUserPassword) {
-        setNewUserPassword(userPassword);
+        newData.newUserPassword = newUserPassword;
     }
 
     api.put(config.path.user, {

@@ -90,20 +90,20 @@ export const putUser = async function putUserController(
     req : Request, 
     res : Response
 ) {
-    const saltRounds = config.secrets.SALT_ROUNDS;
-    const saltRoundsNumber = getSaltRoundsNumber(saltRounds);
-    
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.status(400).json({ errors : errors.array() });
-        return;
-    }
-
     const userId = req.query.id;
     if (!userId || typeof userId !== 'string') {
         throw httpError(400, 'User ID is invalid');
     }
     checkAuth(res, userId);
+
+    const saltRounds = config.secrets.SALT_ROUNDS;
+    const saltRoundsNumber = getSaltRoundsNumber(saltRounds);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors : errors.array() });
+        return;
+    }
 
     const prismaUsersRepository = new PrismaUsersRepository();
     const bcryptHashAdapter = new BcryptHashAdapter();
@@ -128,16 +128,16 @@ export const deleteUser = async function deleteUserController(
     req : Request, 
     res : Response
 ) {    
-    const prismaUsersRepository = new PrismaUsersRepository();
-    const deleteUserUseCase = new DeleteUserUseCase(
-        prismaUsersRepository
-    );
-
     const userId = req.query.id;
     if (!userId || typeof userId !== 'string') {
         throw httpError(400, 'User ID is invalid');
     }
     checkAuth(res, userId);
+
+    const prismaUsersRepository = new PrismaUsersRepository();
+    const deleteUserUseCase = new DeleteUserUseCase(
+        prismaUsersRepository
+    );
 
     await deleteUserUseCase.execute({ userId });
 

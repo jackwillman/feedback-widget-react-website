@@ -63,12 +63,7 @@ const updateUserHandler = function logicToUpdateUserOnServer(
         newData.newUserPassword = newUserPassword;
     }
 
-    api.put(config.path.user, {
-        id : userId,
-        username : newUsername,
-        email : newUserEmail,
-        password : newUserPassword
-    }, { 
+    api.put(config.path.user, newData, { 
         headers : {
             [tokenHeader] : sessionToken
         }

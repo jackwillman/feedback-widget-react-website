@@ -1,4 +1,4 @@
-import { PageHeaderProps } from '..';
+import { ExistingPage } from '../..';
 import MobileMenuList from './MobileMenuList';
 
 import {
@@ -8,12 +8,18 @@ import {
     MenuListPanel
 } from './styled';
 
+interface MobileMenuProps {
+    setCurrentPage : ( currentPage : ExistingPage ) => void;
+    setIsLoggedIn : ( isLoggedIn : boolean) => void;
+    isLoggedIn : boolean;
+};
+
 const MobileMenu = function MobileMenuComponent(
     { 
         setCurrentPage,
         setIsLoggedIn,
         isLoggedIn
-    } : PageHeaderProps
+    } : MobileMenuProps
 ) {
     return (
         <MenuListPopover>

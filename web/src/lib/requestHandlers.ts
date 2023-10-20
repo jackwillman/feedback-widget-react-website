@@ -1,17 +1,18 @@
 import api from './api';
 import config from './config';
-import { 
-    cookies,
-    setCookie
-} from './cookiesHandlers';
 
 import { ExistingPage } from '../components/MainPage';
+import { 
+    CookiesType,
+    SetCookie
+ } from '../components/MainPage/Pages';
 
 interface HandleGetUserProps {
     setIsUserGotten : (isGettingUser : boolean) => void;
     setUpdateError : (userError : string) => void;
     setUserEmail : (userEmail : string) => void;
     setUsername : (username : string) => void;
+    cookies : CookiesType;
 };
 
 interface UpdateUserHandlerProps {
@@ -27,6 +28,7 @@ interface UpdateUserHandlerProps {
     newUserEmail : string;
     userPassword : string;
     newUserPassword : string;
+    cookies : CookiesType;
 };
 
 interface LoginHandlerProps {
@@ -34,6 +36,7 @@ interface LoginHandlerProps {
     setLoginError : (loginError : string) => void;
     setIsLoggedIn : (isLoggedIn : boolean) => void;
     setCurrentPage : (currentPage : ExistingPage) => void;
+    setCookie : SetCookie;
     userIdentifier : string;
     userPassword : string;
 };
@@ -43,7 +46,8 @@ export const handleGetUser = function getUserFromServer(
         setIsUserGotten,
         setUpdateError,
         setUserEmail,
-        setUsername
+        setUsername,
+        cookies
     } : HandleGetUserProps
 ) {
     const tokenHeader = config.sessionToken.headerName;
@@ -95,7 +99,8 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
         userEmail,
         newUserEmail,
         userPassword,
-        newUserPassword
+        newUserPassword,
+        cookies
     } : UpdateUserHandlerProps
 ) {
     const tokenHeader = config.sessionToken.headerName;
@@ -117,10 +122,6 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
     if (!newUserPassword) {
         setNewUserPassword(userPassword);
     }
-
-    console.log(
-        `\n user ID: ${userId}\n`
-        )
 
     api.put(config.path.user, {
         username : newUsername,
@@ -161,7 +162,6 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
     }).finally(() => {
         setIsSendingNewUserData(false);
     });
-    
 };
 
 export const loginHandler = function logicToSubmitLoginInput(
@@ -170,6 +170,7 @@ export const loginHandler = function logicToSubmitLoginInput(
         setLoginError,
         setIsLoggedIn,
         setCurrentPage,
+        setCookie,
         userIdentifier,
         userPassword
     } : LoginHandlerProps

@@ -4,8 +4,9 @@ import {
 } from 'react';
 
 import { loginHandler } from '../../../../lib/requestHandlers';
-
+import { SetCookie } from '..';
 import { ExistingPage } from '../..';
+
 import LoginFormTextArea from './LoginFormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';
 
@@ -21,6 +22,7 @@ interface LoginProps {
     setCurrentPage : (currentPage : ExistingPage) => void;
     setIsLoggedIn : (isLoggedIn : boolean) => void;
     setUserPassword : (userPassword : string) => void;
+    setCookie : SetCookie;
     userPassword : string;
 };
 
@@ -29,6 +31,7 @@ const Login = function LoginPageComponent(
         setCurrentPage, 
         setIsLoggedIn,
         setUserPassword,
+        setCookie,
         userPassword
     } : LoginProps
 ) {
@@ -46,6 +49,7 @@ const Login = function LoginPageComponent(
             setLoginError,
             setIsLoggedIn,
             setCurrentPage,
+            setCookie,
             userIdentifier,
             userPassword
         });

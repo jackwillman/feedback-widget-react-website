@@ -1,17 +1,13 @@
-import { 
-    SetCurrentPage,
-    SetIsLoggedIn,
-    IsLoggedIn
- } from '..';
+import { ExistingPage, IsLoggedIn } from '..';
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
 
 import { HeaderDiv, CompanyButton } from './styled';
 
-export interface PageHeaderProps {
-    setCurrentPage : SetCurrentPage,
-    setIsLoggedIn : SetIsLoggedIn,
-    isLoggedIn : IsLoggedIn
+interface PageHeaderProps {
+    setCurrentPage : ( currentPage : ExistingPage ) => void;
+    setIsLoggedIn : ( isLoggedIn : boolean) => void;
+    isLoggedIn : boolean;
 };
 
 const PageHeader = function PageHeaderComponent(

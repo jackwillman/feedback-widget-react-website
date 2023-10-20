@@ -4,14 +4,15 @@ import {
     FormEvent 
 } from 'react';
 
-import Loading from '../../../Misc/Loading';
-
-import DashboardFormTextArea from './DashboardFormTextArea';
-import DashboardUpdateButton from './DashboardUpdateButton';
 import { 
     handleGetUser,
     updateUserHandler
 } from '../../../../lib/requestHandlers';
+import { CookiesType } from '..';
+
+import Loading from '../../../Misc/Loading';
+import DashboardFormTextArea from './DashboardFormTextArea';
+import DashboardUpdateButton from './DashboardUpdateButton';
 
 import { 
     PageDiv, 
@@ -28,10 +29,14 @@ import {
 
 interface DashboardProps {
     userPassword : string;
+    cookies : CookiesType;
 };
 
 const Dashboard = function DashboardPageComponent(
-    { userPassword } : DashboardProps
+    { 
+        userPassword,
+        cookies
+     } : DashboardProps
 ) {
     const [isUserGotten, setIsUserGotten] = useState(false);
     const [updateError, setUpdateError] = useState('');
@@ -60,7 +65,8 @@ const Dashboard = function DashboardPageComponent(
             userEmail,
             newUserEmail,
             userPassword,
-            newUserPassword
+            newUserPassword,
+            cookies
         });
     };
 
@@ -69,7 +75,8 @@ const Dashboard = function DashboardPageComponent(
             setIsUserGotten,
             setUpdateError,
             setUserEmail,
-            setUsername
+            setUsername,
+            cookies
         });    
     }, []);               
     

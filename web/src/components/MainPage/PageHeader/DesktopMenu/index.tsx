@@ -1,13 +1,22 @@
-import { PageHeaderProps } from '..';
+import { ExistingPage } from '../..';
 
-import { MenuButtonsDiv, MenuButton } from './styled';
+import { 
+    MenuButtonsDiv, 
+    MenuButton 
+} from './styled';
+
+interface DesktopMenuProps {
+    setCurrentPage : ( currentPage : ExistingPage ) => void;
+    setIsLoggedIn : ( isLoggedIn : boolean) => void;
+    isLoggedIn : boolean;
+};
 
 const DesktopMenu = function DesktopMenuComponent(
     { 
         setCurrentPage,
         setIsLoggedIn,
         isLoggedIn
-    } : PageHeaderProps
+    } : DesktopMenuProps
 ) {
     return (
         <>

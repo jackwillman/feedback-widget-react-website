@@ -1,13 +1,8 @@
 import { useState } from 'react';
-import { useCookies } from 'react-cookie';
 
 import config from '../../../lib/config';
 
-import { 
-    ExistingPage,
-    SetCurrentPage,
-    SetIsLoggedIn
-} from '..';
+import { ExistingPage } from '..';
 import Home from './Home';
 import About from './About';
 import Dashboard from './Dashboard';
@@ -16,17 +11,24 @@ import Signup from './Signup';
 import AccountCreated from './AccountCreated';
 import LoggedOut from './LoggedOut';
 
+export type SetCookie = (name : string, value : any, options?: any) => void;
+export type CookiesType = { [x: string] : any };
+
 interface CurrentPageProps {
+    setCurrentPage : (currentPage : ExistingPage) => void;
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
+    setCookie : SetCookie;
+    cookies : CookiesType;
     currentPage : ExistingPage;
-    setCurrentPage : SetCurrentPage;
-    setIsLoggedIn : SetIsLoggedIn;
 };
 
-const CurrentPage = function SwitchCaseToGetCurrentPage(
+const CurrentPage = function GetCurrentPageBySwitchCase(
     {
-        currentPage,
         setCurrentPage,
-        setIsLoggedIn
+        setIsLoggedIn,
+        setCookie,
+        cookies,
+        currentPage
     } : CurrentPageProps
 ) {
     const [userPassword, setUserPassword] = useState('');
@@ -43,6 +45,7 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
         case 'Dashboard':
             return (
                 <Dashboard 
+                    cookies={ cookies }
                     userPassword={ userPassword }
                 />
             );
@@ -52,6 +55,7 @@ const CurrentPage = function SwitchCaseToGetCurrentPage(
                     setCurrentPage={ setCurrentPage }
                     setIsLoggedIn={ setIsLoggedIn }
                     setUserPassword={ setUserPassword }
+                    setCookie={ setCookie }
                     userPassword={ userPassword }
                 />
             );

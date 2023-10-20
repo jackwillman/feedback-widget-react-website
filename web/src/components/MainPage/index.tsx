@@ -5,13 +5,9 @@ import config from '../../lib/config';
 
 import PageHeader from './PageHeader';
 import CurrentPage from './Pages';
+import { ExistingPage } from '../../lib/types';
 
 import { MainDiv } from './styled';
-
-export type ExistingPage = 'Home' | 'About' | 'Dashboard' | 'Login' | 'Signup' | 'AccountCreated' | 'LoggedOut';
-export type SetCurrentPage = (page : ExistingPage) => void;
-export type IsLoggedIn = boolean;
-export type SetIsLoggedIn = (isLoggedIn : boolean) => void;
 
 const MainPage = function MainPageComponent() {
     const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName, config.user.id.cookieName]);

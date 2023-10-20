@@ -4,11 +4,11 @@ import {
     FormEvent 
 } from 'react';
 
+import { CookiesType } from "../../../../lib/types";
 import { 
     handleGetUser,
     updateUserHandler
 } from '../../../../lib/requestHandlers';
-import { CookiesType } from '..';
 
 import Loading from '../../../Misc/Loading';
 import DashboardFormTextArea from './DashboardFormTextArea';

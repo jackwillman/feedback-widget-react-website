@@ -2,8 +2,7 @@ import { useState, FormEvent } from 'react';
 
 import api from '../../../../lib/api';
 import config from '../../../../lib/config';
-
-import { SetCurrentPage } from '../..';
+import { ExistingPage } from '../../../../lib/types';
 
 import SignupFormTextArea from './SignupFormTextArea';
 import SignupSubmitButton from './SignupSubmitButton';
@@ -17,7 +16,7 @@ import {
 } from "../styled";
 
 interface SignupProps {
-    setCurrentPage : SetCurrentPage;
+    setCurrentPage : (currentPage : ExistingPage) => void;
 };
 
 const Signup = function SignupPageComponent (

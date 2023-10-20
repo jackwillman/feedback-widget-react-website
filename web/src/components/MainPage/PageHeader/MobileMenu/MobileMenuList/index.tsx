@@ -1,4 +1,4 @@
-import { PageHeaderProps } from '../..';
+import { ExistingPage } from '../../../../../lib/types';
 
 import { 
     MenuList, 
@@ -9,12 +9,18 @@ import {
     MenuItemText 
 } from './styled';
 
+interface MobileMenuListProps {
+    setCurrentPage : ( currentPage : ExistingPage ) => void;
+    setIsLoggedIn : ( isLoggedIn : boolean) => void;
+    isLoggedIn : boolean;
+};
+
 const MobileMenuList = function MobileMenuListComponent(
     { 
         setCurrentPage,
         setIsLoggedIn,
         isLoggedIn
-    } : PageHeaderProps
+    } : MobileMenuListProps
 ) {
     return (
         <>

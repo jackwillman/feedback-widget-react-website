@@ -1,4 +1,4 @@
-import { ExistingPage } from '../..';
+import { ExistingPage } from '../../../../lib/types';
 import MobileMenuList from './MobileMenuList';
 
 import {

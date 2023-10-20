@@ -1,11 +1,10 @@
 import api from './api';
 import config from './config';
-
-import { ExistingPage } from '../components/MainPage';
-import { 
+import {
+    ExistingPage,
     CookiesType,
     SetCookie
- } from '../components/MainPage/Pages';
+ } from './types';
 
 interface HandleGetUserProps {
     setIsUserGotten : (isGettingUser : boolean) => void;

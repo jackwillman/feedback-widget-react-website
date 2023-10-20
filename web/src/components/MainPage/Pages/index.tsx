@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
-import config from '../../../lib/config';
-
-import { ExistingPage } from '..';
+import { 
+    ExistingPage,
+    SetCookie,
+    CookiesType
+} from '../../../lib/types';
 import Home from './Home';
 import About from './About';
 import Dashboard from './Dashboard';
@@ -11,8 +13,7 @@ import Signup from './Signup';
 import AccountCreated from './AccountCreated';
 import LoggedOut from './LoggedOut';
 
-export type SetCookie = (name : string, value : any, options?: any) => void;
-export type CookiesType = { [x: string] : any };
+
 
 interface CurrentPageProps {
     setCurrentPage : (currentPage : ExistingPage) => void;

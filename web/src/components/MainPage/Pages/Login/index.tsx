@@ -3,10 +3,11 @@ import {
     FormEvent 
 } from 'react';
 
+import { 
+    ExistingPage,
+    SetCookie 
+} from '../../../../lib/types';
 import { loginHandler } from '../../../../lib/requestHandlers';
-import { SetCookie } from '..';
-import { ExistingPage } from '../..';
-
 import LoginFormTextArea from './LoginFormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';
 

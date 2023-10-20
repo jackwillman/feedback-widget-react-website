@@ -1,4 +1,4 @@
-import { ExistingPage, IsLoggedIn } from '..';
+import { ExistingPage } from '../../../lib/types';
 import DesktopMenu from './DesktopMenu';
 import MobileMenu from './MobileMenu';
 

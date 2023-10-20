@@ -30,10 +30,7 @@ const DesktopMenu = function DesktopMenuComponent(
                         <MenuButton onClick={() => setCurrentPage('Dashboard')}>
                             Dashboard
                         </MenuButton>
-                        <MenuButton onClick={() => {
-                            setIsLoggedIn(false);
-                            setCurrentPage('LoggedOut');
-                        }}>
+                        <MenuButton onClick={() => setCurrentPage('LogOut')}>
                             Log Out
                         </MenuButton>
                     </MenuButtonsDiv>

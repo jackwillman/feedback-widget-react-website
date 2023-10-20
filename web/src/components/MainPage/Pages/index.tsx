@@ -11,7 +11,7 @@ import Dashboard from './Dashboard';
 import Login from './Login';
 import Signup from './Signup';
 import AccountCreated from './AccountCreated';
-import LoggedOut from './LoggedOut';
+import LogOut from './LogOut';
 
 interface CurrentPageProps {
     setCurrentPage : (currentPage : ExistingPage) => void;
@@ -68,9 +68,11 @@ const CurrentPage = function GetCurrentPageBySwitchCase(
             return (
                 <AccountCreated />
             );
-        case 'LoggedOut':
+        case 'LogOut':
             return (
-                <LoggedOut />
+                <LogOut
+                    setIsLoggedIn={ setIsLoggedIn }
+                />
             );
         default:
             return (

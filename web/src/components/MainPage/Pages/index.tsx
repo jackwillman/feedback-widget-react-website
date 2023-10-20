@@ -13,8 +13,6 @@ import Signup from './Signup';
 import AccountCreated from './AccountCreated';
 import LoggedOut from './LoggedOut';
 
-
-
 interface CurrentPageProps {
     setCurrentPage : (currentPage : ExistingPage) => void;
     setIsLoggedIn : (isLoggedIn : boolean) => void;

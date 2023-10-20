@@ -1,9 +1,7 @@
 import { useState, FormEvent } from 'react';
 
-import api from '../../../../lib/api';
-import config from '../../../../lib/config';
 import { ExistingPage } from '../../../../lib/types';
-
+import { signupHandler } from '../../../../lib/requestHandlers';
 import SignupFormTextArea from './SignupFormTextArea';
 import SignupSubmitButton from './SignupSubmitButton';
 
@@ -32,44 +30,13 @@ const Signup = function SignupPageComponent (
         event : FormEvent
     ) {
         event.preventDefault();
-        setIsSendingSignupInput(true);
-        setSignupError('');
-
-        api.post(config.path.users, {
-            username,
-            email : userEmail,
-            password : userPassword,
-
-        }).then((response) => {
-            setCurrentPage('AccountCreated');
-
-        }).catch((error) => {
-           
-            if (error.response) {
-                console.log(error.response.data);
-                if (error.response.data.errors) {
-                    const errorArray = error.response.data.errors;
-                    let errorMessage = 'Error! '
-                    let i = 0;
-                    while (i < errorArray.length) {
-                        errorMessage += `${errorArray[i].msg} `;
-                        i++;
-                    }
-                    setSignupError(errorMessage);
-                    
-                }
-                else {
-                    setSignupError(error.response.data.error);
-                }
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log('Error: ', error.message);
-                console.log(error);
-            }
-
-        }).finally(() => {
-            setIsSendingSignupInput(false);
+        signupHandler({
+            setIsSendingSignupInput, 
+            setSignupError, 
+            username, 
+            userEmail, 
+            userPassword, 
+            setCurrentPage
         });
     };
 

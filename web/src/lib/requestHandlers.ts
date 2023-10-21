@@ -14,41 +14,6 @@ interface SignupHandlerProps {
     userEmail: string, 
     userPassword: string, 
 };
-
-interface HandleGetUserProps {
-    setIsUserGotten : (isGettingUser : boolean) => void;
-    setUpdateError : (userError : string) => void;
-    setUserEmail : (userEmail : string) => void;
-    setUsername : (username : string) => void;
-    cookies : CookiesType;
-};
-
-interface UpdateUserHandlerProps {
-    setIsSendingNewUserData : (isSendingNewUserData : boolean) => void;
-    setUpdateSuccess : (updateSuccess : boolean) => void;
-    setUpdateError : (updateError : string) => void;
-    setNewUsername : (newUsername : string) => void;
-    setNewUserEmail : (newUserEmail : string) => void;
-    setNewUserPassword : (newUserPassword : string) => void;
-    newUsername : string;
-    username : string;
-    userEmail : string;
-    newUserEmail : string;
-    userPassword : string;
-    newUserPassword : string;
-    cookies : CookiesType;
-};
-
-interface LoginHandlerProps {
-    setIsSendingLoginInput : (isSendingLoginInput : boolean) => void;
-    setLoginError : (loginError : string) => void;
-    setIsLoggedIn : (isLoggedIn : boolean) => void;
-    setCurrentPage : (currentPage : ExistingPage) => void;
-    setCookie : SetCookie;
-    userIdentifier : string;
-    userPassword : string;
-};
-
 export const signupHandler = function logicToHandleUserSignup(
     {
         setIsSendingSignupInput,
@@ -98,8 +63,15 @@ export const signupHandler = function logicToHandleUserSignup(
     }).finally(() => {
         setIsSendingSignupInput(false);
     });
-}
+};
 
+interface HandleGetUserProps {
+    setIsUserGotten : (isGettingUser : boolean) => void;
+    setUpdateError : (userError : string) => void;
+    setUserEmail : (userEmail : string) => void;
+    setUsername : (username : string) => void;
+    cookies : CookiesType;
+};
 export const handleGetUser = function getUserFromServer(
     {
         setIsUserGotten,
@@ -145,6 +117,21 @@ export const handleGetUser = function getUserFromServer(
     });
 };
 
+interface UpdateUserHandlerProps {
+    setIsSendingNewUserData : (isSendingNewUserData : boolean) => void;
+    setUpdateSuccess : (updateSuccess : boolean) => void;
+    setUpdateError : (updateError : string) => void;
+    setNewUsername : (newUsername : string) => void;
+    setNewUserEmail : (newUserEmail : string) => void;
+    setNewUserPassword : (newUserPassword : string) => void;
+    newUsername : string;
+    username : string;
+    userEmail : string;
+    newUserEmail : string;
+    userPassword : string;
+    newUserPassword : string;
+    cookies : CookiesType;
+};
 export const updateUserHandler = function logicToUpdateUserOnServer(
     {
         setIsSendingNewUserData,
@@ -223,6 +210,15 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
     });
 };
 
+interface LoginHandlerProps {
+    setIsSendingLoginInput : (isSendingLoginInput : boolean) => void;
+    setLoginError : (loginError : string) => void;
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
+    setCurrentPage : (currentPage : ExistingPage) => void;
+    setCookie : SetCookie;
+    userIdentifier : string;
+    userPassword : string;
+};
 export const loginHandler = function logicToSubmitLoginInput(
     {
         setIsSendingLoginInput,

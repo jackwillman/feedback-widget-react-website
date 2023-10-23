@@ -20,10 +20,12 @@ import {
     BiggerText 
 } from '../styled';
 import { 
+    DashboardDiv,
+    DasboardItemDiv,
     DashboardForm,
     DashboardItemRow,
-    DashboardErrorBox,
-    dashboardTextBoxClass,
+    DashboardResponseDiv,
+    DashboardResponseText,
     DashboardText
  } from './styled';
 
@@ -86,18 +88,14 @@ const Dashboard = function DashboardPageComponent(
                 <BiggerText>
                     Dashboard
                 </BiggerText>
-                {
-                    !isUserGotten ?
-                        <Loading />
-                    :
-                        username && userEmail ?
-                            <DashboardForm onSubmit={ handleUpdateUser }>
+                { !isUserGotten ?
+                    <Loading />
+                :
+                    <DashboardDiv>
+                        <DashboardForm onSubmit={ handleUpdateUser }>
+                            <DasboardItemDiv>
                                 <DashboardItemRow>
                                     <DashboardText>Username:</DashboardText>
-                                    <textarea 
-                                        className={dashboardTextBoxClass}
-                                        placeholder={ username }
-                                    />
                                     <DashboardFormTextArea 
                                         originalValue={ username }
                                         setInput={ setNewUsername }
@@ -115,33 +113,35 @@ const Dashboard = function DashboardPageComponent(
                                 <DashboardItemRow>
                                     <DashboardText>Password:</DashboardText>
                                     <DashboardFormTextArea 
-                                        originalValue={ userPassword }
+                                        originalValue={ '******' }
                                         setInput={ setNewUserPassword }
                                     />
                                 </DashboardItemRow>
+                            </DasboardItemDiv>
 
-                                <DashboardItemRow>
-                                    <DashboardUpdateButton
-                                        isSendingNewUserData={ isSendingNewUserData }
-                                        newUsername={ newUsername }
-                                        newEmail={ newUserEmail }
-                                    />
-                                </DashboardItemRow>
-                            </DashboardForm>
-                        :
-                            <DashboardErrorBox>
-                                <DashboardText>
-                                    {
-                                        updateError ?
-                                            updateError
+                            
+                            <DashboardUpdateButton
+                                isSendingNewUserData={ isSendingNewUserData }
+                                newUsername={ newUsername }
+                                newEmail={ newUserEmail }
+                            />
+                            
+                        </DashboardForm>
+
+                        <DashboardResponseDiv>
+                            <DashboardResponseText>
+                                {
+                                    updateError ?
+                                        updateError
+                                    :
+                                        updateSuccess ?
+                                            <>Your account has been updated!</>
                                         :
-                                            updateSuccess ?
-                                                <>Your account has been updated!</>
-                                            :
-                                                <></>
-                                    }
-                                </DashboardText>
-                            </DashboardErrorBox>      
+                                            <></>
+                                }
+                            </DashboardResponseText>
+                        </DashboardResponseDiv>      
+                    </DashboardDiv>
                 }
             </TextDiv>
         </PageDiv>

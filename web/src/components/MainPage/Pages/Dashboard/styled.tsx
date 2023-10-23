@@ -2,15 +2,22 @@ import tw from "tailwind-styled-components";
 
 import { Text } from '../styled';
 
+export const DashboardDiv = tw.div`
+    absolute
+`;
+
 export const DashboardForm = tw.form`
     relative 
-    bg-zinc-900 
-    rounded-2xl 
-    shadow-lg
-
     mt-[47px]
-    w-[500px]
-    h-[200px]
+    w-[480px]
+`;
+
+export const DasboardItemDiv = tw.div`
+    relative 
+    bg-zinc-900 
+    rounded
+    shadow-lg
+    h-[240px]
 `;
 
 export const DashboardItemRow = tw.div`
@@ -21,9 +28,8 @@ export const DashboardItemRow = tw.div`
     py-8
 `;
 
-export const DashboardErrorBox = tw.div`
-    absolute
-    pl-[150px]
+export const DashboardResponseDiv = tw.div`
+    relative
 `;
 
 export const DashboardText = tw(Text)`
@@ -34,6 +40,10 @@ export const DashboardText = tw(Text)`
     xl:text-lg
     leading-[22px]
     xl:leading-[32px]
+`;
+
+export const DashboardResponseText = tw(DashboardText)`
+    text-brand-300 
 `;
 
 export const DashboardUpdateFormSubmit = tw.button`
@@ -47,8 +57,7 @@ export const DashboardUpdateFormSubmit = tw.button`
     min-w-[170px] 
     w-full
     h-10
-    my-3
-    rounded 
+    rounded
     border-transparent 
     flex-1 
     flex 
@@ -63,21 +72,6 @@ export const DashboardUpdateFormSubmit = tw.button`
     disabled:hover:bg-brand-500
 `;
 
-export const dashboardTextBoxClass = `
-    absolute
-    h-[3rem]
-    w-[300px]
-    ml-[115px]
-    text-base
-    rounded
-    text-zinc-100
-    border-zinc-600
-    bg-transparent
-    focus:border-brand-500
-    focus:ring-brand-500
-    focus:ring-1
-    focus:outline-none
-    scrollbar-thin  
-    scrollbar-thumb-zinc-700 
-    scrollbar-track-transparent
+export const GetUserLoadingDiv = tw.div`
+    relative
 `;

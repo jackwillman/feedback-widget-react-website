@@ -11,7 +11,7 @@ const DashboardDeleteButton = function ({
     } : LoginDeleteButtonProps
 ) {
     return ( <DashboardDeleteButtonClass
-        type="submit"
+        type="button"
         disabled={ isDeletingUser }
     >
         { isDeletingUser

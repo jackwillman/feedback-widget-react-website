@@ -1,4 +1,4 @@
-import { dashboardTextBoxClass } from './styled';
+import { dashboardFormTextClass } from './styled';
 
 interface FormTextAreaProps {
     originalValue : string;
@@ -10,7 +10,7 @@ const DashboardFormTextArea = function DashboardFormTextAreaComponent(
 ) {
     return (
         <textarea
-            className={ dashboardTextBoxClass }
+            className={ dashboardFormTextClass }
             placeholder={ originalValue }
             onChange={ event => setInput(event.target.value) }
         />

@@ -17,7 +17,7 @@ export const DasboardItemDiv = tw.div`
     bg-zinc-900 
     rounded
     shadow-lg
-    h-[240px]
+    h-[280px]
 `;
 
 export const DashboardItemRow = tw.div`
@@ -42,14 +42,7 @@ export const DashboardText = tw(Text)`
     xl:leading-[32px]
 `;
 
-export const DashboardUpdateFormSubmit = tw.button`
-    font-bold
-    text-base
-    xl:text-lg
-    text-zinc-800
-    bg-brand-500 
-    hover:bg-brand-300 
-    transition-colors
+export const DashboardUpdateButtonClass = tw.button`
     min-w-[170px] 
     w-full
     h-10
@@ -59,16 +52,57 @@ export const DashboardUpdateFormSubmit = tw.button`
     flex 
     justify-center 
     items-center 
+
+    font-bold
+    text-base
+    transition-colors
+
+    text-zinc-800
+    bg-brand-500 
+    
+    hover:bg-brand-300 
+
+    xl:text-lg
+
     focus:outline-none 
     focus:ring-2 
     focus:ring-offset-2 
     focus:ring-offset-zinc-900 
     focus:ring-brand-500
+
     disabled:opacity-50 
     disabled:hover:bg-brand-500
 `;
 
-export const dashboardTextBoxClass = `
+export const DashboardDeleteButtonClass = tw.button`
+    relative
+    ml-[50px]
+    mt-8
+    min-w-[170px] 
+    w-[380px]
+    h-10
+    rounded
+    border-2 
+    border-transparent 
+    flex-1 
+    flex 
+    justify-center 
+    items-center 
+
+    font-bold
+    text-base
+    transition-colors
+
+    bg-zinc-800
+    
+    xl:text-lg
+
+    hover:border-brand-500 
+    focus:border-brand-500 
+    focus:outline-none
+`;
+
+export const dashboardFormTextClass = `
     absolute
     h-[3rem]
     w-[300px]
@@ -85,4 +119,4 @@ export const dashboardTextBoxClass = `
     scrollbar-thin  
     scrollbar-thumb-zinc-700 
     scrollbar-track-transparent
-    `;
+`;

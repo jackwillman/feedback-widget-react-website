@@ -27,6 +27,7 @@ import {
     DashboardResponseDiv,
     DashboardText
  } from './styled';
+import DashboardDeleteButton from './DashboardDeleteButton';
 
 interface DashboardProps {
     userPassword : string;
@@ -40,6 +41,7 @@ const Dashboard = function DashboardPageComponent(
      } : DashboardProps
 ) {
     const [isUserGotten, setIsUserGotten] = useState(false);
+    const [isDeletingUser, SetIsDeletingUser] = useState(false);
     const [updateError, setUpdateError] = useState('');
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [username, setUsername] = useState('');
@@ -116,6 +118,10 @@ const Dashboard = function DashboardPageComponent(
                                         setInput={ setNewUserPassword }
                                     />
                                 </DashboardItemRow>
+
+                                <DashboardDeleteButton 
+                                    isDeletingUser={ isDeletingUser }
+                                />
                             </DasboardItemDiv>
 
                             

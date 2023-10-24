@@ -42,10 +42,6 @@ export const DashboardText = tw(Text)`
     xl:leading-[32px]
 `;
 
-export const DashboardResponseText = tw(DashboardText)`
-    text-brand-300 
-`;
-
 export const DashboardUpdateFormSubmit = tw.button`
     font-bold
     text-base
@@ -72,6 +68,21 @@ export const DashboardUpdateFormSubmit = tw.button`
     disabled:hover:bg-brand-500
 `;
 
-export const GetUserLoadingDiv = tw.div`
-    relative
-`;
+export const dashboardTextBoxClass = `
+    absolute
+    h-[3rem]
+    w-[300px]
+    ml-[115px]
+    text-base
+    rounded
+    text-zinc-100
+    border-zinc-600
+    bg-transparent
+    focus:border-brand-500
+    focus:ring-brand-500
+    focus:ring-1
+    focus:outline-none
+    scrollbar-thin  
+    scrollbar-thumb-zinc-700 
+    scrollbar-track-transparent
+    `;

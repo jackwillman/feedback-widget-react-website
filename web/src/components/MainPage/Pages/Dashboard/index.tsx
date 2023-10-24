@@ -25,7 +25,6 @@ import {
     DashboardForm,
     DashboardItemRow,
     DashboardResponseDiv,
-    DashboardResponseText,
     DashboardText
  } from './styled';
 
@@ -129,7 +128,7 @@ const Dashboard = function DashboardPageComponent(
                         </DashboardForm>
 
                         <DashboardResponseDiv>
-                            <DashboardResponseText>
+                            <DashboardText>
                                 {
                                     updateError ?
                                         updateError
@@ -139,7 +138,7 @@ const Dashboard = function DashboardPageComponent(
                                         :
                                             <></>
                                 }
-                            </DashboardResponseText>
+                            </DashboardText>
                         </DashboardResponseDiv>      
                     </DashboardDiv>
                 }

@@ -1,4 +1,5 @@
 import tw from "tailwind-styled-components";
+import Popup from "reactjs-popup";
 
 import { Text } from '../styled';
 
@@ -100,6 +101,17 @@ export const DashboardDeleteButtonClass = tw.button`
     hover:border-brand-500 
     focus:border-brand-500 
     focus:outline-none
+`;
+
+export const DashboardDeletePopup = tw(Popup)``;
+
+export const DashboardDeleteConfirmationPopup = tw.div`
+    bg-zinc-900 
+    relative 
+    rounded
+    shadow-lg
+    w-[300px]
+    h-[200px]
 `;
 
 export const dashboardFormTextClass = `

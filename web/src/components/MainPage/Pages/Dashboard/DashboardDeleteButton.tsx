@@ -1,6 +1,10 @@
 import Loading from '../../../Misc/Loading';
 
-import { DashboardDeleteButtonClass } from './styled';
+import { 
+    DashboardDeleteButtonClass,
+    DashboardDeletePopup,
+    DashboardDeleteConfirmationPopup
+ } from './styled';
 
 interface LoginDeleteButtonProps {
     isDeletingUser : boolean;
@@ -10,15 +14,22 @@ const DashboardDeleteButton = function ({
         isDeletingUser, 
     } : LoginDeleteButtonProps
 ) {
-    return ( <DashboardDeleteButtonClass
-        type="button"
-        disabled={ isDeletingUser }
-    >
-        { isDeletingUser
-            ? <Loading />
-            : 'Delete User'
+    return ( <DashboardDeletePopup
+        trigger={ 
+            <DashboardDeleteButtonClass
+                disabled={ isDeletingUser }
+            >
+                { isDeletingUser
+                    ? <Loading />
+                    : 'Delete User'
+                }
+            </DashboardDeleteButtonClass> 
         }
-    </DashboardDeleteButtonClass> );
+    >
+        <DashboardDeleteConfirmationPopup>
+            Are you sure?
+        </DashboardDeleteConfirmationPopup>
+    </DashboardDeletePopup>);
 };
 
 export default DashboardDeleteButton;

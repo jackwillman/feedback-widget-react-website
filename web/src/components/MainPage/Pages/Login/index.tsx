@@ -56,36 +56,32 @@ const Login = function LoginPageComponent(
         });
     };
 
-    return (
-        <PageDiv>
-            <TextDiv>
-                <BigText>
-                    Log In
-                </BigText>
-                <AccountForm onSubmit={ handleLogin }>
-                    <AccountFormText>
-                        Username or E-mail
-                    </AccountFormText>
-                    <LoginFormTextArea setInput={ setUserIdentifier }/>
-                    <AccountFormText>
-                        Password
-                    </AccountFormText>
-                    <LoginFormTextArea setInput={ setUserPassword }/>
-                    <LoginSubmitButton 
-                        isSendingLoginInput={ isSendingLoginInput }
-                        userIdentifier={ userIdentifier }
-                        userPassword={ userPassword }
-                    />
-                    { 
-                        loginError ? 
-                            loginError
-                        : 
-                            <></>                      
-                    }
-                </AccountForm>
-            </TextDiv>
-        </PageDiv>
-    );
+    return ( <PageDiv>
+        <TextDiv>
+            <BigText>
+                Log In
+            </BigText>
+            <AccountForm onSubmit={ handleLogin }>
+                <AccountFormText>
+                    Username or E-mail
+                </AccountFormText>
+                <LoginFormTextArea setInput={ setUserIdentifier }/>
+                <AccountFormText>
+                    Password
+                </AccountFormText>
+                <LoginFormTextArea setInput={ setUserPassword }/>
+                <LoginSubmitButton 
+                    isSendingLoginInput={ isSendingLoginInput }
+                    userIdentifier={ userIdentifier }
+                    userPassword={ userPassword }
+                />
+                { loginError 
+                    ? loginError
+                    : <></>                 
+                }
+            </AccountForm>
+        </TextDiv>
+    </PageDiv> );
 };
 
 export default Login;

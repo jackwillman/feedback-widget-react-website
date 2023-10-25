@@ -16,23 +16,20 @@ const SignupSubmitButton = function ({
         userPassword 
     } : SignupSubmitButtonProps
 ) {
-    return (
-        <AccountFormSubmit
-            type="submit"
-            disabled={ 
-                username.length === 0 
-                || userEmail.length === 0
-                || userPassword.length === 0 
-                || isSendingSignupInput 
-            }
-        >
-            {
-                isSendingSignupInput
-                    ? <Loading />
-                    : 'Sign Up'
-            }
-        </AccountFormSubmit>
-    );
+    return ( <AccountFormSubmit
+        type="submit"
+        disabled={ 
+            username.length === 0 
+            || userEmail.length === 0
+            || userPassword.length === 0 
+            || isSendingSignupInput 
+        }
+    >
+        { isSendingSignupInput            
+            ? <Loading />
+            : 'Sign Up'
+        }
+    </AccountFormSubmit> );
 };
 
 export default SignupSubmitButton;

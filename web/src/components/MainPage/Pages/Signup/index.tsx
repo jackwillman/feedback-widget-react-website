@@ -40,40 +40,37 @@ const Signup = function SignupPageComponent (
         });
     };
 
-    return (
-        <PageDiv>
-            <TextDiv>
-                <BigText>
-                    Sign Up
-                </BigText>
-                <AccountForm onSubmit={ handleSignup }>
-                    <AccountFormText>
-                        Username
-                    </AccountFormText>
-                    <SignupFormTextArea setInput={ setUsername }/>
-                    <AccountFormText>
-                        Email
-                    </AccountFormText>
-                    <SignupFormTextArea setInput={ setUserEmail }/>
-                    <AccountFormText>
-                        Password
-                    </AccountFormText>
-                    <SignupFormTextArea setInput={ setUserPassword }/>
-                    <SignupSubmitButton 
-                        isSendingSignupInput={ isSendingSignupInput }
-                        username={ username }
-                        userEmail={ userEmail }
-                        userPassword={ userPassword }
-                    />
-                    { 
-                        signupError
-                            ? signupError
-                            : <></>                      
-                    }
-                </AccountForm>
-            </TextDiv>
-        </PageDiv>
-    );
+    return ( <PageDiv>    
+        <TextDiv>
+            <BigText>
+                Sign Up
+            </BigText>
+            <AccountForm onSubmit={ handleSignup }>
+                <AccountFormText>
+                    Username
+                </AccountFormText>
+                <SignupFormTextArea setInput={ setUsername }/>
+                <AccountFormText>
+                    Email
+                </AccountFormText>
+                <SignupFormTextArea setInput={ setUserEmail }/>
+                <AccountFormText>
+                    Password
+                </AccountFormText>
+                <SignupFormTextArea setInput={ setUserPassword }/>
+                <SignupSubmitButton 
+                    isSendingSignupInput={ isSendingSignupInput }
+                    username={ username }
+                    userEmail={ userEmail }
+                    userPassword={ userPassword }
+                />
+                { signupError                    
+                    ? signupError
+                    : <></>                      
+                }
+            </AccountForm>
+        </TextDiv>        
+    </PageDiv> );
 };
 
 export default Signup;

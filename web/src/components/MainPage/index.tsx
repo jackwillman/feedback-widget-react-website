@@ -14,22 +14,20 @@ const MainPage = function MainPageComponent() {
     const [currentPage, setCurrentPage] = useState<ExistingPage>('Home');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    return (
-        <MainDiv>
-            <PageHeader 
-                setCurrentPage={ setCurrentPage }                
-                setIsLoggedIn={ setIsLoggedIn }
-                isLoggedIn={ isLoggedIn }
-            />
-            <CurrentPage 
-                setCookie={ setCookie }
-                setIsLoggedIn={ setIsLoggedIn }
-                setCurrentPage={ setCurrentPage }
-                currentPage={ currentPage }
-                cookies={ cookies }
-            />
-        </MainDiv>
-    );
+    return ( <MainDiv>        
+        <PageHeader 
+            setCurrentPage={ setCurrentPage }                
+            setIsLoggedIn={ setIsLoggedIn }
+            isLoggedIn={ isLoggedIn }
+        />
+        <CurrentPage 
+            setCookie={ setCookie }
+            setIsLoggedIn={ setIsLoggedIn }
+            setCurrentPage={ setCurrentPage }
+            currentPage={ currentPage }
+            cookies={ cookies }
+        />        
+    </MainDiv> );
 };
 
 export default MainPage;

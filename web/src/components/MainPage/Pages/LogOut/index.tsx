@@ -14,15 +14,13 @@ const LogOut = function LogOutPageComponent(
 ) {
     useEffect(() => setIsLoggedIn(false), []);
     
-    return (
-        <PageDiv>
-            <TextDiv>
-                <BigText>
-                    Logged out.
-                </BigText>
-            </TextDiv>
-        </PageDiv>
-    );
+    return ( <PageDiv>        
+        <TextDiv>
+            <BigText>
+                Logged out.
+            </BigText>
+        </TextDiv>        
+    </PageDiv> );
 };
 
 export default LogOut;

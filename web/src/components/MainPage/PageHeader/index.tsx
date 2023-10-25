@@ -17,25 +17,23 @@ const PageHeader = function PageHeaderComponent(
         isLoggedIn
     } : PageHeaderProps
 ) {
-    return (
-        <HeaderDiv>
-            <CompanyButton onClick={() => setCurrentPage('Home')}>
-                Better<a className='text-brand-500'>Site</a>
-            </CompanyButton>
+    return ( <HeaderDiv>        
+        <CompanyButton onClick={() => setCurrentPage('Home')}>
+            Better<a className='text-brand-500'>Site</a>
+        </CompanyButton>
 
-            <DesktopMenu 
-                setCurrentPage={ setCurrentPage }
-                setIsLoggedIn={ setIsLoggedIn }
-                isLoggedIn={ isLoggedIn }
-            />
+        <DesktopMenu 
+            setCurrentPage={ setCurrentPage }
+            setIsLoggedIn={ setIsLoggedIn }
+            isLoggedIn={ isLoggedIn }
+        />
 
-            <MobileMenu 
-                setCurrentPage={ setCurrentPage }
-                setIsLoggedIn={ setIsLoggedIn }
-                isLoggedIn={ isLoggedIn }
-            />
-        </HeaderDiv>
-    );
+        <MobileMenu 
+            setCurrentPage={ setCurrentPage }
+            setIsLoggedIn={ setIsLoggedIn }
+            isLoggedIn={ isLoggedIn }
+        />        
+    </HeaderDiv> );
 };
 
 export default PageHeader;

@@ -17,10 +17,9 @@ const DashboardUpdateButton = function ({
     return ( <DashboardUpdateButtonClass
         type="submit"
         disabled={ (
-                newUsername.length === 0 
-                && newEmail.length === 0 
-            ) || isSendingNewUserData 
-        }
+            newUsername.length === 0 
+            && newEmail.length === 0 
+        ) || isSendingNewUserData }
     >
         { isSendingNewUserData
             ? <Loading />

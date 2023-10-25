@@ -83,74 +83,69 @@ const Dashboard = function DashboardPageComponent(
         });    
     }, []);               
     
-    return (
-        <PageDiv>
-            <TextDiv>
-                <BiggerText>
-                    Dashboard
-                </BiggerText>
-                { !isUserGotten ?
-                    <Loading />
-                :
-                    <DashboardDiv>
-                        <DashboardForm onSubmit={ handleUpdateUser }>
-                            <DasboardItemDiv>
-                                <DashboardItemRow>
-                                    <DashboardText>Username:</DashboardText>
-                                    <DashboardFormTextArea 
-                                        originalValue={ username }
-                                        setInput={ setNewUsername }
-                                    />
-                                </DashboardItemRow>
-
-                                <DashboardItemRow>
-                                    <DashboardText>E-mail:</DashboardText>
-                                    <DashboardFormTextArea 
-                                        originalValue={ userEmail }
-                                        setInput={ setNewUserEmail }
-                                    />
-                                </DashboardItemRow>
-
-                                <DashboardItemRow>
-                                    <DashboardText>Password:</DashboardText>
-                                    <DashboardFormTextArea 
-                                        originalValue={ '******' }
-                                        setInput={ setNewUserPassword }
-                                    />
-                                </DashboardItemRow>
-
-                                <DashboardDeleteButton 
-                                    isDeletingUser={ isDeletingUser }
+    return ( <PageDiv>
+        <TextDiv>
+            <BiggerText>
+                Dashboard
+            </BiggerText>
+            { !isUserGotten 
+                ? <Loading />
+                : <DashboardDiv>
+                
+                    <DashboardForm onSubmit={ handleUpdateUser }>
+                        <DasboardItemDiv>
+                            <DashboardItemRow>
+                                <DashboardText>Username:</DashboardText>
+                                <DashboardFormTextArea 
+                                    originalValue={ username }
+                                    setInput={ setNewUsername }
                                 />
-                            </DasboardItemDiv>
+                            </DashboardItemRow>
 
-                            
-                            <DashboardUpdateButton
-                                isSendingNewUserData={ isSendingNewUserData }
-                                newUsername={ newUsername }
-                                newEmail={ newUserEmail }
+                            <DashboardItemRow>
+                                <DashboardText>E-mail:</DashboardText>
+                                <DashboardFormTextArea 
+                                    originalValue={ userEmail }
+                                    setInput={ setNewUserEmail }
+                                />
+                            </DashboardItemRow>
+
+                            <DashboardItemRow>
+                                <DashboardText>Password:</DashboardText>
+                                <DashboardFormTextArea 
+                                    originalValue={ '******' }
+                                    setInput={ setNewUserPassword }
+                                />
+                            </DashboardItemRow>
+
+                            <DashboardDeleteButton 
+                                isDeletingUser={ isDeletingUser }
                             />
-                            
-                        </DashboardForm>
+                        </DasboardItemDiv>
 
-                        <DashboardResponseDiv>
-                            <DashboardText>
-                                {
-                                    updateError ?
-                                        updateError
-                                    :
-                                        updateSuccess ?
-                                            <>Your account has been updated!</>
-                                        :
-                                            <></>
-                                }
-                            </DashboardText>
-                        </DashboardResponseDiv>      
-                    </DashboardDiv>
-                }
-            </TextDiv>
-        </PageDiv>
-    );
+                        
+                        <DashboardUpdateButton
+                            isSendingNewUserData={ isSendingNewUserData }
+                            newUsername={ newUsername }
+                            newEmail={ newUserEmail }
+                        />
+                        
+                    </DashboardForm>
+
+                    <DashboardResponseDiv>
+                        <DashboardText>
+                            { updateError
+                                ? updateError 
+                                : updateSuccess 
+                                    ? <>Your account has been updated!</>
+                                    : <></>
+                            }
+                        </DashboardText>
+                    </DashboardResponseDiv>      
+                </DashboardDiv>
+            }
+        </TextDiv>
+    </PageDiv>);
 };
 
 export default Dashboard;

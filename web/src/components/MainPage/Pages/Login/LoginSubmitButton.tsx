@@ -8,14 +8,14 @@ interface LoginSubmitButtonProps {
     userPassword : string;
 };
 
-const LoginSubmitButton = function ({ 
+const LoginSubmitButton = function (
+    { 
         isSendingLoginInput, 
         userIdentifier, 
         userPassword 
     } : LoginSubmitButtonProps
 ) {
-    return (
-        <AccountFormSubmit
+    return ( <AccountFormSubmit
             type="submit"
             disabled={ 
                 userIdentifier.length === 0 
@@ -23,13 +23,11 @@ const LoginSubmitButton = function ({
                 || isSendingLoginInput 
             }
         >
-            {
-                isSendingLoginInput
-                    ? <Loading />
-                    : 'Log In'
+            { isSendingLoginInput                
+                ? <Loading />
+                : 'Log In'
             }
-        </AccountFormSubmit>
-    );
+    </AccountFormSubmit> );
 };
 
 export default LoginSubmitButton;

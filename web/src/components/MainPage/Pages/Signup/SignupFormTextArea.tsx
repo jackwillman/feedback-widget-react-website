@@ -7,12 +7,10 @@ interface FormTextAreaProps {
 const SignupFormTextArea = function SignupFormTextAreaComponent(
     { setInput } : FormTextAreaProps
 ) {
-    return (
-        <textarea
-            className={ accountFormTextAreaClass }
-            onChange={ event => setInput(event.target.value) }
-        />
-    );
+    return ( <textarea        
+        className={ accountFormTextAreaClass }
+        onChange={ event => setInput(event.target.value) }        
+    /> );
 };
 
 export default SignupFormTextArea;

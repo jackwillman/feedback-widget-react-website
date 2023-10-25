@@ -21,21 +21,19 @@ const MobileMenu = function MobileMenuComponent(
         isLoggedIn
     } : MobileMenuProps
 ) {
-    return (
-        <MenuListPopover>
-            <MenuListButton>
-                <MenuListIcon weight='bold'/>
-            </MenuListButton>
+    return ( <MenuListPopover>        
+        <MenuListButton>
+            <MenuListIcon weight='bold'/>
+        </MenuListButton>
 
-            <MenuListPanel>
-                <MobileMenuList
-                    setCurrentPage={ setCurrentPage }
-                    setIsLoggedIn={ setIsLoggedIn }
-                    isLoggedIn={ isLoggedIn }
-                />
-            </MenuListPanel >
-        </MenuListPopover>
-    );
+        <MenuListPanel>
+            <MobileMenuList
+                setCurrentPage={ setCurrentPage }
+                setIsLoggedIn={ setIsLoggedIn }
+                isLoggedIn={ isLoggedIn }
+            />
+        </MenuListPanel >        
+    </MenuListPopover> );
 };
 
 export default MobileMenu;

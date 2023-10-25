@@ -43,7 +43,7 @@ export const DashboardText = tw(Text)`
     xl:leading-[32px]
 `;
 
-export const DashboardUpdateButtonClass = tw.button`
+export const DashboardMainButtonClass = tw.button`
     min-w-[170px] 
     w-full
     h-10
@@ -66,10 +66,6 @@ export const DashboardUpdateButtonClass = tw.button`
     xl:text-lg
 
     focus:outline-none 
-    focus:ring-2 
-    focus:ring-offset-2 
-    focus:ring-offset-zinc-900 
-    focus:ring-brand-500
 
     disabled:opacity-50 
     disabled:hover:bg-brand-500
@@ -103,15 +99,27 @@ export const DashboardDeleteButtonClass = tw.button`
     focus:outline-none
 `;
 
-export const DashboardDeletePopup = tw(Popup)``;
+export const DashboardDeletePopup = tw(Popup)`
+`;
 
 export const DashboardDeleteConfirmationPopup = tw.div`
-    bg-zinc-900 
-    relative 
+    relative
+    bg-zinc-800  
     rounded
     shadow-lg
-    w-[300px]
-    h-[200px]
+    mt-1
+    w-[480px]
+    h-[90px]
+`;
+
+export const DashboardDeleteConfirmationText = tw(Text)`
+    relative
+    pt-6
+    ml-6
+`;
+
+export const DashboardDeleteConfirmationButton = tw(DashboardMainButtonClass)`
+    mt-8
 `;
 
 export const dashboardFormTextClass = `

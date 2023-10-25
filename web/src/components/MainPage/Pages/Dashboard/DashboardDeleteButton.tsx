@@ -3,7 +3,9 @@ import Loading from '../../../Misc/Loading';
 import { 
     DashboardDeleteButtonClass,
     DashboardDeletePopup,
-    DashboardDeleteConfirmationPopup
+    DashboardDeleteConfirmationPopup,
+    DashboardDeleteConfirmationText,
+    DashboardDeleteConfirmationButton
  } from './styled';
 
 interface LoginDeleteButtonProps {
@@ -27,7 +29,12 @@ const DashboardDeleteButton = function ({
         }
     >
         <DashboardDeleteConfirmationPopup>
-            Are you sure?
+            <DashboardDeleteConfirmationText>
+                Are you sure you want to delete your User Account?
+            </DashboardDeleteConfirmationText>
+            <DashboardDeleteConfirmationButton>
+                Delete my account
+            </DashboardDeleteConfirmationButton>
         </DashboardDeleteConfirmationPopup>
     </DashboardDeletePopup>);
 };

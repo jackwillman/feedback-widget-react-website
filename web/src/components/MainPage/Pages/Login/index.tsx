@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 
 import { 
     ExistingPage,
@@ -36,25 +36,24 @@ const Login = function LoginPageComponent({
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
     const [loginError, setLoginError] = useState('');
 
-    const handleLogin = function (event : FormEvent) {
-        loginHandler({
-            setIsSendingLoginInput,
-            setLoginError,
-            setIsLoggedIn,
-            setCurrentPage,
-            setCookie,
-            userIdentifier,
-            userPassword
-        });
-    };    
-    
     return ( 
         <PageDiv>
             <TextDiv>
                 <BigText>
                     Log In
                 </BigText>
-                <AccountForm onSubmit={ handleLogin }>
+                <AccountForm onSubmit={ (event) => {
+                    event.preventDefault();
+                    loginHandler({
+                        setIsSendingLoginInput,
+                        setLoginError,
+                        setIsLoggedIn,
+                        setCurrentPage,
+                        setCookie,
+                        userIdentifier,
+                        userPassword
+                    });
+                } }>
                     <AccountFormText> Username or E-mail </AccountFormText>
                     <FormTextArea 
                         setInput={ setUserIdentifier }

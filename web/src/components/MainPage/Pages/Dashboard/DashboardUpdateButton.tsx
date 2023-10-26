@@ -9,23 +9,24 @@ interface LoginSubmitButtonProps {
 };
 
 const DashboardUpdateButton = function ({ 
-        isSendingNewUserData, 
-        newUsername, 
-        newEmail 
-    } : LoginSubmitButtonProps
-) {
-    return ( <DashboardMainButtonClass
-        type="submit"
-        disabled={ (
-            newUsername.length === 0 
-            && newEmail.length === 0 
-        ) || isSendingNewUserData }
-    >
-        { isSendingNewUserData
-            ? <Loading />
-            : 'Update User Data'
-        }
-    </DashboardMainButtonClass> );
+    isSendingNewUserData, 
+    newUsername, 
+    newEmail 
+} : LoginSubmitButtonProps) {
+    return ( 
+        <DashboardMainButtonClass
+            type="submit"
+            disabled={ (
+                newUsername.length === 0 
+                && newEmail.length === 0 
+            ) || isSendingNewUserData }
+        >
+            { isSendingNewUserData
+                ? <Loading />
+                : "Update User Data"
+            }
+        </DashboardMainButtonClass> 
+    );
 };
 
 export default DashboardUpdateButton;

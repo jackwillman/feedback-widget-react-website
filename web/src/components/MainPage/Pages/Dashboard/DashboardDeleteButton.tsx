@@ -21,47 +21,45 @@ interface LoginDeleteButtonProps {
     cookies : CookiesType;
 };
 
-const DashboardDeleteButton = function (
-    { 
-        setIsLoggedIn,
-        setCurrentPage,        
-        cookies
-    } : LoginDeleteButtonProps
-) {
+const DashboardDeleteButton = function ({ 
+    setIsLoggedIn,
+    setCurrentPage,        
+    cookies
+} : LoginDeleteButtonProps) {
     const [deleteError, setDeleteError] = useState('');
     const [isDeletingUser, setIsDeletingUser] = useState(false);
-    const handleDeleteUser = function () {
-        deleteUserHandler({
-            setDeleteError,
-            setIsDeletingUser,
-            setIsLoggedIn,
-            setCurrentPage,        
-            cookies
-        });
-    };
-    return ( <DashboardDeletePopup
-        trigger={ 
-            <DashboardDeleteButtonClass
-                disabled={ isDeletingUser }
-            >
-                { isDeletingUser
-                    ? <Loading />
-                    : 'Delete User'
-                }
-            </DashboardDeleteButtonClass> 
-        }
-    >
-        <DashboardDeleteConfirmationPopup>
-            <DashboardDeleteConfirmationText>
-                Are you sure you want to delete your User Account?
-            </DashboardDeleteConfirmationText>
-            <DashboardDeleteConfirmationButton
-                onClick={ handleDeleteUser }
-            >
-                Delete my account
-            </DashboardDeleteConfirmationButton>
-        </DashboardDeleteConfirmationPopup>
-    </DashboardDeletePopup>);
+
+    return ( 
+        <DashboardDeletePopup
+            trigger={ (
+                <DashboardDeleteButtonClass
+                    disabled={ isDeletingUser }
+                >
+                    { isDeletingUser
+                        ? <Loading />
+                        : "Delete User"
+                    }
+                </DashboardDeleteButtonClass> 
+            ) }
+        >
+            <DashboardDeleteConfirmationPopup>
+                <DashboardDeleteConfirmationText>
+                    Are you sure you want to delete your User Account?
+                </DashboardDeleteConfirmationText>
+                <DashboardDeleteConfirmationButton
+                    onClick={ () => deleteUserHandler({
+                        setDeleteError,
+                        setIsDeletingUser,
+                        setIsLoggedIn,
+                        setCurrentPage,        
+                        cookies
+                    }) }
+                >
+                    Delete my account
+                </DashboardDeleteConfirmationButton>
+            </DashboardDeleteConfirmationPopup>
+        </DashboardDeletePopup>
+    );
 };
 
 export default DashboardDeleteButton;

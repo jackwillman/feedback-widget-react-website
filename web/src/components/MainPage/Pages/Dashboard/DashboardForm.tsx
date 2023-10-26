@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 import { updateUserHandler } from '../../../../lib/requestHandlers';
 import { CookiesType } from "../../pageTypes";
@@ -73,7 +73,7 @@ const DashboardForm = function DashboardFormComponent({
                 <DashboardItemRow>
                     <DashboardText>Password:</DashboardText>
                     <DashboardFormTextArea 
-                        originalValue={ '******' }
+                        originalValue={ "******" }
                         setInput={ setNewUserPassword }
                     />
                 </DashboardItemRow>

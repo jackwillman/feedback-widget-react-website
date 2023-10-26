@@ -5,7 +5,8 @@ export type ExistingPage =
     'Login' | 
     'Signup' | 
     'AccountCreated' | 
-    'LogOut'
+    'LogOut' |
+    'AccountDeleted'
 ;
 export type SetCookie = (name : string, value : any, options?: any) => void;
 export type CookiesType = { [x: string] : any };

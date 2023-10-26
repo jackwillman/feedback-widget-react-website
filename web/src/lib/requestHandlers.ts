@@ -304,7 +304,7 @@ export const deleteUserHandler = function logicToSubmitLoginInput(
 
     }).then((response) => {
         setIsLoggedIn(false);
-        setCurrentPage('Home');
+        setCurrentPage('AccountDeleted');
 
     }).catch((error) => {
         if (error.response) {

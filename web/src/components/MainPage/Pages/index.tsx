@@ -12,6 +12,7 @@ import Login from './Login';
 import Signup from './Signup';
 import AccountCreated from './AccountCreated';
 import LogOut from './LogOut';
+import AccountDeleted from './AccountDeleted';
 
 interface CurrentPageProps {
     setCurrentPage : (currentPage : ExistingPage) => void;
@@ -34,13 +35,9 @@ const CurrentPage = function GetCurrentPageBySwitchCase(
     
     switch (currentPage) {
         case 'Home':
-            return (
-                <Home />
-            );
+            return (<Home />);
         case 'About':
-            return (
-                <About />
-            );
+            return (<About />);
         case 'Dashboard':
             return (
                 <Dashboard
@@ -67,15 +64,15 @@ const CurrentPage = function GetCurrentPageBySwitchCase(
                 />
             );
         case 'AccountCreated':
-            return (
-                <AccountCreated />
-            );
+            return (<AccountCreated />);
         case 'LogOut':
             return (
                 <LogOut
                     setIsLoggedIn={ setIsLoggedIn }
                 />
             );
+        case 'AccountDeleted':
+            return (<AccountDeleted/>);
         default:
             return (
                 <Home/>

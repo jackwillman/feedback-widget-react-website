@@ -22,22 +22,22 @@ interface CurrentPageProps {
     currentPage : ExistingPage;
 };
 
-const CurrentPage = function GetCurrentPageBySwitchCase(
-    {
-        setCurrentPage,
-        setIsLoggedIn,
-        setCookie,
-        cookies,
-        currentPage
-    } : CurrentPageProps
-) {
+const CurrentPage = function GetCurrentPageBySwitchCase({
+    setCurrentPage,
+    setIsLoggedIn,
+    setCookie,
+    cookies,
+    currentPage
+} : CurrentPageProps) {
     const [userPassword, setUserPassword] = useState('');
     
     switch (currentPage) {
-        case 'Home':
-            return (<Home />);
         case 'About':
-            return (<About />);
+            return <About />;
+        case 'AccountCreated':
+            return <AccountCreated />;
+        case 'AccountDeleted':
+            return <AccountDeleted/>;
         case 'Dashboard':
             return (
                 <Dashboard
@@ -47,6 +47,8 @@ const CurrentPage = function GetCurrentPageBySwitchCase(
                     userPassword={ userPassword }
                 />
             );
+        case 'Home':
+            return <Home />;
         case 'Login':
             return (
                 <Login
@@ -57,26 +59,13 @@ const CurrentPage = function GetCurrentPageBySwitchCase(
                     userPassword={ userPassword }
                 />
             );
-        case 'Signup':
-            return (
-                <Signup 
-                    setCurrentPage={ setCurrentPage }
-                />
-            );
-        case 'AccountCreated':
-            return (<AccountCreated />);
         case 'LogOut':
-            return (
-                <LogOut
-                    setIsLoggedIn={ setIsLoggedIn }
-                />
-            );
-        case 'AccountDeleted':
-            return (<AccountDeleted/>);
+            return <LogOut setIsLoggedIn={ setIsLoggedIn }/>;
+        case 'Signup':
+            return <Signup setCurrentPage={ setCurrentPage }/>;
+
         default:
-            return (
-                <Home/>
-            );
+            return <Home/>;
     }
 };
 

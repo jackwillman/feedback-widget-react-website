@@ -1,6 +1,6 @@
 import html2canvas from "html2canvas";
 
-const handleTakeScreenshot = async function handlesTakingScreenshotOfTheCurrentScreen(
+const handleTakeScreenshot = async function handlesTakingScreenshotOfScreen(
     handleSetScreenshot : (screenshot : string | null) => void,
     setIsTakingScreenshot : (isTakingScreenshot : boolean) => void
 ) {

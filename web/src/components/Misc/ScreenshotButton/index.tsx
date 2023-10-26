@@ -19,11 +19,7 @@ const ScreenshotButton = function ScreenshotButtonComponent( {
         );
     }
 
-    return ( 
-        <TakeScreenshotButton 
-            handleSetScreenshot={ handleSetScreenshot }
-        /> 
-    );
+    return <TakeScreenshotButton handleSetScreenshot={ handleSetScreenshot }/>;
 };
 
 export default ScreenshotButton;

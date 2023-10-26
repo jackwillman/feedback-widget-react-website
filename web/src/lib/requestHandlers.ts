@@ -6,6 +6,58 @@ import {
     SetCookie
 } from './types';
 
+interface HandleGetUserProps {
+    setIsUserGotten : (isGettingUser : boolean) => void;
+    setUpdateError : (userError : string) => void;
+    setUserEmail : (userEmail : string) => void;
+    setUsername : (username : string) => void;
+    cookies : CookiesType;
+};
+export const handleGetUser = function getUserFromServer(
+    {
+        setIsUserGotten,
+        setUpdateError,
+        setUserEmail,
+        setUsername,
+        cookies
+    } : HandleGetUserProps
+) {
+    const tokenHeader = config.sessionToken.headerName;
+    const sessionToken = cookies[config.sessionToken.cookieName];
+    const userId = cookies[config.user.id.cookieName];
+
+    setIsUserGotten(false);
+    setUpdateError('');
+    setUserEmail('');
+    setUsername('');
+
+    api.get(config.path.user, { 
+        params : {
+            id : userId
+        },
+        headers : {
+            [tokenHeader] : sessionToken
+        }
+
+    }).then((response) => {
+        setUsername(response.data[config.user.username]);
+        setUserEmail(response.data[config.user.email]);
+        
+    }).catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+            setUpdateError(error.response.data.error);
+        } else if (error.request) {
+            console.log(error.request);
+        } else {
+            console.log('Error: ', error.message);
+        }
+
+    }).finally(() => {
+        setIsUserGotten(true);
+    });
+};
+
 interface SignupHandlerProps {
     setIsSendingSignupInput : (isSendingSignupInput : boolean) => void;
     setSignupError : (signupError : string) => void;
@@ -62,58 +114,6 @@ export const signupHandler = function logicToHandleUserSignup(
 
     }).finally(() => {
         setIsSendingSignupInput(false);
-    });
-};
-
-interface HandleGetUserProps {
-    setIsUserGotten : (isGettingUser : boolean) => void;
-    setUpdateError : (userError : string) => void;
-    setUserEmail : (userEmail : string) => void;
-    setUsername : (username : string) => void;
-    cookies : CookiesType;
-};
-export const handleGetUser = function getUserFromServer(
-    {
-        setIsUserGotten,
-        setUpdateError,
-        setUserEmail,
-        setUsername,
-        cookies
-    } : HandleGetUserProps
-) {
-    const tokenHeader = config.sessionToken.headerName;
-    const sessionToken = cookies[config.sessionToken.cookieName];
-    const userId = cookies[config.user.id.cookieName];
-
-    setIsUserGotten(false);
-    setUpdateError('');
-    setUserEmail('');
-    setUsername('');
-
-    api.get(config.path.user, { 
-        params : {
-            id : userId
-        },
-        headers : {
-            [tokenHeader] : sessionToken
-        }
-
-    }).then((response) => {
-        setUsername(response.data[config.user.username]);
-        setUserEmail(response.data[config.user.email]);
-        
-    }).catch((error) => {
-        if (error.response) {
-            console.log(error.response.data);
-            setUpdateError(error.response.data.error);
-        } else if (error.request) {
-            console.log(error.request);
-        } else {
-            console.log('Error: ', error.message);
-        }
-
-    }).finally(() => {
-        setIsUserGotten(true);
     });
 };
 
@@ -269,5 +269,54 @@ export const loginHandler = function logicToSubmitLoginInput(
 
     }).finally(() => {
         setIsSendingLoginInput(false);
+    });
+};
+
+interface DeleteUserHandlerProps {
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
+    setIsDeletingUser : (isDeletingUser : boolean) => void;
+    setDeleteError : (updateError : string) => void;
+    setCurrentPage : (currentPage : ExistingPage) => void;
+    cookies : CookiesType;
+};
+export const deleteUserHandler = function logicToSubmitLoginInput(
+    {
+        setIsLoggedIn,
+        setIsDeletingUser,
+        setDeleteError,
+        setCurrentPage,
+        cookies
+    } : DeleteUserHandlerProps
+) {
+    const tokenHeader = config.sessionToken.headerName;
+    const sessionToken = cookies[config.sessionToken.cookieName];
+    const userId = cookies[config.user.id.cookieName];
+
+    setIsDeletingUser(true);
+
+    api.delete(config.path.user, { 
+        params : {
+            id : userId
+        },
+        headers : {
+            [tokenHeader] : sessionToken
+        }
+
+    }).then((response) => {
+        setIsLoggedIn(false);
+        setCurrentPage('Home');
+
+    }).catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+            setDeleteError(error.response.data.error);
+        } else if (error.request) {
+            console.log(error.request);
+        } else {
+            console.log('Error: ', error.message);
+        }
+
+    }).finally(() => {
+        setIsDeletingUser(false);
     });
 };

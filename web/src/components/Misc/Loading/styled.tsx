@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components"
 import { CircleNotch } from "phosphor-react";
 
-const Loading = tw.div`
+export const LoadingClass = tw.div`
     w-6
     h-6
     flex
@@ -10,13 +10,8 @@ const Loading = tw.div`
     overflow-hidden
 `;
 
-const LoadingIcon = tw(CircleNotch)`
+export const LoadingIcon = tw(CircleNotch)`
     w-4
     h-4
     animate-spin
 `;
-
-export default {
-    Loading,
-    LoadingIcon
-};

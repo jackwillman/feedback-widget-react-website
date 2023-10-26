@@ -2,7 +2,7 @@ import tw from "tailwind-styled-components"
 import { Popover } from "@headlessui/react";
 import { X } from "phosphor-react";
 
-const CloseButton = tw(Popover.Button)`
+export const CloseButtonClass = tw(Popover.Button)`
     top-5 
     right-5 
     absolute 
@@ -10,12 +10,7 @@ const CloseButton = tw(Popover.Button)`
     hover:text-zinc-100
 `;
 
-const CloseButtonIcon = tw(X)`
+export const CloseButtonIcon = tw(X)`
     w-4 
     h-4
 `;
-
-export default {
-    CloseButton,
-    CloseButtonIcon
-};

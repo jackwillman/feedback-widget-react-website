@@ -1,10 +1,13 @@
-import styled from './styled';
+import {
+    LoadingClass,
+    LoadingIcon
+} from './styled';
 
 const Loading = function LoadingComponent() {
-    return (
-        <styled.Loading>
-            <styled.LoadingIcon weight="bold" />
-        </styled.Loading>
+    return ( 
+        <LoadingClass>
+            <LoadingIcon weight="bold" />
+        </LoadingClass> 
     );
 };
 

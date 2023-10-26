@@ -1,8 +1,7 @@
 import tw from "tailwind-styled-components"
 import { Camera } from "phosphor-react";
 
-
-const ScreenshotButton = tw.button`
+export const ScreenshotButton = tw.button`
     p-2 
     rounded 
     border-transparent
@@ -16,12 +15,12 @@ const ScreenshotButton = tw.button`
     focus:ring-brand-500
 `;
 
-const ScreenshotIcon = tw(Camera)`
+export const ScreenshotIcon = tw(Camera)`
     w-6 
     h-6 
     text-zinc-100
 `;
-const ScreenshotPicture = tw.button`
+export const ScreenshotPicture = tw.button`
     p-1 
     w-10 
     h-10 
@@ -34,9 +33,3 @@ const ScreenshotPicture = tw.button`
     hover:text-zinc-100 
     transition-colors
 `;
-
-export default {
-    ScreenshotButton,
-    ScreenshotIcon,
-    ScreenshotPicture
-};

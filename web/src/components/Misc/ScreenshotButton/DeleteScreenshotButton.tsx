@@ -1,28 +1,27 @@
 import { Trash } from "phosphor-react";
+import { ScreenshotPicture } from "./styled";
 
-import { ScreenshotButtonProps } from ".";
-import styled from "./styled";
+interface DeleteScreenshotButtonProps {
+    screenshot : string | null;
+    handleSetScreenshot : (screenshot : string | null) => void;
+};
 
-const deleteScreenshotButton = function(
-    { 
-        screenshot,
-        handleSetScreenshot 
-    } : ScreenshotButtonProps
-) {
+const deleteScreenshotButton = function deleteScreenshotButtonComponent({ 
+    screenshot,
+    handleSetScreenshot 
+} : DeleteScreenshotButtonProps) {
     return (
-        <styled.ScreenshotPicture
+        <ScreenshotPicture
             type="button"
             onClick={ () => handleSetScreenshot(null) }
             style={ { 
                 backgroundImage : `url(${screenshot})`,
-
-                // posição do widget, só pq n tem bulhufas no site
                 backgroundPosition : 'right bottom',
                 backgroundSize : 80
             } }
         >
             <Trash weight="fill" />
-        </styled.ScreenshotPicture>
+        </ScreenshotPicture>
     );
 };
 

@@ -1,10 +1,13 @@
-import styled from "./styled";
+import {
+    CloseButtonClass,
+    CloseButtonIcon
+} from "./styled";
 
 const CloseButton = function CloseButtonComponent() {
-    return (
-        <styled.CloseButton title="Fechar formulário de feedback">
-            <styled.CloseButtonIcon weight="bold"/>
-        </styled.CloseButton>
+    return ( 
+        <CloseButtonClass>
+            <CloseButtonIcon weight="bold"/>        
+        </CloseButtonClass> 
     );
 };
 

@@ -1,31 +1,28 @@
 import DeleteScreenshotButton from "./DeleteScreenshotButton";
 import TakeScreenshotButton from "./TakeScreenshotButton";
 
-export interface ScreenshotButtonProps {
+interface ScreenshotButtonProps {
     screenshot : string | null;
     handleSetScreenshot : (screenshot : string | null) => void;
 };
 
-const ScreenshotButton = function ScreenshotButtonComponent(
-    { 
-        screenshot,
-        handleSetScreenshot 
-    } : ScreenshotButtonProps
-) {
-
+const ScreenshotButton = function ScreenshotButtonComponent( { 
+    screenshot,
+    handleSetScreenshot 
+} : ScreenshotButtonProps) {
     if (screenshot) {
-        return (
+        return ( 
             <DeleteScreenshotButton 
                 handleSetScreenshot={ handleSetScreenshot }
                 screenshot={ screenshot }
-            />
+            /> 
         );
     }
 
-    return (
+    return ( 
         <TakeScreenshotButton 
             handleSetScreenshot={ handleSetScreenshot }
-        />
+        /> 
     );
 };
 

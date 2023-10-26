@@ -1,18 +1,19 @@
 import { FormEvent, useState } from "react";
 
 import api from "../../../../lib/api";
-
 import { FeedbackType } from "../feedbackType";
+
 import CloseButton from "../../../Misc/CloseButton";
 import ScreenshotButton from "../../../Misc/ScreenshotButton";
+import FormTextArea from "../../../Misc/FormTextArea";
 import LeftArrowButton from "./LeftArrowButton";
 import FeedbackContentHeader from "./FeedbackContentHeader";
-import FormTextArea from "./FormTextArea";
 import SubmitButton from "./SubmitButton";
 
 import { 
     FeedbackForm, 
-    FeedbackFormFooter 
+    FeedbackFormFooter, 
+    formTextAreaClass
 } from './styled';
 
 interface FeedbackContentStepProps {
@@ -57,7 +58,11 @@ const FeedbackContentStep = function FeedbackContentStep( {
             </header>
 
             <FeedbackForm onSubmit={ handleSubmitFeedback }>
-                <FormTextArea setComment={ setComment }/>
+                <FormTextArea 
+                    setInput={ setComment }
+                    placeholder="Tell us what is happening in detail..."
+                    textClass={ formTextAreaClass }
+                />
 
                 <FeedbackFormFooter>
                     <ScreenshotButton 

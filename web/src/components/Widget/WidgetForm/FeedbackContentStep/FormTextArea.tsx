@@ -10,7 +10,7 @@ const FormTextArea = function FormTextAreaComponent(
     return (
         <textarea
             className={formTextAreaClass}
-            placeholder="Conte com detalhes o que está acontecendo..."
+            placeholder="Tell us what is happening in detail..."
             onChange={ event => setComment(event.target.value) }
         />
     );

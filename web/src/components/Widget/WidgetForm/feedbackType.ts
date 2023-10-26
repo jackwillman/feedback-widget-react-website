@@ -4,24 +4,24 @@ import thoughtImageUrl from '../../../images/thought.svg';
 
 export const feedbackTypes = {
     BUG : {
-        title : 'Problema',
+        title : 'Problem',
         image : {
             source : bugImageUrl,
-            alt : 'Imagem de um inseto'
+            alt : 'Image of a bug'
         }
     },
     IDEA : {
-        title : 'Ideia',
+        title : 'Idea',
         image : {
             source : ideaImageUrl,
-            alt : 'Imagem de uma lâmpada'
+            alt : 'Image of a lamp'
         }
     },
     OTHER : {
-        title : 'Outro',
+        title : 'Other',
         image : {
             source : thoughtImageUrl,
-            alt : 'Imagem de um balão de pensamento'
+            alt : 'Image of a thought bubble'
         }
     }
 };

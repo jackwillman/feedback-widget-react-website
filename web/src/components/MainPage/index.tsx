@@ -5,7 +5,7 @@ import config from '../../lib/config';
 
 import PageHeader from './PageHeader';
 import CurrentPage from './Pages';
-import { ExistingPage } from '../../lib/types';
+import { ExistingPage } from './pageTypes';
 
 import { MainDiv } from './styled';
 

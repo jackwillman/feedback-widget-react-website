@@ -3,34 +3,37 @@ import RestartFeedbackButton from "./RestartFeedbackButton";
 
 import successIcon from "../../../../images/success.svg";
 
-import { FeedbackSuccess, FeedbackSuccessMessage } from './styled';
+import { 
+    FeedbackSuccess, 
+    FeedbackSuccessMessage 
+} from './styled';
 
 export interface FeedbackSuccessStepProps {
     onFeedbackRestartRequested : () => void;
 };
 
-const FeedbackSuccessStep = function FeedbackSuccessStep(
-    {
-        onFeedbackRestartRequested
-    } : FeedbackSuccessStepProps
-) {
-    return ( <>
-        <header>
-            <CloseButton />
-        </header>
+const FeedbackSuccessStep = function FeedbackSuccessStep({
+    onFeedbackRestartRequested
+} : FeedbackSuccessStepProps) {
+    return ( 
+        <>
+            <header>
+                <CloseButton />
+            </header>
 
-        <FeedbackSuccess>
-            <img src={ successIcon } />
+            <FeedbackSuccess>
+                <img src={ successIcon } />
 
-            <FeedbackSuccessMessage>
-                Agradecemos o feedback!
-            </FeedbackSuccessMessage>
+                <FeedbackSuccessMessage>
+                    Thank you for your feedback!
+                </FeedbackSuccessMessage>
 
-            <RestartFeedbackButton 
-                onFeedbackRestartRequested={ onFeedbackRestartRequested }
-            />
-        </FeedbackSuccess>
-    </> );
+                <RestartFeedbackButton 
+                    onFeedbackRestartRequested={ onFeedbackRestartRequested }
+                />
+            </FeedbackSuccess>
+        </> 
+    );
 };
 
 export default FeedbackSuccessStep;

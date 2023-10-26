@@ -1,7 +1,6 @@
 import { Popover } from '@headlessui/react';
 
 import WidgetForm from './WidgetForm';
-
 import {
     WidgetPopover,
     WidgetButton,
@@ -11,20 +10,18 @@ import {
 
 const Widget = function WidgetComponent() {    
     return (
-        <WidgetPopover>
-            
+        <WidgetPopover>            
             <Popover.Panel>
                 <WidgetForm />
-            </Popover.Panel>
-    
+            </Popover.Panel>    
+
             <WidgetButton>
-                <WidgetIcon weight="bold"/>
-    
+                <WidgetIcon weight="bold"/>    
                 <WidgetSpan>
                     Feedback
                 </WidgetSpan>
-            </WidgetButton>
-    
+            </WidgetButton>   
+
         </WidgetPopover>
     );
 };

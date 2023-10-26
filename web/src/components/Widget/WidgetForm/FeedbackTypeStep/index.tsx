@@ -8,8 +8,7 @@ export interface FeedbackTypeStepProps {
 
 const FeedbackTypeStep = function FeedbackTypeStep({ 
     handleSetFeedbackType 
-} : FeedbackTypeStepProps
-) {
+} : FeedbackTypeStepProps) {
     return ( 
         <>
             <FeedbackTypeHeader />

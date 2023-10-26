@@ -6,7 +6,7 @@ import {
 import { 
     ExistingPage,
     SetCookie 
-} from '../../../../lib/types';
+} from '../../pageTypes';
 import { loginHandler } from '../../../../lib/requestHandlers';
 import LoginFormTextArea from './LoginFormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';

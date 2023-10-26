@@ -7,18 +7,18 @@ interface SubmitButtonProps {
     comment : string;
 };
 
-const SubmitButton = function FeedbackFormSubmitButtonComponent(
-    { isSendingFeedback, comment } : SubmitButtonProps
-) {
+const SubmitButton = function FeedbackFormSubmitButtonComponent({ 
+    isSendingFeedback, 
+    comment 
+} : SubmitButtonProps) {
     return (
         <FeedbackFormSubmit 
             type="submit" 
             disabled={ comment.length === 0 || isSendingFeedback }
         >
-            { 
-                isSendingFeedback
-                    ? <Loading />
-                    : 'Enviar Feedback' 
+            { isSendingFeedback
+                ? <Loading />
+                : 'Send Feedback' 
             }
         </FeedbackFormSubmit>
     );

@@ -7,7 +7,7 @@ import {
 import { 
     CookiesType, 
     ExistingPage 
-} from "../../../../lib/types";
+} from "../../pageTypes";
 import { 
     handleGetUser,
     updateUserHandler

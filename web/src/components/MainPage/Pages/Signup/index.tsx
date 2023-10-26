@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react';
 
-import { ExistingPage } from '../../../../lib/types';
+import { ExistingPage } from '../../pageTypes';
 import { signupHandler } from '../../../../lib/requestHandlers';
 import SignupFormTextArea from './SignupFormTextArea';
 import SignupSubmitButton from './SignupSubmitButton';

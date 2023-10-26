@@ -4,7 +4,7 @@ import { deleteUserHandler } from '../../../../lib/requestHandlers';
 import {
     ExistingPage,
     CookiesType
-} from '../../../../lib/types';
+} from '../../pageTypes';
 
 import { 
     DashboardDeleteButtonClass,

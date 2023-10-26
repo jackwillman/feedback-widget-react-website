@@ -4,7 +4,7 @@ import {
     ExistingPage,
     CookiesType,
     SetCookie
-} from './types';
+} from '../components/MainPage/pageTypes';
 
 interface HandleGetUserProps {
     setIsUserGotten : (isGettingUser : boolean) => void;

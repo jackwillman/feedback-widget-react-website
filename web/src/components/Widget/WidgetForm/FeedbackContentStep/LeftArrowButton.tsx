@@ -1,12 +1,15 @@
-import { FeedbackArrowLeftButton, FeedbackArrowLeftIcon } from "./styled";
+import { 
+    FeedbackArrowLeftButton, 
+    FeedbackArrowLeftIcon 
+} from "./styled";
 
 interface FeedbackContentStepProps {
     onFeedbackRestartRequested : () => void;
 };
 
-const LeftArrowButton = function LeftArrowButtonComponent(
-    { onFeedbackRestartRequested } : FeedbackContentStepProps
-) {
+const LeftArrowButton = function LeftArrowButtonComponent({ 
+    onFeedbackRestartRequested 
+} : FeedbackContentStepProps) {
     return (
         <FeedbackArrowLeftButton 
             type="button" 

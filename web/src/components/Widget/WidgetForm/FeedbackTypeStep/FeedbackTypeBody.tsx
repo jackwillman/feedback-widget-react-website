@@ -1,12 +1,17 @@
-import { FeedbackType, feedbackTypes } from "../feedbackType";
+import { 
+    FeedbackType, 
+    feedbackTypes 
+} from "../feedbackType";
 import { FeedbackTypeStepProps } from ".";
 
-import { FeedbackTypeBodyDiv, FeedbackTypeButton } from './styled';
+import { 
+    FeedbackTypeBodyDiv, 
+    FeedbackTypeButton 
+} from './styled';
 
 const FeedbackTypeBody = function FeedbackTypeBodyComponent({ 
     handleSetFeedbackType 
-} : FeedbackTypeStepProps
-) {
+} : FeedbackTypeStepProps) {
     return (
         <FeedbackTypeBodyDiv>
             { Object.entries(feedbackTypes).map(([key, value]) => {

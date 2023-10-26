@@ -1,4 +1,4 @@
-import { ExistingPage } from '../../../../lib/types';
+import { ExistingPage } from '../../pageTypes';
 
 import { 
     MenuButtonsDiv, 

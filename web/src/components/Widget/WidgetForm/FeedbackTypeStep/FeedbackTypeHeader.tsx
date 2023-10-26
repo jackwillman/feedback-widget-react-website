@@ -4,10 +4,10 @@ import { FeedbackTypeHeaderSpan } from './styled';
 
 const FeedbackTypeHeader = function FeedbackTypeHeaderComponent() {
     return (
-    <header>
-        <FeedbackTypeHeaderSpan>Deixe seu feedback</FeedbackTypeHeaderSpan>
-        <CloseButton />
-    </header>
+        <header>
+            <FeedbackTypeHeaderSpan>Write your feedback</FeedbackTypeHeaderSpan>
+            <CloseButton />
+        </header>
     );
 };
 

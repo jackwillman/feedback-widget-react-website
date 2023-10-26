@@ -1,14 +1,11 @@
-import { 
-    useState, 
-    FormEvent 
-} from 'react';
+import { FormEvent, useState } from 'react';
 
 import { 
     ExistingPage,
     SetCookie 
 } from '../../pageTypes';
 import { loginHandler } from '../../../../lib/requestHandlers';
-import LoginFormTextArea from './LoginFormTextArea';
+import FormTextArea from '../../../Misc/FormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';
 
 import { 
@@ -16,7 +13,8 @@ import {
     TextDiv,
     BigText,
     AccountForm,
-    AccountFormText 
+    AccountFormText, 
+    accountFormTextAreaClass
 } from '../styled';
 
 interface LoginProps {
@@ -38,25 +36,35 @@ const Login = function LoginPageComponent({
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
     const [loginError, setLoginError] = useState('');
 
+    const handleLogin = function (event : FormEvent) {
+        loginHandler({
+            setIsSendingLoginInput,
+            setLoginError,
+            setIsLoggedIn,
+            setCurrentPage,
+            setCookie,
+            userIdentifier,
+            userPassword
+        });
+    };    
+    
     return ( 
         <PageDiv>
             <TextDiv>
                 <BigText>
                     Log In
                 </BigText>
-                <AccountForm onSubmit={ () => loginHandler({
-                    setIsSendingLoginInput,
-                    setLoginError,
-                    setIsLoggedIn,
-                    setCurrentPage,
-                    setCookie,
-                    userIdentifier,
-                    userPassword
-                }) }>
+                <AccountForm onSubmit={ handleLogin }>
                     <AccountFormText> Username or E-mail </AccountFormText>
-                    <LoginFormTextArea setInput={ setUserIdentifier }/>
+                    <FormTextArea 
+                        setInput={ setUserIdentifier }
+                        textClass={ accountFormTextAreaClass }
+                    />
                     <AccountFormText> Password </AccountFormText>
-                    <LoginFormTextArea setInput={ setUserPassword }/>
+                    <FormTextArea 
+                        setInput={ setUserPassword }
+                        textClass={ accountFormTextAreaClass }
+                    />
                     <LoginSubmitButton 
                         isSendingLoginInput={ isSendingLoginInput }
                         userIdentifier={ userIdentifier }

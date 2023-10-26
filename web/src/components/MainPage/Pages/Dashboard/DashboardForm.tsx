@@ -3,13 +3,14 @@ import { useState } from "react";
 import { updateUserHandler } from '../../../../lib/requestHandlers';
 import { CookiesType } from "../../pageTypes";
 
-import DashboardFormTextArea from "./DashboardFormTextArea";
+import FormTextArea from "../../../Misc/FormTextArea";
 import DashboardUpdateButton from "./DashboardUpdateButton";
 import { 
     DasboardItemDiv,
     DashboardFormClass, 
     DashboardItemRow,
-    DashboardText
+    DashboardText,
+    dashboardFormTextClass
 } from "./styled";
 
 interface DashboardFormProps {
@@ -56,25 +57,28 @@ const DashboardForm = function DashboardFormComponent({
             <DasboardItemDiv>
                 <DashboardItemRow>
                     <DashboardText>Username:</DashboardText>
-                    <DashboardFormTextArea 
-                        originalValue={ username }
+                    <FormTextArea 
                         setInput={ setNewUsername }
+                        placeholder={ username }
+                        textClass={ dashboardFormTextClass }
                     />
                 </DashboardItemRow>
 
                 <DashboardItemRow>
                     <DashboardText>E-mail:</DashboardText>
-                    <DashboardFormTextArea 
-                        originalValue={ userEmail }
+                    <FormTextArea 
                         setInput={ setNewUserEmail }
+                        placeholder={ userEmail }
+                        textClass={ dashboardFormTextClass }
                     />
                 </DashboardItemRow>
 
                 <DashboardItemRow>
                     <DashboardText>Password:</DashboardText>
-                    <DashboardFormTextArea 
-                        originalValue={ "******" }
+                    <FormTextArea 
                         setInput={ setNewUserPassword }
+                        placeholder={ "******" }
+                        textClass={ dashboardFormTextClass }
                     />
                 </DashboardItemRow>
 

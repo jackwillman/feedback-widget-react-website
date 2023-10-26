@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 import { ExistingPage } from '../../pageTypes';
 import { signupHandler } from '../../../../lib/requestHandlers';
-import SignupFormTextArea from './SignupFormTextArea';
+
+import FormTextArea from '../../../Misc/FormTextArea';
 import SignupSubmitButton from './SignupSubmitButton';
 
 import { 
@@ -10,7 +11,8 @@ import {
     TextDiv,
     BigText,
     AccountForm,
-    AccountFormText
+    AccountFormText,
+    accountFormTextAreaClass
 } from "../styled";
 
 interface SignupProps {
@@ -44,11 +46,20 @@ const Signup = function SignupPageComponent ({
                     });
                 } }>
                     <AccountFormText> Username </AccountFormText>
-                    <SignupFormTextArea setInput={ setUsername }/>
+                    <FormTextArea 
+                        setInput={ setUsername }
+                        textClass= { accountFormTextAreaClass }
+                    />
                     <AccountFormText> Email </AccountFormText>
-                    <SignupFormTextArea setInput={ setUserEmail }/>
+                    <FormTextArea 
+                        setInput={ setUserEmail }
+                        textClass= { accountFormTextAreaClass }
+                    />
                     <AccountFormText> Password </AccountFormText>
-                    <SignupFormTextArea setInput={ setUserPassword }/>
+                    <FormTextArea 
+                        setInput={ setUserPassword }
+                        textClass= { accountFormTextAreaClass }
+                    />
                     <SignupSubmitButton 
                         isSendingSignupInput={ isSendingSignupInput }
                         username={ username }

@@ -10,26 +10,27 @@ interface SignupSubmitButtonProps {
 };
 
 const SignupSubmitButton = function ({ 
-        isSendingSignupInput, 
-        username, 
-        userEmail,
-        userPassword 
-    } : SignupSubmitButtonProps
-) {
-    return ( <AccountFormSubmit
-        type="submit"
-        disabled={ 
-            username.length === 0 
-            || userEmail.length === 0
-            || userPassword.length === 0 
-            || isSendingSignupInput 
-        }
-    >
-        { isSendingSignupInput            
-            ? <Loading />
-            : 'Sign Up'
-        }
-    </AccountFormSubmit> );
+    isSendingSignupInput, 
+    username, 
+    userEmail,
+    userPassword 
+} : SignupSubmitButtonProps) {
+    return ( 
+        <AccountFormSubmit
+            type="submit"
+            disabled={ 
+                username.length === 0 
+                || userEmail.length === 0
+                || userPassword.length === 0 
+                || isSendingSignupInput 
+            }
+        >
+            { isSendingSignupInput            
+                ? <Loading />
+                : 'Sign Up'
+            }
+        </AccountFormSubmit> 
+    );
 };
 
 export default SignupSubmitButton;

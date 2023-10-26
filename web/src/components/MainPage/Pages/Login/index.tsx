@@ -27,61 +27,49 @@ interface LoginProps {
     userPassword : string;
 };
 
-const Login = function LoginPageComponent(
-    { 
-        setCurrentPage, 
-        setIsLoggedIn,
-        setUserPassword,
-        setCookie,
-        userPassword
-    } : LoginProps
-) {
+const Login = function LoginPageComponent({ 
+    setCurrentPage, 
+    setIsLoggedIn,
+    setUserPassword,
+    setCookie,
+    userPassword
+} : LoginProps) {
     const [userIdentifier, setUserIdentifier] = useState('');
     const [isSendingLoginInput, setIsSendingLoginInput] = useState(false);
     const [loginError, setLoginError] = useState('');
 
-    const handleLogin = function submitLoginInput(
-        event : FormEvent
-    ) {
-        event.preventDefault();
-
-        loginHandler({
-            setIsSendingLoginInput,
-            setLoginError,
-            setIsLoggedIn,
-            setCurrentPage,
-            setCookie,
-            userIdentifier,
-            userPassword
-        });
-    };
-
-    return ( <PageDiv>
-        <TextDiv>
-            <BigText>
-                Log In
-            </BigText>
-            <AccountForm onSubmit={ handleLogin }>
-                <AccountFormText>
-                    Username or E-mail
-                </AccountFormText>
-                <LoginFormTextArea setInput={ setUserIdentifier }/>
-                <AccountFormText>
-                    Password
-                </AccountFormText>
-                <LoginFormTextArea setInput={ setUserPassword }/>
-                <LoginSubmitButton 
-                    isSendingLoginInput={ isSendingLoginInput }
-                    userIdentifier={ userIdentifier }
-                    userPassword={ userPassword }
-                />
-                { loginError 
-                    ? loginError
-                    : <></>                 
-                }
-            </AccountForm>
-        </TextDiv>
-    </PageDiv> );
+    return ( 
+        <PageDiv>
+            <TextDiv>
+                <BigText>
+                    Log In
+                </BigText>
+                <AccountForm onSubmit={ () => loginHandler({
+                    setIsSendingLoginInput,
+                    setLoginError,
+                    setIsLoggedIn,
+                    setCurrentPage,
+                    setCookie,
+                    userIdentifier,
+                    userPassword
+                }) }>
+                    <AccountFormText> Username or E-mail </AccountFormText>
+                    <LoginFormTextArea setInput={ setUserIdentifier }/>
+                    <AccountFormText> Password </AccountFormText>
+                    <LoginFormTextArea setInput={ setUserPassword }/>
+                    <LoginSubmitButton 
+                        isSendingLoginInput={ isSendingLoginInput }
+                        userIdentifier={ userIdentifier }
+                        userPassword={ userPassword }
+                    />
+                    { loginError 
+                        ? loginError
+                        : <></>                 
+                    }
+                </AccountForm>
+            </TextDiv>
+        </PageDiv> 
+    );
 };
 
 export default Login;

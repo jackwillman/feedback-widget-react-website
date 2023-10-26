@@ -4,7 +4,10 @@ import {
     FormEvent 
 } from 'react';
 
-import { CookiesType } from "../../../../lib/types";
+import { 
+    CookiesType, 
+    ExistingPage 
+} from "../../../../lib/types";
 import { 
     handleGetUser,
     updateUserHandler
@@ -30,18 +33,21 @@ import {
 import DashboardDeleteButton from './DashboardDeleteButton';
 
 interface DashboardProps {
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
+    setCurrentPage : (currentPage : ExistingPage) => void;     
     userPassword : string;
     cookies : CookiesType;
 };
 
 const Dashboard = function DashboardPageComponent(
-    { 
+    {
+        setIsLoggedIn,
+        setCurrentPage,
         userPassword,
         cookies
      } : DashboardProps
 ) {
     const [isUserGotten, setIsUserGotten] = useState(false);
-    const [isDeletingUser, SetIsDeletingUser] = useState(false);
     const [updateError, setUpdateError] = useState('');
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [username, setUsername] = useState('');
@@ -119,7 +125,9 @@ const Dashboard = function DashboardPageComponent(
                             </DashboardItemRow>
 
                             <DashboardDeleteButton 
-                                isDeletingUser={ isDeletingUser }
+                                setIsLoggedIn={ setIsLoggedIn }
+                                setCurrentPage={ setCurrentPage }       
+                                cookies={ cookies }
                             />
                         </DasboardItemDiv>
 

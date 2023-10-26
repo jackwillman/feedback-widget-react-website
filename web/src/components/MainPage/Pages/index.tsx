@@ -43,7 +43,9 @@ const CurrentPage = function GetCurrentPageBySwitchCase(
             );
         case 'Dashboard':
             return (
-                <Dashboard 
+                <Dashboard
+                    setIsLoggedIn={ setIsLoggedIn }
+                    setCurrentPage={ setCurrentPage }      
                     cookies={ cookies }
                     userPassword={ userPassword }
                 />

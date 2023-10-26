@@ -273,18 +273,18 @@ export const loginHandler = function logicToSubmitLoginInput(
 };
 
 interface DeleteUserHandlerProps {
-    setIsLoggedIn : (isLoggedIn : boolean) => void;
-    setIsDeletingUser : (isDeletingUser : boolean) => void;
     setDeleteError : (updateError : string) => void;
+    setIsDeletingUser : (isDeletingUser : boolean) => void;
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
     setCurrentPage : (currentPage : ExistingPage) => void;
     cookies : CookiesType;
 };
 export const deleteUserHandler = function logicToSubmitLoginInput(
     {
-        setIsLoggedIn,
-        setIsDeletingUser,
         setDeleteError,
-        setCurrentPage,
+        setIsDeletingUser,
+        setIsLoggedIn,
+        setCurrentPage,        
         cookies
     } : DeleteUserHandlerProps
 ) {

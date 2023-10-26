@@ -119,7 +119,7 @@ export const signupHandler = function logicToHandleUserSignup(
 
 interface UpdateUserHandlerProps {
     setIsSendingNewUserData : (isSendingNewUserData : boolean) => void;
-    setUpdateSuccess : (updateSuccess : boolean) => void;
+    setIsUserUpdated : (updateSuccess : boolean) => void;
     setUpdateError : (updateError : string) => void;
     setNewUsername : (newUsername : string) => void;
     setNewUserEmail : (newUserEmail : string) => void;
@@ -136,7 +136,7 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
     {
         setIsSendingNewUserData,
         setUpdateError,
-        setUpdateSuccess,
+        setIsUserUpdated,
         setNewUsername,
         setNewUserEmail,
         setNewUserPassword,
@@ -155,7 +155,7 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
 
     setIsSendingNewUserData(true);
     setUpdateError('');
-    setUpdateSuccess(false);
+    setIsUserUpdated(false);
 
     if (!newUsername) {
         setNewUsername(username);
@@ -181,7 +181,7 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
             [tokenHeader] : sessionToken
         }
     }).then((response) => {
-        setUpdateSuccess(true);
+        setIsUserUpdated(true);
     }).catch((error) => {
         if (error.response) {
             if (error.response.data.errors) {

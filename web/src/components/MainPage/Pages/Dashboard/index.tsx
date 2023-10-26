@@ -1,36 +1,25 @@
 import { 
     useEffect,
-    useState, 
-    FormEvent 
+    useState,  
 } from 'react';
 
 import { 
     CookiesType, 
     ExistingPage 
 } from "../../pageTypes";
-import { 
-    handleGetUser,
-    updateUserHandler
-} from '../../../../lib/requestHandlers';
+import { handleGetUser } from '../../../../lib/requestHandlers';
 
 import Loading from '../../../Misc/Loading';
-import DashboardFormTextArea from './DashboardFormTextArea';
-import DashboardUpdateButton from './DashboardUpdateButton';
+import DashboardForm from './DashboardForm';
 
 import { 
     PageDiv, 
     TextDiv, 
     BiggerText 
 } from '../styled';
-import { 
-    DashboardDiv,
-    DasboardItemDiv,
-    DashboardForm,
-    DashboardItemRow,
-    DashboardResponseDiv,
-    DashboardText
- } from './styled';
+import { DashboardDiv, DashboardResponseDiv, DashboardText } from './styled';
 import DashboardDeleteButton from './DashboardDeleteButton';
+
 
 interface DashboardProps {
     setIsLoggedIn : (isLoggedIn : boolean) => void;
@@ -39,45 +28,17 @@ interface DashboardProps {
     cookies : CookiesType;
 };
 
-const Dashboard = function DashboardPageComponent(
-    {
-        setIsLoggedIn,
-        setCurrentPage,
-        userPassword,
-        cookies
-     } : DashboardProps
-) {
+const Dashboard = function DashboardPageComponent({
+    setIsLoggedIn,
+    setCurrentPage,
+    userPassword,
+    cookies
+} : DashboardProps) {
     const [isUserGotten, setIsUserGotten] = useState(false);
-    const [updateError, setUpdateError] = useState('');
-    const [updateSuccess, setUpdateSuccess] = useState(false);
     const [username, setUsername] = useState('');
     const [userEmail, setUserEmail] = useState('');
-    const [isSendingNewUserData, setIsSendingNewUserData] = useState(false);
-    const [newUsername, setNewUsername] = useState('');
-    const [newUserEmail, setNewUserEmail] = useState('');
-    const [newUserPassword, setNewUserPassword] = useState('');
-
-    const handleUpdateUser = function updateUserOnServer(
-        event : FormEvent
-    ) {
-        event.preventDefault();
-
-        updateUserHandler({
-            setIsSendingNewUserData,
-            setUpdateError,
-            setUpdateSuccess,
-            setNewUsername,
-            setNewUserEmail,
-            setNewUserPassword,
-            newUsername,
-            username,
-            userEmail,
-            newUserEmail,
-            userPassword,
-            newUserPassword,
-            cookies
-        });
-    };
+    const [updateError, setUpdateError] = useState('');
+    const [isUserUpdated, setIsUserUpdated] = useState(false);
 
     useEffect(() => {
         handleGetUser({
@@ -89,71 +50,45 @@ const Dashboard = function DashboardPageComponent(
         });    
     }, []);               
     
-    return ( <PageDiv>
-        <TextDiv>
-            <BiggerText>
-                Dashboard
-            </BiggerText>
-            { !isUserGotten 
-                ? <Loading />
-                : <DashboardDiv>
-                
-                    <DashboardForm onSubmit={ handleUpdateUser }>
-                        <DasboardItemDiv>
-                            <DashboardItemRow>
-                                <DashboardText>Username:</DashboardText>
-                                <DashboardFormTextArea 
-                                    originalValue={ username }
-                                    setInput={ setNewUsername }
-                                />
-                            </DashboardItemRow>
-
-                            <DashboardItemRow>
-                                <DashboardText>E-mail:</DashboardText>
-                                <DashboardFormTextArea 
-                                    originalValue={ userEmail }
-                                    setInput={ setNewUserEmail }
-                                />
-                            </DashboardItemRow>
-
-                            <DashboardItemRow>
-                                <DashboardText>Password:</DashboardText>
-                                <DashboardFormTextArea 
-                                    originalValue={ '******' }
-                                    setInput={ setNewUserPassword }
-                                />
-                            </DashboardItemRow>
-
+    return ( 
+        <PageDiv>
+            <TextDiv>
+                <BiggerText>
+                    Dashboard
+                </BiggerText>
+                { !isUserGotten 
+                    ? <Loading />
+                    : (
+                        <DashboardDiv>
+                            <DashboardForm
+                                setIsUserUpdated={ setIsUserUpdated }
+                                setUpdateError={ setUpdateError }
+                                username={ username }
+                                userEmail={ userEmail }
+                                userPassword={ userPassword }
+                                cookies={ cookies }
+                            />
                             <DashboardDeleteButton 
                                 setIsLoggedIn={ setIsLoggedIn }
                                 setCurrentPage={ setCurrentPage }       
                                 cookies={ cookies }
                             />
-                        </DasboardItemDiv>
-
-                        
-                        <DashboardUpdateButton
-                            isSendingNewUserData={ isSendingNewUserData }
-                            newUsername={ newUsername }
-                            newEmail={ newUserEmail }
-                        />
-                        
-                    </DashboardForm>
-
-                    <DashboardResponseDiv>
-                        <DashboardText>
-                            { updateError
-                                ? updateError 
-                                : updateSuccess 
-                                    ? <>Your account has been updated!</>
-                                    : <></>
-                            }
-                        </DashboardText>
-                    </DashboardResponseDiv>      
-                </DashboardDiv>
-            }
-        </TextDiv>
-    </PageDiv>);
+                            <DashboardResponseDiv>
+                                <DashboardText>
+                                    { updateError
+                                        ? updateError 
+                                        : isUserUpdated 
+                                            ? <>Your account has been updated!</>
+                                            : <></>
+                                    }
+                                </DashboardText>
+                            </DashboardResponseDiv>  
+                        </DashboardDiv>
+                    )
+                }
+            </TextDiv>
+        </PageDiv>
+    );
 };
 
 export default Dashboard;

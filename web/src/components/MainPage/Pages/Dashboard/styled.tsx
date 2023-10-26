@@ -7,7 +7,7 @@ export const DashboardDiv = tw.div`
     absolute
 `;
 
-export const DashboardForm = tw.form`
+export const DashboardFormClass = tw.form`
     relative 
     mt-[47px]
     w-[480px]
@@ -18,7 +18,7 @@ export const DasboardItemDiv = tw.div`
     bg-zinc-900 
     rounded
     shadow-lg
-    h-[280px]
+    h-[230px]
 `;
 
 export const DashboardItemRow = tw.div`
@@ -73,10 +73,10 @@ export const DashboardMainButtonClass = tw.button`
 
 export const DashboardDeleteButtonClass = tw.button`
     relative
-    ml-[50px]
-    mt-8
+    mt-2
     min-w-[170px] 
-    w-[380px]
+    min-w-[170px] 
+    w-full
     h-10
     rounded
     border-2 

@@ -7,13 +7,15 @@ import {
 } from './styled';
 
 const AccountDeleted = function AccountDeletedPageComponent() {
-    return ( <PageDiv>
-        <AccountDeletedTextDiv>
-            <BigText>
-                Account Deleted.
-            </BigText>
-        </AccountDeletedTextDiv>
-    </PageDiv> );
+    return ( 
+        <PageDiv>
+            <AccountDeletedTextDiv>
+                <BigText>
+                    Account Deleted.
+                </BigText>
+            </AccountDeletedTextDiv>
+        </PageDiv> 
+    );
 };
 
 export default AccountDeleted;

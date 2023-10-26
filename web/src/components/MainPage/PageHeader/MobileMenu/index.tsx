@@ -10,30 +10,27 @@ import {
 
 interface MobileMenuProps {
     setCurrentPage : ( currentPage : ExistingPage ) => void;
-    setIsLoggedIn : ( isLoggedIn : boolean) => void;
     isLoggedIn : boolean;
 };
 
-const MobileMenu = function MobileMenuComponent(
-    { 
-        setCurrentPage,
-        setIsLoggedIn,
-        isLoggedIn
-    } : MobileMenuProps
-) {
-    return ( <MenuListPopover>        
-        <MenuListButton>
-            <MenuListIcon weight='bold'/>
-        </MenuListButton>
+const MobileMenu = function MobileMenuComponent({ 
+    setCurrentPage,
+    isLoggedIn
+} : MobileMenuProps) {
+    return ( 
+        <MenuListPopover>        
+            <MenuListButton>
+                <MenuListIcon weight='bold'/>
+            </MenuListButton>
 
-        <MenuListPanel>
-            <MobileMenuList
-                setCurrentPage={ setCurrentPage }
-                setIsLoggedIn={ setIsLoggedIn }
-                isLoggedIn={ isLoggedIn }
-            />
-        </MenuListPanel >        
-    </MenuListPopover> );
+            <MenuListPanel>
+                <MobileMenuList
+                    setCurrentPage={ setCurrentPage }
+                    isLoggedIn={ isLoggedIn }
+                />
+            </MenuListPanel >        
+        </MenuListPopover> 
+    );
 };
 
 export default MobileMenu;

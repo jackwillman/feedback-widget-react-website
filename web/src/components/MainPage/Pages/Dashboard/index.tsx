@@ -18,8 +18,7 @@ import {
     TextDiv, 
     BiggerText 
 } from '../styled';
-
-
+import { DashboardDiv } from './styled';
 
 interface DashboardProps {
     setIsLoggedIn : (isLoggedIn : boolean) => void;
@@ -59,16 +58,19 @@ const Dashboard = function DashboardPageComponent({
                 { !isUserGotten 
                     ? <Loading />
                     : (
-                        <UserDashboard 
-                            setIsLoggedIn={ setIsLoggedIn }
-                            setCurrentPage={ setCurrentPage }
-                            setUserError={ setUserError }
-                            userError={ userError }
-                            username={ username }
-                            userEmail={ userEmail }
-                            userPassword={ userPassword }
-                            cookies={ cookies }
-                        />
+                        <DashboardDiv>
+                            <UserDashboard 
+                                setIsLoggedIn={ setIsLoggedIn }
+                                setCurrentPage={ setCurrentPage }
+                                setUserError={ setUserError }
+                                userError={ userError }
+                                username={ username }
+                                userEmail={ userEmail }
+                                userPassword={ userPassword }
+                                cookies={ cookies }
+                            />
+                            <FeedbackDashboard />
+                        </DashboardDiv>
                     )
                 }
             </TextDiv>

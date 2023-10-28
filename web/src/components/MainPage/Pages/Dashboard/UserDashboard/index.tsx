@@ -8,12 +8,12 @@ import DashboardDeleteButton from './DashboardDeleteButton';
 
 import DashboardForm from './DashboardForm';
 
-import { 
-    DashboardDiv, 
-    DashboardText 
-} from '../styled';
+import { DashboardText } from '../styled';
 
-import { UserDashboardResponse } from './styled';
+import { 
+    UserDashboardDiv,
+    UserDashboardResponse 
+} from './styled';
 
 interface UserDashboardProps {
     setIsLoggedIn : (isLoggedIn : boolean) => void;
@@ -39,7 +39,7 @@ const UserDashboard = function UserDashboardComponent({
     const [isUserUpdated, setIsUserUpdated] = useState(false);  
     
     return ( 
-        <DashboardDiv>
+        <UserDashboardDiv>
             <DashboardForm
                 setIsUserUpdated={ setIsUserUpdated }
                 setUserError={ setUserError }
@@ -63,7 +63,7 @@ const UserDashboard = function UserDashboardComponent({
                     }
                 </DashboardText>
             </UserDashboardResponse>  
-        </DashboardDiv>                    
+        </UserDashboardDiv>                    
     );
 };
 

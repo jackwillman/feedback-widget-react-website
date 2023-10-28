@@ -3,6 +3,10 @@ import Popup from "reactjs-popup";
 
 import { Text } from "../../styled";
 
+export const UserDashboardDiv = tw.div`
+    relative
+`;
+
 export const UserUpdateFormStyle = tw.form`
     relative 
     mt-[47px]

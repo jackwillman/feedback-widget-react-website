@@ -1,10 +1,10 @@
-import Loading from '../../../Misc/Loading';
+import Loading from '../../../../Misc/Loading';
 
-import { deleteUserHandler } from '../../../../lib/requestHandlers';
+import { deleteUserHandler } from '../../../../../lib/requestHandlers';
 import {
     ExistingPage,
     CookiesType
-} from '../../pageTypes';
+} from '../../../pageTypes';
 
 import { 
     DashboardDeleteButtonClass,
@@ -12,7 +12,7 @@ import {
     DashboardDeleteConfirmationPopup,
     DashboardDeleteConfirmationText,
     DashboardDeleteConfirmationButton
- } from './styled';
+ } from '../styled';
 import { useState } from 'react';
 
 interface LoginDeleteButtonProps {

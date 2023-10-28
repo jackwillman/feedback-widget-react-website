@@ -1,6 +1,6 @@
-import Loading from '../../../Misc/Loading';
+import Loading from '../../../../Misc/Loading';
 
-import { DashboardMainButtonClass } from './styled';
+import { DashboardMainButtonClass } from '../styled';
 
 interface LoginSubmitButtonProps {
     isSendingNewUserData : boolean;

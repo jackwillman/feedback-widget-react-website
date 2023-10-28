@@ -3,22 +3,22 @@ import {
     useState,  
 } from 'react';
 
+import { handleGetUser } from '../../../../lib/requestHandlers';
 import { 
     CookiesType, 
     ExistingPage 
 } from "../../pageTypes";
-import { handleGetUser } from '../../../../lib/requestHandlers';
 
 import Loading from '../../../Misc/Loading';
-import DashboardForm from './DashboardForm';
+import FeedbackDashboard from './FeedbackDashboard';
+import UserDashboard from './UserDashboard';
 
 import { 
     PageDiv, 
     TextDiv, 
     BiggerText 
 } from '../styled';
-import { DashboardDiv, DashboardResponseDiv, DashboardText } from './styled';
-import DashboardDeleteButton from './DashboardDeleteButton';
+
 
 
 interface DashboardProps {
@@ -35,15 +35,15 @@ const Dashboard = function DashboardPageComponent({
     cookies
 } : DashboardProps) {
     const [isUserGotten, setIsUserGotten] = useState(false);
+    const [userError, setUserError] = useState('');
     const [username, setUsername] = useState('');
     const [userEmail, setUserEmail] = useState('');
-    const [updateError, setUpdateError] = useState('');
     const [isUserUpdated, setIsUserUpdated] = useState(false);
 
     useEffect(() => {
         handleGetUser({
             setIsUserGotten,
-            setUpdateError,
+            setUserError,
             setUserEmail,
             setUsername,
             cookies
@@ -59,31 +59,16 @@ const Dashboard = function DashboardPageComponent({
                 { !isUserGotten 
                     ? <Loading />
                     : (
-                        <DashboardDiv>
-                            <DashboardForm
-                                setIsUserUpdated={ setIsUserUpdated }
-                                setUpdateError={ setUpdateError }
-                                username={ username }
-                                userEmail={ userEmail }
-                                userPassword={ userPassword }
-                                cookies={ cookies }
-                            />
-                            <DashboardDeleteButton 
-                                setIsLoggedIn={ setIsLoggedIn }
-                                setCurrentPage={ setCurrentPage }       
-                                cookies={ cookies }
-                            />
-                            <DashboardResponseDiv>
-                                <DashboardText>
-                                    { updateError
-                                        ? updateError 
-                                        : isUserUpdated 
-                                            ? <>Your account has been updated!</>
-                                            : <></>
-                                    }
-                                </DashboardText>
-                            </DashboardResponseDiv>  
-                        </DashboardDiv>
+                        <UserDashboard 
+                            setIsLoggedIn={ setIsLoggedIn }
+                            setCurrentPage={ setCurrentPage }
+                            setUserError={ setUserError }
+                            userError={ userError }
+                            username={ username }
+                            userEmail={ userEmail }
+                            userPassword={ userPassword }
+                            cookies={ cookies }
+                        />
                     )
                 }
             </TextDiv>

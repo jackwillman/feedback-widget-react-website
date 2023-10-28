@@ -8,7 +8,7 @@ import {
 
 interface HandleGetUserProps {
     setIsUserGotten : (isGettingUser : boolean) => void;
-    setUpdateError : (userError : string) => void;
+    setUserError : (userError : string) => void;
     setUserEmail : (userEmail : string) => void;
     setUsername : (username : string) => void;
     cookies : CookiesType;
@@ -16,7 +16,7 @@ interface HandleGetUserProps {
 export const handleGetUser = function getUserFromServer(
     {
         setIsUserGotten,
-        setUpdateError,
+        setUserError,
         setUserEmail,
         setUsername,
         cookies
@@ -27,7 +27,7 @@ export const handleGetUser = function getUserFromServer(
     const userId = cookies[config.user.id.cookieName];
 
     setIsUserGotten(false);
-    setUpdateError('');
+    setUserError('');
     setUserEmail('');
     setUsername('');
 
@@ -46,7 +46,7 @@ export const handleGetUser = function getUserFromServer(
     }).catch((error) => {
         if (error.response) {
             console.log(error.response.data);
-            setUpdateError(error.response.data.error);
+            setUserError(error.response.data.error);
         } else if (error.request) {
             console.log(error.request);
         } else {
@@ -120,7 +120,7 @@ export const signupHandler = function logicToHandleUserSignup(
 interface UpdateUserHandlerProps {
     setIsSendingNewUserData : (isSendingNewUserData : boolean) => void;
     setIsUserUpdated : (updateSuccess : boolean) => void;
-    setUpdateError : (updateError : string) => void;
+    setUserError : (userError : string) => void;
     setNewUsername : (newUsername : string) => void;
     setNewUserEmail : (newUserEmail : string) => void;
     setNewUserPassword : (newUserPassword : string) => void;
@@ -135,7 +135,7 @@ interface UpdateUserHandlerProps {
 export const updateUserHandler = function logicToUpdateUserOnServer(
     {
         setIsSendingNewUserData,
-        setUpdateError,
+        setUserError,
         setIsUserUpdated,
         setNewUsername,
         setNewUserEmail,
@@ -154,7 +154,7 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
     const userId = cookies[config.user.id.cookieName];
 
     setIsSendingNewUserData(true);
-    setUpdateError('');
+    setUserError('');
     setIsUserUpdated(false);
 
     if (!newUsername) {
@@ -193,11 +193,11 @@ export const updateUserHandler = function logicToUpdateUserOnServer(
                     errorMessage += `${errorArray[i].msg} `;
                     i++;
                 }
-                setUpdateError(errorMessage);
+                setUserError(errorMessage);
                 
             }
             else {
-                setUpdateError(error.response.data.error);
+                setUserError(error.response.data.error);
             }
         } else if (error.request) {
             console.log(error.request);

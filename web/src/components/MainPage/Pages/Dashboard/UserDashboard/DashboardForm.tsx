@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { updateUserHandler } from '../../../../lib/requestHandlers';
-import { CookiesType } from "../../pageTypes";
+import { updateUserHandler } from '../../../../../lib/requestHandlers';
+import { CookiesType } from "../../../pageTypes";
 
-import FormTextArea from "../../../Misc/FormTextArea";
+import FormTextArea from "../../../../Misc/FormTextArea";
 import DashboardUpdateButton from "./DashboardUpdateButton";
 import { 
     DasboardItemDiv,
@@ -11,10 +11,10 @@ import {
     DashboardItemRow,
     DashboardText,
     dashboardFormTextClass
-} from "./styled";
+} from "../styled";
 
 interface DashboardFormProps {
-    setUpdateError : (updateError : string) => void;
+    setUserError : (userError : string) => void;
     setIsUserUpdated : (updateSuccess : boolean) => void;
     username : string;
     userEmail : string;
@@ -22,7 +22,7 @@ interface DashboardFormProps {
     cookies : CookiesType;
 };
 const DashboardForm = function DashboardFormComponent({
-    setUpdateError,
+    setUserError,
     setIsUserUpdated,
     username,
     userEmail,
@@ -40,7 +40,7 @@ const DashboardForm = function DashboardFormComponent({
 
             updateUserHandler({
                 setIsSendingNewUserData,
-                setUpdateError,
+                setUserError,
                 setIsUserUpdated,
                 setNewUsername,
                 setNewUserEmail,

@@ -1,6 +1,5 @@
 import Loading from '../../../../Misc/Loading';
-
-import { DashboardMainButtonClass } from '../styled';
+import { UserDashboardButton } from './styled';
 
 interface LoginSubmitButtonProps {
     isSendingNewUserData : boolean;
@@ -14,7 +13,7 @@ const DashboardUpdateButton = function ({
     newEmail 
 } : LoginSubmitButtonProps) {
     return ( 
-        <DashboardMainButtonClass
+        <UserDashboardButton
             type="submit"
             disabled={ (
                 newUsername.length === 0 
@@ -25,7 +24,7 @@ const DashboardUpdateButton = function ({
                 ? <Loading />
                 : "Update User Data"
             }
-        </DashboardMainButtonClass> 
+        </UserDashboardButton> 
     );
 };
 

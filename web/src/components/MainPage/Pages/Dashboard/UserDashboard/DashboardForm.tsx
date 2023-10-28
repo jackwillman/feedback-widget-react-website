@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 import { updateUserHandler } from '../../../../../lib/requestHandlers';
-import { CookiesType } from "../../../pageTypes";
+import { CookiesType } from '../../../pageTypes';
 
-import FormTextArea from "../../../../Misc/FormTextArea";
-import DashboardUpdateButton from "./DashboardUpdateButton";
+import FormTextArea from '../../../../Misc/FormTextArea';
+import DashboardUpdateButton from './DashboardUpdateButton';
 import { 
-    DasboardItemDiv,
-    DashboardFormClass, 
-    DashboardItemRow,
     DashboardText,
     dashboardFormTextClass
-} from "../styled";
+} from '../styled';
+import {
+    UserUpdateFormBox,
+    UserUpdateFormStyle, 
+    UserUpdateFormItem
+} from './styled';
 
 interface DashboardFormProps {
     setUserError : (userError : string) => void;
@@ -35,7 +37,7 @@ const DashboardForm = function DashboardFormComponent({
     const [isSendingNewUserData, setIsSendingNewUserData] = useState(false);
 
     return (                      
-        <DashboardFormClass onSubmit={ (event) => {
+        <UserUpdateFormStyle onSubmit={ (event) => {
             event.preventDefault();
 
             updateUserHandler({
@@ -54,35 +56,35 @@ const DashboardForm = function DashboardFormComponent({
                 cookies
             });
         } }>
-            <DasboardItemDiv>
-                <DashboardItemRow>
+            <UserUpdateFormBox>
+                <UserUpdateFormItem>
                     <DashboardText>Username:</DashboardText>
                     <FormTextArea 
                         setInput={ setNewUsername }
                         placeholder={ username }
                         textClass={ dashboardFormTextClass }
                     />
-                </DashboardItemRow>
+                </UserUpdateFormItem>
 
-                <DashboardItemRow>
+                <UserUpdateFormItem>
                     <DashboardText>E-mail:</DashboardText>
                     <FormTextArea 
                         setInput={ setNewUserEmail }
                         placeholder={ userEmail }
                         textClass={ dashboardFormTextClass }
                     />
-                </DashboardItemRow>
+                </UserUpdateFormItem>
 
-                <DashboardItemRow>
+                <UserUpdateFormItem>
                     <DashboardText>Password:</DashboardText>
                     <FormTextArea 
                         setInput={ setNewUserPassword }
                         placeholder={ "******" }
                         textClass={ dashboardFormTextClass }
                     />
-                </DashboardItemRow>
+                </UserUpdateFormItem>
 
-            </DasboardItemDiv>
+            </UserUpdateFormBox>
             
             <DashboardUpdateButton
                 isSendingNewUserData={ isSendingNewUserData }
@@ -90,7 +92,7 @@ const DashboardForm = function DashboardFormComponent({
                 newEmail={ newUserEmail }
             />
             
-        </DashboardFormClass>    
+        </UserUpdateFormStyle>    
     );
 };
 

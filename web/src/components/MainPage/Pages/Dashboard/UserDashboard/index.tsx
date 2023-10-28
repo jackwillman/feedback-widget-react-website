@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 import { 
     CookiesType, 
     ExistingPage 
-} from "../../../pageTypes";
+} from '../../../pageTypes';
 import DashboardDeleteButton from './DashboardDeleteButton';
 
 import DashboardForm from './DashboardForm';
 
 import { 
     DashboardDiv, 
-    DashboardResponseDiv, 
     DashboardText 
 } from '../styled';
+
+import { UserDashboardResponse } from './styled';
 
 interface UserDashboardProps {
     setIsLoggedIn : (isLoggedIn : boolean) => void;
@@ -52,7 +53,7 @@ const UserDashboard = function UserDashboardComponent({
                 setCurrentPage={ setCurrentPage }       
                 cookies={ cookies }
             />
-            <DashboardResponseDiv>
+            <UserDashboardResponse>
                 <DashboardText>
                     { userError
                         ? userError 
@@ -61,7 +62,7 @@ const UserDashboard = function UserDashboardComponent({
                             : <></>
                     }
                 </DashboardText>
-            </DashboardResponseDiv>  
+            </UserDashboardResponse>  
         </DashboardDiv>                    
     );
 };

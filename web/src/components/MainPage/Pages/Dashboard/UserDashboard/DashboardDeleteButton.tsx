@@ -1,4 +1,4 @@
-import Loading from '../../../../Misc/Loading';
+import { useState } from 'react';
 
 import { deleteUserHandler } from '../../../../../lib/requestHandlers';
 import {
@@ -6,14 +6,15 @@ import {
     CookiesType
 } from '../../../pageTypes';
 
+import Loading from '../../../../Misc/Loading';
+
 import { 
-    DashboardDeleteButtonClass,
-    DashboardDeletePopup,
-    DashboardDeleteConfirmationPopup,
-    DashboardDeleteConfirmationText,
-    DashboardDeleteConfirmationButton
- } from '../styled';
-import { useState } from 'react';
+    UserDeleteButton,
+    UserDeletePopup,
+    UserDeletePopupPanel,
+    UserDeletePopupText,
+    UserDeletePopupButton
+ } from './styled';
 
 interface LoginDeleteButtonProps {
     setIsLoggedIn : (isLoggedIn : boolean) => void;
@@ -30,23 +31,23 @@ const DashboardDeleteButton = function ({
     const [isDeletingUser, setIsDeletingUser] = useState(false);
 
     return ( 
-        <DashboardDeletePopup
+        <UserDeletePopup
             trigger={ (
-                <DashboardDeleteButtonClass
+                <UserDeleteButton
                     disabled={ isDeletingUser }
                 >
                     { isDeletingUser
                         ? <Loading />
                         : "Delete User"
                     }
-                </DashboardDeleteButtonClass> 
+                </UserDeleteButton> 
             ) }
         >
-            <DashboardDeleteConfirmationPopup>
-                <DashboardDeleteConfirmationText>
+            <UserDeletePopupPanel>
+                <UserDeletePopupText>
                     Are you sure you want to delete your User Account?
-                </DashboardDeleteConfirmationText>
-                <DashboardDeleteConfirmationButton
+                </UserDeletePopupText>
+                <UserDeletePopupButton
                     onClick={ () => deleteUserHandler({
                         setDeleteError,
                         setIsDeletingUser,
@@ -56,9 +57,9 @@ const DashboardDeleteButton = function ({
                     }) }
                 >
                     Delete my account
-                </DashboardDeleteConfirmationButton>
-            </DashboardDeleteConfirmationPopup>
-        </DashboardDeletePopup>
+                </UserDeletePopupButton>
+            </UserDeletePopupPanel>
+        </UserDeletePopup>
     );
 };
 

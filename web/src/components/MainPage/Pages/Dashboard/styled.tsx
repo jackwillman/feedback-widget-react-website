@@ -3,7 +3,10 @@ import tw from "tailwind-styled-components";
 import { Text } from '../styled';
 
 export const DashboardDiv = tw.div`
-    absolute
+    relative 
+    flex 
+    flex-col 
+    items-end
 `;
 
 export const DashboardText = tw(Text)`
@@ -15,6 +18,25 @@ export const DashboardText = tw(Text)`
     leading-[22px]
     xl:leading-[32px]
 `;
+
+export const DashboardButton = tw.button`
+    min-w-[170px] 
+    w-full
+    h-10
+    rounded
+    border-transparent 
+    flex-1 
+    flex 
+    justify-center 
+    items-center 
+
+    font-bold
+    text-base
+    transition-colors
+
+    xl:text-lg
+`;
+
 
 export const dashboardFormTextClass = `
     absolute

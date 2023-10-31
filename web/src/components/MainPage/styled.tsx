@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components";
 
 export const MainDiv = tw.div`
-    relative
+    absolute
     grid
     h-screen
     w-screen

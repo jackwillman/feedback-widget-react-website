@@ -3,8 +3,6 @@ import tw from "tailwind-styled-components";
 
 export const FeedbackDashboardPopover = tw(Popover)`
     relative
-    static
-    place-self-end
 `;
 
 export const FeedbackDashboardButton = tw(Popover.Button)`

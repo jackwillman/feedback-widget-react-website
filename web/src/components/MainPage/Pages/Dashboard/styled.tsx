@@ -5,6 +5,7 @@ import { Text } from '../styled';
 export const DashboardDiv = tw.div`
     relative 
     flex 
+    mt-[47px]
 `;
 
 export const DashboardText = tw(Text)`

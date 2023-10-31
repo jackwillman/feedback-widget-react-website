@@ -10,7 +10,6 @@ export const UserDashboardDiv = tw.div`
 
 export const UserUpdateFormStyle = tw.form`
     relative 
-    mt-[47px]
     w-[480px]
 `;
 

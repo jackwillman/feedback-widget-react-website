@@ -39,6 +39,7 @@ export const UserUpdateButtonStyle = tw(DashboardButton)`
     bg-brand-500 
     focus:outline-none 
     hover:bg-brand-300 
+    focus:bg-brand-300 
     disabled:opacity-50 
     disabled:hover:bg-brand-500
 `;
@@ -50,6 +51,7 @@ export const UserDeleteButtonStyle = tw(DashboardButton)`
     relative
     mt-2
     bg-zinc-800
+    border-2
     hover:border-brand-500 
     focus:border-brand-500 
     focus:outline-none

@@ -8,7 +8,7 @@ export const PageDiv = tw.div`
 `;
 
 export const TextDiv = tw.div`
-    absolute
+    relative
     mt-[47px]
     ml-[calc(11vw)]
 `;

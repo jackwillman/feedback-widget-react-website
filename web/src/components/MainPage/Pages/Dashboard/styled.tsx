@@ -5,8 +5,6 @@ import { Text } from '../styled';
 export const DashboardDiv = tw.div`
     relative 
     flex 
-    flex-col 
-    items-end
 `;
 
 export const DashboardText = tw(Text)`

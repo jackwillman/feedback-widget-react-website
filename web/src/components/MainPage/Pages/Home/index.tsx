@@ -5,6 +5,7 @@ import {
     NormalText 
 } from '../styled';
 import { 
+    HomePageDiv,
     HomeImageDiv,
     HomeTextDiv,
     HomeNormalTextDiv,
@@ -14,7 +15,7 @@ import heroUrl from '../../../../images/hero.svg';
 
 const Home = function HomePageComponent() {
     return ( 
-        <PageDiv>
+        <HomePageDiv>
             <HomeTextDiv>
                 <BiggerText>
                     Let's <a className='text-brand-500'>work</a> together.
@@ -31,9 +32,9 @@ const Home = function HomePageComponent() {
                 </HomeNormalTextDiv>
             </HomeTextDiv>
             <HomeImageDiv>
-                <img src={ heroUrl } alt='Image of a long haired person holding flower petals.' />
+                <img src={ heroUrl } alt='Image of a long haired person holding flower petals.' width={800}/>
             </HomeImageDiv>
-        </PageDiv> 
+        </HomePageDiv> 
     );
 };
 

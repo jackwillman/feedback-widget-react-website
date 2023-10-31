@@ -33,7 +33,7 @@ export const UserDashboardResponse = tw.div`
     relative
 `;
 
-export const UserDashboardButton = tw.button`
+const UserDashboardButton = tw.button`
     min-w-[170px] 
     w-full
     h-10
@@ -50,7 +50,7 @@ export const UserDashboardButton = tw.button`
 
     text-zinc-800
     bg-brand-500 
-    
+
     hover:bg-brand-300 
 
     xl:text-lg
@@ -61,10 +61,13 @@ export const UserDashboardButton = tw.button`
     disabled:hover:bg-brand-500
 `;
 
+export const UserUpdateButtonStyle = tw(UserDashboardButton)`
+`;
+
 export const UserDeletePopup = tw(Popup)`
 `;
 
-export const UserDeleteButton = tw.button`
+export const UserDeleteButtonStyle = tw.button`
     relative
     mt-2
     min-w-[170px] 

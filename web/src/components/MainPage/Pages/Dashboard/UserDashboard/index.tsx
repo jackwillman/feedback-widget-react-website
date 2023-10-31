@@ -4,9 +4,9 @@ import {
     CookiesType, 
     ExistingPage 
 } from '../../../pageTypes';
-import DashboardDeleteButton from './DashboardDeleteButton';
+import UserDeleteButton from './UserDeleteButton';
 
-import DashboardForm from './DashboardForm';
+import UserUpdateForm from './UserUpdateForm';
 
 import { DashboardText } from '../styled';
 
@@ -40,7 +40,7 @@ const UserDashboard = function UserDashboardComponent({
     
     return ( 
         <UserDashboardDiv>
-            <DashboardForm
+            <UserUpdateForm
                 setIsUserUpdated={ setIsUserUpdated }
                 setUserError={ setUserError }
                 username={ username }
@@ -48,7 +48,7 @@ const UserDashboard = function UserDashboardComponent({
                 userPassword={ userPassword }
                 cookies={ cookies }
             />
-            <DashboardDeleteButton 
+            <UserDeleteButton 
                 setIsLoggedIn={ setIsLoggedIn }
                 setCurrentPage={ setCurrentPage }       
                 cookies={ cookies }

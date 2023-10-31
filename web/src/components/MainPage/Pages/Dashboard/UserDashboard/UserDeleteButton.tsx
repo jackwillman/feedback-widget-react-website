@@ -9,7 +9,7 @@ import {
 import Loading from '../../../../Misc/Loading';
 
 import { 
-    UserDeleteButton,
+    UserDeleteButtonStyle,
     UserDeletePopup,
     UserDeletePopupPanel,
     UserDeletePopupText,
@@ -22,7 +22,7 @@ interface LoginDeleteButtonProps {
     cookies : CookiesType;
 };
 
-const DashboardDeleteButton = function ({ 
+const UserDeleteButton = function DashboardUserDeleteButtonComponent ({ 
     setIsLoggedIn,
     setCurrentPage,        
     cookies
@@ -33,14 +33,14 @@ const DashboardDeleteButton = function ({
     return ( 
         <UserDeletePopup
             trigger={ (
-                <UserDeleteButton
+                <UserDeleteButtonStyle
                     disabled={ isDeletingUser }
                 >
                     { isDeletingUser
                         ? <Loading />
                         : "Delete User"
                     }
-                </UserDeleteButton> 
+                </UserDeleteButtonStyle> 
             ) }
         >
             <UserDeletePopupPanel>
@@ -63,4 +63,4 @@ const DashboardDeleteButton = function ({
     );
 };
 
-export default DashboardDeleteButton;
+export default UserDeleteButton;

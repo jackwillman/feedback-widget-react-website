@@ -4,7 +4,7 @@ import { updateUserHandler } from '../../../../../lib/requestHandlers';
 import { CookiesType } from '../../../pageTypes';
 
 import FormTextArea from '../../../../Misc/FormTextArea';
-import DashboardUpdateButton from './DashboardUpdateButton';
+import UserUpdateButton from './UserUpdateButton';
 import { 
     DashboardText,
     dashboardFormTextClass
@@ -23,7 +23,7 @@ interface DashboardFormProps {
     userPassword : string;
     cookies : CookiesType;
 };
-const DashboardForm = function DashboardFormComponent({
+const UserUpdateForm = function DashboardUserUpdateFormComponent({
     setUserError,
     setIsUserUpdated,
     username,
@@ -86,7 +86,7 @@ const DashboardForm = function DashboardFormComponent({
 
             </UserUpdateFormBox>
             
-            <DashboardUpdateButton
+            <UserUpdateButton
                 isSendingNewUserData={ isSendingNewUserData }
                 newUsername={ newUsername }
                 newEmail={ newUserEmail }
@@ -96,4 +96,4 @@ const DashboardForm = function DashboardFormComponent({
     );
 };
 
-export default DashboardForm;
+export default UserUpdateForm;

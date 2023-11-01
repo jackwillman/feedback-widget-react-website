@@ -2,13 +2,16 @@ import FeedbackDashboardPanel from './FeedbackDashboardPanel';
 
 import { 
     FeedbackDashboardPopover,
-    FeedbackDashboardButton
+    FeedbackDashboardButton,
+    FeedbackDashboardButtonText
  } from './styled';
 
 const FeedbackDashboard = function FeedbackDashboardComponent() {
     return (
         <FeedbackDashboardPopover>
-            <FeedbackDashboardButton>Feedbacks history</FeedbackDashboardButton>
+            <FeedbackDashboardButton>
+                <FeedbackDashboardButtonText>My Feedbacks</FeedbackDashboardButtonText>
+            </FeedbackDashboardButton>
                 
             <FeedbackDashboardPanel />
         </FeedbackDashboardPopover>

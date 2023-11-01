@@ -1,14 +1,18 @@
 import { Popover } from "@headlessui/react";
 import tw from "tailwind-styled-components";
 
+
 export const FeedbackDashboardPopover = tw(Popover)`
     relative
+    
 `;
 
 export const FeedbackDashboardButton = tw(Popover.Button)`
-    min-w-[170px] 
-    w-full
-    h-10
+    relative
+    h-full
+    w-[40px]
+    ml-2
+
     rounded
     border-transparent 
     flex-1 
@@ -20,18 +24,24 @@ export const FeedbackDashboardButton = tw(Popover.Button)`
     text-base
     transition-colors
 
-    bg-zinc-800 
-
-    hover:bg-brand-300 
-
     xl:text-lg
 
-    focus:outline-none 
+    bg-zinc-800
+    border-2
+    hover:border-brand-500 
+    focus:border-brand-500 
+    focus:outline-none
+`;
 
-    disabled:opacity-50 
-    disabled:hover:bg-brand-500
+export const FeedbackDashboardButtonText = tw.text`
+    fixed
+    -rotate-90
 `;
 
 export const FeedbackDashboardPanelStyle = tw(Popover.Panel)`
-    
+    relative 
+    bg-zinc-900 
+    rounded
+    shadow-lg
+    h-[10px]
 `;

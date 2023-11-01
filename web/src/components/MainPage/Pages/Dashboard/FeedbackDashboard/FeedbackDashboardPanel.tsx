@@ -1,4 +1,6 @@
-import { FeedbackDashboardPanelStyle } from "./styled";
+import { 
+    FeedbackDashboardPanelStyle
+} from "./styled";
 
 const FeedbackDashboardPanel = function FeedbackDashboardPanelComponent() {
     return (

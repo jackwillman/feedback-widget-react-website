@@ -1,4 +1,4 @@
-export interface Feedback {
+export interface FeedbackData {
     id : string;
     type : string;
     comment : string;
@@ -6,9 +6,9 @@ export interface Feedback {
     userId: string | null;
 };
 
-export type FeedbackCreateData = Omit<Feedback, "id">;
+export type FeedbackCreateData = Omit<FeedbackData, "id">;
 
 export interface FeedbacksRepository {
-    get : (userId : string) => Promise<Feedback[] | null>;
+    get : (userId : string) => Promise<FeedbackData[] | null>;
     create : (data : FeedbackCreateData) => Promise<void>;
 };

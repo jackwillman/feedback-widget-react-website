@@ -1,8 +1,8 @@
-import { FormEvent, useState } from "react";
+import { useState } from 'react';
 
-import api from "../../../../lib/api";
+import { submitFeedbackHandler } from '../../../../lib/requestHandlers'
+
 import { FeedbackType } from "../feedbackType";
-
 import CloseButton from "../../../Misc/CloseButton";
 import ScreenshotButton from "../../../Misc/ScreenshotButton";
 import FormTextArea from "../../../Misc/FormTextArea";
@@ -31,22 +31,6 @@ const FeedbackContentStep = function FeedbackContentStep( {
     const [comment, setComment] = useState('');
     const [isSendingFeedback, setIsSendingFeedback] = useState(false);
 
-    const handleSubmitFeedback = async function logsFeedbackTextAndScreenshot(
-        event : FormEvent
-    ) {
-        event.preventDefault();
-        setIsSendingFeedback(true);
-    
-        await api.post('/feedbacks', {
-            type : feedbackType,
-            comment,
-            screenshot
-        });
-
-        setIsSendingFeedback(false);
-        onFeedbackSent();
-    };
-
     return ( 
         <>
             <header>
@@ -57,7 +41,16 @@ const FeedbackContentStep = function FeedbackContentStep( {
                 <CloseButton />
             </header>
 
-            <FeedbackForm onSubmit={ handleSubmitFeedback }>
+            <FeedbackForm onSubmit={ (event) => {
+                event.preventDefault();
+                submitFeedbackHandler({
+                    setIsSendingFeedback,
+                    onFeedbackSent,
+                    type : feedbackType,
+                    comment,
+                    screenshot
+                });
+            } }>
                 <FormTextArea 
                     setInput={ setComment }
                     placeholder="Tell us what is happening in detail..."

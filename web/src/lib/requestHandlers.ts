@@ -320,3 +320,34 @@ export const deleteUserHandler = function logicToSubmitLoginInput(
         setIsDeletingUser(false);
     });
 };
+
+interface SubmitFeedbackHandler {
+    setIsSendingFeedback : (isSendingFeedback : boolean) => void;
+    onFeedbackSent : () => void;
+    type : string;
+    comment : string;
+    screenshot : string | null;
+};
+export const submitFeedbackHandler = function logicToHandleSubmitFeedback ({
+    setIsSendingFeedback,
+    onFeedbackSent,
+    type,
+    comment,
+    screenshot
+}: SubmitFeedbackHandler) {
+    setIsSendingFeedback(true);
+    
+    api.post('/feedbacks', {
+        type,
+        comment,
+        screenshot
+    }).then((response) => {
+        onFeedbackSent();
+    }).catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+    }).finally(() => {
+        setIsSendingFeedback(false);
+    });
+};

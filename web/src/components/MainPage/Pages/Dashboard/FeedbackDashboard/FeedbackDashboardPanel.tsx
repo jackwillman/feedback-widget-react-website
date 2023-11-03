@@ -1,8 +1,17 @@
+
+import { FeedbackData } from "../../../pageTypes";
 import { 
     FeedbackDashboardPanelStyle
 } from "./styled";
 
-const FeedbackDashboardPanel = function FeedbackDashboardPanelComponent() {
+interface FeedbackDashboardPanelProps {
+    feedbackList : FeedbackData[] | null; 
+};
+
+const FeedbackDashboardPanel = function FeedbackDashboardPanelComponent({
+    feedbackList
+} : FeedbackDashboardPanelProps) {
+
     return (
         <FeedbackDashboardPanelStyle>
 

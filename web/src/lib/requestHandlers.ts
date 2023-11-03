@@ -3,7 +3,8 @@ import config from './config';
 import {
     ExistingPage,
     CookiesType,
-    SetCookie
+    SetCookie,
+    FeedbackData
 } from '../components/MainPage/pageTypes';
 
 interface HandleGetUserProps {
@@ -13,15 +14,13 @@ interface HandleGetUserProps {
     setUsername : (username : string) => void;
     cookies : CookiesType;
 };
-export const handleGetUser = function getUserFromServer(
-    {
-        setIsUserGotten,
-        setUserError,
-        setUserEmail,
-        setUsername,
-        cookies
-    } : HandleGetUserProps
-) {
+export const handleGetUser = function getUserFromServer({
+    setIsUserGotten,
+    setUserError,
+    setUserEmail,
+    setUsername,
+    cookies
+} : HandleGetUserProps) {
     const tokenHeader = config.sessionToken.headerName;
     const sessionToken = cookies[config.sessionToken.cookieName];
     const userId = cookies[config.user.id.cookieName];
@@ -321,7 +320,7 @@ export const deleteUserHandler = function logicToSubmitLoginInput(
     });
 };
 
-interface SubmitFeedbackHandler {
+interface SubmitFeedbackHandlerProps {
     setIsSendingFeedback : (isSendingFeedback : boolean) => void;
     onFeedbackSent : () => void;
     type : string;
@@ -334,7 +333,7 @@ export const submitFeedbackHandler = function logicToHandleSubmitFeedback ({
     type,
     comment,
     screenshot
-}: SubmitFeedbackHandler) {
+}: SubmitFeedbackHandlerProps) {
     setIsSendingFeedback(true);
     
     api.post('/feedbacks', {
@@ -349,5 +348,52 @@ export const submitFeedbackHandler = function logicToHandleSubmitFeedback ({
         }
     }).finally(() => {
         setIsSendingFeedback(false);
+    });
+};
+
+interface HandleGetFeedbackProps {
+    setFeedbackList : (feedbackList : FeedbackData[] | null) => void;
+    setIsFeedbackGotten : (isFeedbackGotten : boolean) => void;
+    setGetFeedbackError : (getFeedbackError : string) => void;
+    cookies : CookiesType;
+};
+export const handleGetFeedback = function getFeedbackFromServer ({
+    setFeedbackList,
+    setIsFeedbackGotten,
+    setGetFeedbackError,
+    cookies
+} : HandleGetFeedbackProps) {
+    const tokenHeader = config.sessionToken.headerName;
+    const sessionToken = cookies[config.sessionToken.cookieName];
+    const userId = cookies[config.user.id.cookieName];
+
+    setIsFeedbackGotten(false);
+    setGetFeedbackError('');
+
+    let feedbackList : FeedbackData[] | null = null;
+
+    api.get(config.path.feedbacks, { 
+        params : {
+            id : userId
+        },
+        headers : {
+            [tokenHeader] : sessionToken
+        }
+
+    }).then((response) => {
+        console.log(response);
+        
+    }).catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+            setGetFeedbackError(error.response.data.error);
+        } else if (error.request) {
+            console.log(error.request);
+        } else {
+            console.log('Error: ', error.message);
+        }
+
+    }).finally(() => {
+        setIsFeedbackGotten(true);
     });
 };

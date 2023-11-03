@@ -18,7 +18,8 @@ const config = {
         main : '/',
         sessions : '/sessions',
         users : 'users',
-        user : '/users/auth'
+        user : '/users/auth',
+        feedbacks: '/feedbacks/auth'
     }
 };
 

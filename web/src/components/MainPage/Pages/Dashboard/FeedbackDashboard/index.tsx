@@ -1,3 +1,10 @@
+import { useState } from 'react';
+
+import { 
+    CookiesType, 
+    FeedbackData 
+} from '../../../pageTypes';
+import { handleGetFeedback } from '../../../../../lib/requestHandlers';
 import FeedbackDashboardPanel from './FeedbackDashboardPanel';
 
 import { 
@@ -6,14 +13,30 @@ import {
     FeedbackDashboardButtonText
  } from './styled';
 
-const FeedbackDashboard = function FeedbackDashboardComponent() {
+ interface FeedbackDashboardProps {
+    cookies : CookiesType;
+};
+const FeedbackDashboard = function FeedbackDashboardComponent({
+    cookies
+} : FeedbackDashboardProps) {
+    const [isFeedbackGotten, setIsFeedbackGotten] = useState(false);
+    const [getFeedbackError, setGetFeedbackError] = useState('');
+    const [feedbackList, setFeedbackList] = useState<FeedbackData[] | null>(null); 
+    
     return (
         <FeedbackDashboardPopover>
-            <FeedbackDashboardButton>
+            <FeedbackDashboardButton
+                onClick={ () => handleGetFeedback({
+                    setFeedbackList,
+                    setIsFeedbackGotten,
+                    setGetFeedbackError,
+                    cookies
+                }) }
+            >
                 <FeedbackDashboardButtonText>My Feedbacks</FeedbackDashboardButtonText>
             </FeedbackDashboardButton>
                 
-            <FeedbackDashboardPanel />
+            <FeedbackDashboardPanel feedbackList={ feedbackList } />
         </FeedbackDashboardPopover>
     );
 };

@@ -69,7 +69,7 @@ const Dashboard = function DashboardPageComponent({
                                 userPassword={ userPassword }
                                 cookies={ cookies }
                             />
-                            <FeedbackDashboard />
+                            <FeedbackDashboard cookies={ cookies }/>
                         </DashboardDiv>
                     )
                 }

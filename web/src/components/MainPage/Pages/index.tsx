@@ -4,7 +4,7 @@ import {
     ExistingPage,
     SetCookie,
     CookiesType
-} from '../pageTypes';
+} from '../../../lib/types';
 import Home from './Home';
 import About from './About';
 import Dashboard from './Dashboard';

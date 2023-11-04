@@ -1,4 +1,4 @@
-import { ExistingPage } from '../../../pageTypes';
+import { ExistingPage } from '../../../../../lib/types';
 import { 
     MenuList, 
     MenuItem1, 

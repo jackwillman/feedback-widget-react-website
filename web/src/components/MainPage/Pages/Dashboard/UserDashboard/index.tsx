@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { 
     CookiesType, 
     ExistingPage 
-} from '../../../pageTypes';
+} from '../../../../../lib/types';
 import UserDeleteButton from './UserDeleteButton';
 
 import UserUpdateForm from './UserUpdateForm';

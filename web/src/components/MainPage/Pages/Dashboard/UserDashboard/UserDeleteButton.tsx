@@ -4,7 +4,7 @@ import { deleteUserHandler } from '../../../../../lib/requestHandlers';
 import {
     ExistingPage,
     CookiesType
-} from '../../../pageTypes';
+} from '../../../../../lib/types';
 
 import Loading from '../../../../Misc/Loading';
 

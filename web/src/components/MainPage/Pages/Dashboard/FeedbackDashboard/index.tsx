@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { 
     CookiesType, 
     FeedbackData 
-} from '../../../pageTypes';
+} from '../../../../../lib/types';
 import { handleGetFeedback } from '../../../../../lib/requestHandlers';
 import FeedbackDashboardPanel from './FeedbackDashboardPanel';
 

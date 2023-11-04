@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { CookiesType } from '../../../lib/types';
 import { FeedbackType } from './feedbackType';
 import FeedbackTypeStep from './FeedbackTypeStep';
 import FeedbackContentStep from './FeedbackContentStep';
@@ -11,7 +12,17 @@ import {
     WidgetFormFooterLink
 } from './styled';
 
-const WidgetForm = function WidgetFormComponent() {
+
+interface WidgetFormProps {
+    cookies : CookiesType;
+    isLoggedIn : boolean;
+};
+
+const WidgetForm = function WidgetFormComponent({
+    cookies,
+    isLoggedIn
+} : WidgetFormProps) {
+
     const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null);
     const [isFeedbackSent, setIsFeedbackSent] = useState(false);
 
@@ -38,9 +49,11 @@ const WidgetForm = function WidgetFormComponent() {
                     
                     : (
                         <FeedbackContentStep 
-                            feedbackType={ feedbackType } 
                             onFeedbackRestartRequested={ handleRestartFeedback }
                             onFeedbackSent={ () => setIsFeedbackSent(true) }
+                            feedbackType={ feedbackType } 
+                            cookies={ cookies }
+                            isLoggedIn={ isLoggedIn }
                         /> 
                     )
              }

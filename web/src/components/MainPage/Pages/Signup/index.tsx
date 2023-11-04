@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { ExistingPage } from '../../pageTypes';
+import { ExistingPage } from '../../../../lib/types';
 import { signupHandler } from '../../../../lib/requestHandlers';
 
 import FormTextArea from '../../../Misc/FormTextArea';

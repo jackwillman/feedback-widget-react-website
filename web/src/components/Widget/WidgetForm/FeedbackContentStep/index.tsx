@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { submitFeedbackHandler } from '../../../../lib/requestHandlers'
+import { CookiesType } from '../../../../lib/types';
 
 import { FeedbackType } from "../feedbackType";
 import CloseButton from "../../../Misc/CloseButton";
@@ -17,15 +18,19 @@ import {
 } from './styled';
 
 interface FeedbackContentStepProps {
-    feedbackType : FeedbackType;
     onFeedbackRestartRequested : () => void;
     onFeedbackSent : () => void;
+    feedbackType : FeedbackType;
+    cookies : CookiesType;
+    isLoggedIn : boolean;
 };
 
 const FeedbackContentStep = function FeedbackContentStep( {
     feedbackType, 
     onFeedbackRestartRequested,
-    onFeedbackSent
+    onFeedbackSent,
+    cookies,
+    isLoggedIn
 } : FeedbackContentStepProps) {
     const [screenshot, setScreenshot] = useState<string | null>(null);
     const [comment, setComment] = useState('');
@@ -48,7 +53,9 @@ const FeedbackContentStep = function FeedbackContentStep( {
                     onFeedbackSent,
                     type : feedbackType,
                     comment,
-                    screenshot
+                    screenshot,
+                    cookies,
+                    isLoggedIn
                 });
             } }>
                 <FormTextArea 

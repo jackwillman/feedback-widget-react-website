@@ -1,5 +1,5 @@
 
-import { FeedbackData } from "../../../pageTypes";
+import { FeedbackData } from "../../../../../lib/types";
 import { 
     FeedbackDashboardPanelStyle
 } from "./styled";

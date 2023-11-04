@@ -7,7 +7,7 @@ import { handleGetUser } from '../../../../lib/requestHandlers';
 import { 
     CookiesType, 
     ExistingPage 
-} from "../../pageTypes";
+} from "../../../../lib/types";
 
 import Loading from '../../../Misc/Loading';
 import FeedbackDashboard from './FeedbackDashboard';

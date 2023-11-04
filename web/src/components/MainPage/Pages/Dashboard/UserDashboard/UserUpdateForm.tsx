@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { updateUserHandler } from '../../../../../lib/requestHandlers';
-import { CookiesType } from '../../../pageTypes';
+import { CookiesType } from '../../../../../lib/types';
 
 import FormTextArea from '../../../../Misc/FormTextArea';
 import UserUpdateButton from './UserUpdateButton';

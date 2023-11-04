@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { 
     ExistingPage,
     SetCookie 
-} from '../../pageTypes';
+} from '../../../../lib/types';
 import { loginHandler } from '../../../../lib/requestHandlers';
 import FormTextArea from '../../../Misc/FormTextArea';
 import LoginSubmitButton from './LoginSubmitButton';

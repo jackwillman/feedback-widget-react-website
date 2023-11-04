@@ -5,7 +5,7 @@ import {
     CookiesType,
     SetCookie,
     FeedbackData
-} from '../components/MainPage/pageTypes';
+} from './types';
 
 interface HandleGetUserProps {
     setIsUserGotten : (isGettingUser : boolean) => void;
@@ -323,6 +323,8 @@ export const deleteUserHandler = function logicToSubmitLoginInput(
 interface SubmitFeedbackHandlerProps {
     setIsSendingFeedback : (isSendingFeedback : boolean) => void;
     onFeedbackSent : () => void;
+    isLoggedIn : boolean;
+    cookies : CookiesType;
     type : string;
     comment : string;
     screenshot : string | null;
@@ -330,17 +332,44 @@ interface SubmitFeedbackHandlerProps {
 export const submitFeedbackHandler = function logicToHandleSubmitFeedback ({
     setIsSendingFeedback,
     onFeedbackSent,
+    isLoggedIn,
+    cookies,
     type,
     comment,
     screenshot
 }: SubmitFeedbackHandlerProps) {
     setIsSendingFeedback(true);
     
-    api.post('/feedbacks', {
-        type,
-        comment,
-        screenshot
-    }).then((response) => {
+    let path;
+    let requestData;
+    if (isLoggedIn) {
+        const tokenHeader = config.sessionToken.headerName;
+        const sessionToken = cookies[config.sessionToken.cookieName];
+        const userId = cookies[config.user.id.cookieName];
+
+        path = config.path.userFeedbacks
+        requestData = {
+            type,
+            comment,
+            screenshot,
+            params : {
+                id : userId
+            },
+            headers : {
+                [tokenHeader] : sessionToken
+            }
+        };
+    } else {
+        path = config.path.feedbacks;
+        requestData = {
+            type,
+            comment,
+            screenshot
+        };
+    }
+    
+    api.post(path, requestData
+    ).then((response) => {
         onFeedbackSent();
     }).catch((error) => {
         if (error.response) {

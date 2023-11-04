@@ -1,18 +1,28 @@
 import { useState } from 'react';
-import { useCookies } from 'react-cookie';
-
-import config from '../../lib/config';
 
 import PageHeader from './PageHeader';
 import CurrentPage from './Pages';
-import { ExistingPage } from './pageTypes';
+import { 
+    ExistingPage,
+    CookiesType,
+    SetCookie
+} from '../../lib/types';
 
 import { MainDiv } from './styled';
 
-const MainPage = function MainPageComponent() {
-    const [cookies, setCookie, removeCookie] = useCookies([config.sessionToken.cookieName, config.user.id.cookieName]);
+interface MainPageProps {
+    setCookie : SetCookie;
+    setIsLoggedIn : (isLoggedIn : boolean) => void;
+    cookies : CookiesType;
+    isLoggedIn : boolean;
+};
+const MainPage = function MainPageComponent({
+    setCookie,
+    setIsLoggedIn,
+    cookies,
+    isLoggedIn
+} : MainPageProps) {
     const [currentPage, setCurrentPage] = useState<ExistingPage>('Home');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return ( 
         <MainDiv>        

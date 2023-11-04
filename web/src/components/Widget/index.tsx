@@ -1,5 +1,6 @@
 import { Popover } from '@headlessui/react';
 
+import { CookiesType } from '../../lib/types';
 import WidgetForm from './WidgetForm';
 import {
     WidgetPopover,
@@ -8,11 +9,22 @@ import {
     WidgetSpan
 } from './styled';
 
-const Widget = function WidgetComponent() {    
+interface WidgetProps {
+    cookies : CookiesType;
+    isLoggedIn : boolean;
+};
+
+const Widget = function WidgetComponent({
+    cookies,
+    isLoggedIn
+} : WidgetProps) {
     return (
         <WidgetPopover>            
             <Popover.Panel>
-                <WidgetForm />
+                <WidgetForm 
+                    cookies={ cookies }
+                    isLoggedIn={ isLoggedIn }
+                />
             </Popover.Panel>    
 
             <WidgetButton>

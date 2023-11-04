@@ -19,7 +19,8 @@ const config = {
         sessions : '/sessions',
         users : 'users',
         user : '/users/auth',
-        feedbacks: '/feedbacks/auth'
+        feedbacks: '/feedbacks',
+        userFeedbacks: '/feedbacks/auth'
     }
 };
 

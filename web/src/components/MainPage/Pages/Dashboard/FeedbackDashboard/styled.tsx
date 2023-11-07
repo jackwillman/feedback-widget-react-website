@@ -4,7 +4,7 @@ import tw from "tailwind-styled-components";
 
 export const FeedbackDashboardPopover = tw(Popover)`
     relative
-    
+    flex    
 `;
 
 export const FeedbackDashboardButton = tw(Popover.Button)`
@@ -39,9 +39,13 @@ export const FeedbackDashboardButtonText = tw.text`
 `;
 
 export const FeedbackDashboardPanelStyle = tw(Popover.Panel)`
-    relative 
-    bg-zinc-900 
+    absolute 
+    z-10
+    ml-[60px]
+    w-[480px]
+    h-[230px]
+    bg-zinc-900
     rounded
     shadow-lg
-    h-[10px]
+
 `;
